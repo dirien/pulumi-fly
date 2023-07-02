@@ -1,0 +1,29 @@
+{
+    "name": "@ediri/pulumi-fly",
+    "version": "${VERSION}",
+    "description": "A Pulumi package for creating and managing Fly.io resources.",
+    "keywords": [
+        "pulumi",
+        "fly",
+        "category/cloud"
+    ],
+    "homepage": "https://github.com/dirien/pulumi-fly",
+    "repository": "https://github.com/dirien/pulumi-fly",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc",
+        "install": "node scripts/install-pulumi-plugin.js resource fly ${VERSION}"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^10.0.0",
+        "typescript": "^4.3.5"
+    },
+    "pulumi": {
+        "resource": true,
+        "name": "fly",
+        "server": "github://api.github.com/dirien/pulumi-fly"
+    }
+}

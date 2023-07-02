@@ -1,0 +1,45 @@
+{
+    "renames": {
+        "resources": {
+            "fly:index/app:App": "fly_app",
+            "fly:index/cert:Cert": "fly_cert",
+            "fly:index/ip:Ip": "fly_ip",
+            "fly:index/machine:Machine": "fly_machine",
+            "fly:index/volume:Volume": "fly_volume"
+        },
+        "functions": {
+            "fly:index/getApp:getApp": "fly_app",
+            "fly:index/getCert:getCert": "fly_cert",
+            "fly:index/getIp:getIp": "fly_ip",
+            "fly:index/getVolume:getVolume": "fly_volume"
+        },
+        "renamedProperties": {
+            "fly:index/MachineMount:MachineMount": {
+                "sizeGb": "size_gb"
+            },
+            "fly:index/MachineService:MachineService": {
+                "internalPort": "internal_port"
+            },
+            "fly:index/machine:Machine": {
+                "cmds": "cmd",
+                "entrypoints": "entrypoint",
+                "execs": "exec"
+            },
+            "fly:index:Provider": {
+                "flyApiToken": "fly_api_token",
+                "flyHttpEndpoint": "fly_http_endpoint"
+            }
+        },
+        "renamedConfigProperties": {
+            "flyApiToken": "fly_api_token",
+            "flyHttpEndpoint": "fly_http_endpoint"
+        }
+    },
+    "resources": {
+        "fly:index/flyApp:App": "fly_app",
+        "fly:index/flyCert:Cert": "fly_cert",
+        "fly:index/FlyIP:IP": "fly_ip",
+        "fly:index/flyMachine:Machine": "fly_machine",
+        "fly:index/flyVolume:Volume": "fly_volume"
+    }
+}

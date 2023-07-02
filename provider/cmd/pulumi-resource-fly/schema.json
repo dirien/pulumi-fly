@@ -1,0 +1,942 @@
+{
+    "name": "fly",
+    "displayName": "Fly.io",
+    "description": "A Pulumi package for creating and managing Fly.io resources.",
+    "keywords": [
+        "pulumi",
+        "fly",
+        "category/cloud"
+    ],
+    "homepage": "https://github.com/dirien/pulumi-fly",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`fly` Terraform Provider](https://github.com/fly-apps/terraform-provider-fly).",
+    "repository": "https://github.com/dirien/pulumi-fly",
+    "pluginDownloadURL": "github://api.github.com/dirien/pulumi-fly",
+    "publisher": "dirien",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "rootNamespace": "ediri"
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-fly/sdk/go/fly"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing Fly.io resources.",
+            "packageName": "@ediri/pulumi-fly",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/fly-apps/terraform-provider-fly)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-fly` repo](https://github.com/dirien/pulumi-fly/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-fly` repo](https://github.com/fly-apps/terraform-provider-fly/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "packageName": "ediri_fly",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/fly-apps/terraform-provider-fly)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-fly` repo](https://github.com/dirien/pulumi-fly/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-fly` repo](https://github.com/fly-apps/terraform-provider-fly/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "flyApiToken": {
+                "type": "string",
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+            },
+            "flyHttpEndpoint": {
+                "type": "string",
+                "description": "Where the provider should look to find the fly http endpoint\n"
+            }
+        }
+    },
+    "types": {
+        "fly:index/MachineMount:MachineMount": {
+            "properties": {
+                "encrypted": {
+                    "type": "boolean"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Path for volume to be mounted on vm\n"
+                },
+                "sizeGb": {
+                    "type": "integer"
+                },
+                "volume": {
+                    "type": "string",
+                    "description": "Name or ID of volume\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "path",
+                "volume"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "encrypted",
+                        "path",
+                        "sizeGb",
+                        "volume"
+                    ]
+                }
+            }
+        },
+        "fly:index/MachineService:MachineService": {
+            "properties": {
+                "internalPort": {
+                    "type": "integer",
+                    "description": "Port application listens on internally\n"
+                },
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/fly:index/MachineServicePort:MachineServicePort"
+                    },
+                    "description": "External ports and handlers\n"
+                },
+                "protocol": {
+                    "type": "string",
+                    "description": "network protocol\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "internalPort",
+                "ports",
+                "protocol"
+            ]
+        },
+        "fly:index/MachineServicePort:MachineServicePort": {
+            "properties": {
+                "handlers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "port": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "port"
+            ]
+        }
+    },
+    "provider": {
+        "description": "The provider type for the fly package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "flyApiToken": {
+                "type": "string",
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+            },
+            "flyHttpEndpoint": {
+                "type": "string",
+                "description": "Where the provider should look to find the fly http endpoint\n"
+            }
+        },
+        "inputProperties": {
+            "flyApiToken": {
+                "type": "string",
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+            },
+            "flyHttpEndpoint": {
+                "type": "string",
+                "description": "Where the provider should look to find the fly http endpoint\n"
+            }
+        }
+    },
+    "resources": {
+        "fly:index/app:App": {
+            "description": "Fly app resource\n\n## Example Usage\n\n```terraform\nresource \"fly_app\" \"exampleApp\" {\n  name = \"hellofromterraform\"\n}\n```\n\n## Import\n\n\u003cbreak\u003e\u003cbreak\u003e```sh\u003cbreak\u003e $ pulumi import fly:index/app:App exampleApp \u003capp_id\u003e \u003cbreak\u003e```\u003cbreak\u003e\u003cbreak\u003e\n",
+            "properties": {
+                "appurl": {
+                    "type": "string",
+                    "description": "readonly appUrl\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of application\n"
+                },
+                "org": {
+                    "type": "string",
+                    "description": "Optional org slug to operate upon\n"
+                },
+                "orgid": {
+                    "type": "string",
+                    "description": "readonly orgid\n"
+                }
+            },
+            "required": [
+                "appurl",
+                "name",
+                "org",
+                "orgid"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of application\n"
+                },
+                "org": {
+                    "type": "string",
+                    "description": "Optional org slug to operate upon\n"
+                }
+            },
+            "requiredInputs": [
+                "name"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering App resources.\n",
+                "properties": {
+                    "appurl": {
+                        "type": "string",
+                        "description": "readonly appUrl\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of application\n"
+                    },
+                    "org": {
+                        "type": "string",
+                        "description": "Optional org slug to operate upon\n"
+                    },
+                    "orgid": {
+                        "type": "string",
+                        "description": "readonly orgid\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "fly:index/cert:Cert": {
+            "description": "Fly certificate resource\n\n## Example Usage\n\n```terraform\nresource \"fly_cert\" \"exampleCert\" {\n  app      = \"hellofromterraform\"\n  hostname = \"example.com\"\n}\n```\n\n## Import\n\n\u003cbreak\u003e\u003cbreak\u003e```sh\u003cbreak\u003e $ pulumi import fly:index/cert:Cert exampleCert \u003capp_id\u003e,\u003chostname\u003e \u003cbreak\u003e```\u003cbreak\u003e\u003cbreak\u003e\n",
+            "properties": {
+                "app": {
+                    "type": "string",
+                    "description": "Name of app to attach to\n"
+                },
+                "check": {
+                    "type": "boolean",
+                    "description": "check\n"
+                },
+                "dnsvalidationhostname": {
+                    "type": "string",
+                    "description": "DnsValidationHostname\n"
+                },
+                "dnsvalidationinstructions": {
+                    "type": "string",
+                    "description": "DnsValidationHostname\n"
+                },
+                "dnsvalidationtarget": {
+                    "type": "string",
+                    "description": "DnsValidationTarget\n"
+                },
+                "hostname": {
+                    "type": "string",
+                    "description": "hostname\n"
+                }
+            },
+            "required": [
+                "app",
+                "check",
+                "dnsvalidationhostname",
+                "dnsvalidationinstructions",
+                "dnsvalidationtarget",
+                "hostname"
+            ],
+            "inputProperties": {
+                "app": {
+                    "type": "string",
+                    "description": "Name of app to attach to\n"
+                },
+                "hostname": {
+                    "type": "string",
+                    "description": "hostname\n"
+                }
+            },
+            "requiredInputs": [
+                "app",
+                "hostname"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Cert resources.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app to attach to\n"
+                    },
+                    "check": {
+                        "type": "boolean",
+                        "description": "check\n"
+                    },
+                    "dnsvalidationhostname": {
+                        "type": "string",
+                        "description": "DnsValidationHostname\n"
+                    },
+                    "dnsvalidationinstructions": {
+                        "type": "string",
+                        "description": "DnsValidationHostname\n"
+                    },
+                    "dnsvalidationtarget": {
+                        "type": "string",
+                        "description": "DnsValidationTarget\n"
+                    },
+                    "hostname": {
+                        "type": "string",
+                        "description": "hostname\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "fly:index/ip:Ip": {
+            "description": "Fly ip resource\n\n## Example Usage\n\n```terraform\nresource \"fly_ip\" \"exampleIp\" {\n  app  = \"hellofromterraform\"\n  type = \"v4\"\n}\n\nresource \"fly_ip\" \"exampleIpv6\" {\n  app  = \"hellofromterraform\"\n  type = \"v6\"\n}\n```\n\n## Import\n\n\u003cbreak\u003e\u003cbreak\u003e```sh\u003cbreak\u003e $ pulumi import fly:index/ip:Ip exampleIp \u003capp_id\u003e,\u003cip_address\u003e \u003cbreak\u003e```\u003cbreak\u003e\u003cbreak\u003e\n",
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "IP address\n"
+                },
+                "app": {
+                    "type": "string",
+                    "description": "Name of app to attach to\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "region\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "v4 or v6\n"
+                }
+            },
+            "required": [
+                "address",
+                "app",
+                "region",
+                "type"
+            ],
+            "inputProperties": {
+                "app": {
+                    "type": "string",
+                    "description": "Name of app to attach to\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "region\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "v4 or v6\n"
+                }
+            },
+            "requiredInputs": [
+                "app",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Ip resources.\n",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "description": "IP address\n"
+                    },
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app to attach to\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "region\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "v4 or v6\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "fly:index/machine:Machine": {
+            "description": "Fly machine resource\n\n## Example Usage\n\n```terraform\nresource \"fly_machine\" \"exampleMachine\" {\n  app    = \"hellofromterraform\"\n  region = \"iad\"\n  name   = \"extremelyuniquenamelikesoveryunique8\"\n  image  = \"nginx\"\n  env = {\n    key = \"value\"\n  }\n  services = [\n    {\n      ports = [\n        {\n          port     = 443\n          handlers = [\"tls\", \"http\"]\n        },\n        {\n          port     = 80\n          handlers = [\"http\"]\n        }\n      ]\n      \"protocol\" : \"tcp\",\n      \"internal_port\" : 80\n    },\n    {\n      ports = [\n        {\n          port     = 8080\n          handlers = [\"tls\", \"http\"]\n        },\n        {\n          port     = 8081\n          handlers = [\"http\"]\n        }\n      ]\n      \"protocol\" : \"tcp\",\n      \"internal_port\" : 8089\n    }\n  ]\n}\n```\n\n## Import\n\n\u003cbreak\u003e\u003cbreak\u003e```sh\u003cbreak\u003e $ pulumi import fly:index/machine:Machine exampleMachine \u003capp_id\u003e,\u003cmachine_id\u003e \u003cbreak\u003e```\u003cbreak\u003e\u003cbreak\u003e\n",
+            "properties": {
+                "app": {
+                    "type": "string",
+                    "description": "fly app\n"
+                },
+                "cmds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "cmd\n"
+                },
+                "cpus": {
+                    "type": "integer",
+                    "description": "cpu count\n"
+                },
+                "cputype": {
+                    "type": "string",
+                    "description": "cpu type\n"
+                },
+                "entrypoints": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "image entrypoint\n"
+                },
+                "env": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Optional environment variables, keys and values must be strings\n"
+                },
+                "execs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "exec command\n"
+                },
+                "image": {
+                    "type": "string",
+                    "description": "docker image\n"
+                },
+                "memorymb": {
+                    "type": "integer",
+                    "description": "memory mb\n"
+                },
+                "mounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/fly:index/MachineMount:MachineMount"
+                    },
+                    "description": "Volume mounts\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "machine name\n"
+                },
+                "privateip": {
+                    "type": "string",
+                    "description": "Private IP\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "machine region\n"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/fly:index/MachineService:MachineService"
+                    },
+                    "description": "services\n"
+                }
+            },
+            "required": [
+                "app",
+                "cpus",
+                "cputype",
+                "env",
+                "image",
+                "memorymb",
+                "name",
+                "privateip",
+                "region"
+            ],
+            "inputProperties": {
+                "app": {
+                    "type": "string",
+                    "description": "fly app\n"
+                },
+                "cmds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "cmd\n"
+                },
+                "cpus": {
+                    "type": "integer",
+                    "description": "cpu count\n"
+                },
+                "cputype": {
+                    "type": "string",
+                    "description": "cpu type\n"
+                },
+                "entrypoints": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "image entrypoint\n"
+                },
+                "env": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Optional environment variables, keys and values must be strings\n"
+                },
+                "execs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "exec command\n"
+                },
+                "image": {
+                    "type": "string",
+                    "description": "docker image\n"
+                },
+                "memorymb": {
+                    "type": "integer",
+                    "description": "memory mb\n"
+                },
+                "mounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/fly:index/MachineMount:MachineMount"
+                    },
+                    "description": "Volume mounts\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "machine name\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "machine region\n"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/fly:index/MachineService:MachineService"
+                    },
+                    "description": "services\n"
+                }
+            },
+            "requiredInputs": [
+                "app",
+                "image",
+                "region"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Machine resources.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "fly app\n"
+                    },
+                    "cmds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "cmd\n"
+                    },
+                    "cpus": {
+                        "type": "integer",
+                        "description": "cpu count\n"
+                    },
+                    "cputype": {
+                        "type": "string",
+                        "description": "cpu type\n"
+                    },
+                    "entrypoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "image entrypoint\n"
+                    },
+                    "env": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Optional environment variables, keys and values must be strings\n"
+                    },
+                    "execs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "exec command\n"
+                    },
+                    "image": {
+                        "type": "string",
+                        "description": "docker image\n"
+                    },
+                    "memorymb": {
+                        "type": "integer",
+                        "description": "memory mb\n"
+                    },
+                    "mounts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/fly:index/MachineMount:MachineMount"
+                        },
+                        "description": "Volume mounts\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "machine name\n"
+                    },
+                    "privateip": {
+                        "type": "string",
+                        "description": "Private IP\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "machine region\n"
+                    },
+                    "services": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/fly:index/MachineService:MachineService"
+                        },
+                        "description": "services\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "fly:index/volume:Volume": {
+            "description": "Fly volume resource\n\n## Example Usage\n\n```terraform\nresource \"fly_volume\" \"exampleApp\" {\n  name   = \"exampleVolume\"\n  app    = \"hellofromterraform\"\n  size   = 10\n  region = \"ewr\"\n}\n```\n\n## Import\n\n\u003cbreak\u003e\u003cbreak\u003e```sh\u003cbreak\u003e $ pulumi import fly:index/volume:Volume exampleApp \u003capp_id\u003e,\u003cvolume_internal_id\u003e \u003cbreak\u003e```\u003cbreak\u003e\u003cbreak\u003e\n",
+            "properties": {
+                "app": {
+                    "type": "string",
+                    "description": "Name of app to attach to\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "region\n"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "Size of volume in GB\n"
+                }
+            },
+            "required": [
+                "app",
+                "name",
+                "region",
+                "size"
+            ],
+            "inputProperties": {
+                "app": {
+                    "type": "string",
+                    "description": "Name of app to attach to\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "region\n"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "Size of volume in GB\n"
+                }
+            },
+            "requiredInputs": [
+                "app",
+                "name",
+                "region",
+                "size"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Volume resources.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app to attach to\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "region\n"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Size of volume in GB\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "fly:index/getApp:getApp": {
+            "description": "Retrieve info about graphql app\n\n## Example Usage\n\n```terraform\ndata \"fly_app\" \"example\" {\n  name = \"hellofromterraform\"\n  depends_on = [\n    fly_app.exampleApp\n  ]\n}\n```\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getApp.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of app\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getApp.\n",
+                "properties": {
+                    "appurl": {
+                        "type": "string"
+                    },
+                    "currentrelease": {
+                        "type": "string"
+                    },
+                    "deployed": {
+                        "type": "boolean"
+                    },
+                    "healthchecks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "hostname": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "ipaddresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of app\n"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "appurl",
+                    "currentrelease",
+                    "deployed",
+                    "healthchecks",
+                    "hostname",
+                    "id",
+                    "ipaddresses",
+                    "name",
+                    "status"
+                ]
+            }
+        },
+        "fly:index/getCert:getCert": {
+            "description": "Fly certificate data source\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getCert.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app attached to\n"
+                    },
+                    "hostname": {
+                        "type": "string",
+                        "description": "hostname\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "app",
+                    "hostname"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getCert.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app attached to\n"
+                    },
+                    "check": {
+                        "type": "boolean",
+                        "description": "check\n"
+                    },
+                    "dnsvalidationhostname": {
+                        "type": "string",
+                        "description": "DnsValidationHostname\n"
+                    },
+                    "dnsvalidationinstructions": {
+                        "type": "string",
+                        "description": "DnsValidationHostname\n"
+                    },
+                    "dnsvalidationtarget": {
+                        "type": "string",
+                        "description": "DnsValidationTarget\n"
+                    },
+                    "hostname": {
+                        "type": "string",
+                        "description": "hostname\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "ID of certificate\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "app",
+                    "check",
+                    "dnsvalidationhostname",
+                    "dnsvalidationinstructions",
+                    "dnsvalidationtarget",
+                    "hostname",
+                    "id"
+                ]
+            }
+        },
+        "fly:index/getIp:getIp": {
+            "description": "Fly ip data source\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getIp.\n",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "description": "IP address\n"
+                    },
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app attached to\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "address",
+                    "app"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getIp.\n",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "description": "IP address\n"
+                    },
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app attached to\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "ID of address\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "region\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "v4 or v6\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "address",
+                    "app",
+                    "id",
+                    "region",
+                    "type"
+                ]
+            }
+        },
+        "fly:index/getVolume:getVolume": {
+            "description": "Fly volume resource\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getVolume.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app attached to\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "ID of volume\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "app",
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getVolume.\n",
+                "properties": {
+                    "app": {
+                        "type": "string",
+                        "description": "Name of app attached to\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "ID of volume\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "region\n"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Size of volume in GB\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "app",
+                    "id",
+                    "name",
+                    "region",
+                    "size"
+                ]
+            }
+        }
+    }
+}
