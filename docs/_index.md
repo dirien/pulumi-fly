@@ -16,6 +16,7 @@ The Fly.io Resource Provider lets you manage [Fly.io](https://fly.io/) resources
 {{% /choosable %}}
 
 {{% choosable language typescript %}}
+```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as fly from "@ediri/pulumi-fly";
 
@@ -74,6 +75,7 @@ for (const region of ["ams", "cdg", "fra"]) {
 }
 
 export const appUrl = pulumi.interpolate`https://${app.name}.fly.dev`
+```
 {{% /choosable %}}
 
 {{% choosable language python %}}
