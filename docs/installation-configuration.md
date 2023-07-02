@@ -8,7 +8,7 @@ layout: package
 
 The Pulumi Fly.io provider is available as a package in all Pulumi languages:
 
-* JavaScript/TypeScript: [`@ediri/fly`](https://www.npmjs.com/package/@ediri/fly)
+* JavaScript/TypeScript: [`@ediri/pulumi-fly`](https://www.npmjs.com/package/@ediri/pulumi-fly)
 * Python: [`ediri_fly`](https://pypi.org/project/ediri_fly/)
 * Go: [`github.com/dirien/pulumi-fly/sdk`](https://github.com/dirien/pulumi-fly/sdk)
 * .NET: [`ediri.Fly`](https://www.nuget.org/packages/ediri.Fly)
