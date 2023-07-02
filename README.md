@@ -13,13 +13,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @ediri/fly
+npm install @ediri/pulumi-fly
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @ediri/fly
+yarn add @ediri/pulumi-fly
 ```
 
 ### Python
