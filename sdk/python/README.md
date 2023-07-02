@@ -48,7 +48,7 @@ dotnet add package ediri.Fly
 
 ## Configuration
 
-The following configuration points are supported for the `fly` provider:
+The following configuration options are supported for the `fly` provider:
 
 * `fly_api_token` (String) fly.io api token. If not set checks env for `FLY_API_TOKEN`
 * `fly_http_endpoint` (String) Where the provider should look to find the fly http endpoint
