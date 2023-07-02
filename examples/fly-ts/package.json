@@ -1,0 +1,11 @@
+{
+    "name": "fly-ts",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^20"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "3.74.0",
+        "@ediri/pulumi-fly": "0.0.23"
+    }
+}
