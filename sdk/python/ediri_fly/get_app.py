@@ -135,15 +135,15 @@ def get_app(name: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('fly:index/getApp:getApp', __args__, opts=opts, typ=GetAppResult).value
 
     return AwaitableGetAppResult(
-        appurl=__ret__.appurl,
-        currentrelease=__ret__.currentrelease,
-        deployed=__ret__.deployed,
-        healthchecks=__ret__.healthchecks,
-        hostname=__ret__.hostname,
-        id=__ret__.id,
-        ipaddresses=__ret__.ipaddresses,
-        name=__ret__.name,
-        status=__ret__.status)
+        appurl=pulumi.get(__ret__, 'appurl'),
+        currentrelease=pulumi.get(__ret__, 'currentrelease'),
+        deployed=pulumi.get(__ret__, 'deployed'),
+        healthchecks=pulumi.get(__ret__, 'healthchecks'),
+        hostname=pulumi.get(__ret__, 'hostname'),
+        id=pulumi.get(__ret__, 'id'),
+        ipaddresses=pulumi.get(__ret__, 'ipaddresses'),
+        name=pulumi.get(__ret__, 'name'),
+        status=pulumi.get(__ret__, 'status'))
 
 
 @_utilities.lift_output_func(get_app)

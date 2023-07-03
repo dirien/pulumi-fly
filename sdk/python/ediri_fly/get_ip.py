@@ -109,11 +109,11 @@ def get_ip(address: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('fly:index/getIp:getIp', __args__, opts=opts, typ=GetIpResult).value
 
     return AwaitableGetIpResult(
-        address=__ret__.address,
-        app=__ret__.app,
-        id=__ret__.id,
-        region=__ret__.region,
-        type=__ret__.type)
+        address=pulumi.get(__ret__, 'address'),
+        app=pulumi.get(__ret__, 'app'),
+        id=pulumi.get(__ret__, 'id'),
+        region=pulumi.get(__ret__, 'region'),
+        type=pulumi.get(__ret__, 'type'))
 
 
 @_utilities.lift_output_func(get_ip)

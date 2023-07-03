@@ -15,20 +15,21 @@ __all__ = ['VolumeArgs', 'Volume']
 class VolumeArgs:
     def __init__(__self__, *,
                  app: pulumi.Input[str],
-                 name: pulumi.Input[str],
                  region: pulumi.Input[str],
-                 size: pulumi.Input[int]):
+                 size: pulumi.Input[int],
+                 name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Volume resource.
         :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] name: name
         :param pulumi.Input[str] region: region
         :param pulumi.Input[int] size: Size of volume in GB
+        :param pulumi.Input[str] name: name
         """
         pulumi.set(__self__, "app", app)
-        pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "size", size)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter
@@ -41,18 +42,6 @@ class VolumeArgs:
     @app.setter
     def app(self, value: pulumi.Input[str]):
         pulumi.set(self, "app", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[str]:
-        """
-        name
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter
@@ -77,6 +66,18 @@ class VolumeArgs:
     @size.setter
     def size(self, value: pulumi.Input[int]):
         pulumi.set(self, "size", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        name
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
@@ -223,8 +224,6 @@ class Volume(pulumi.CustomResource):
             if app is None and not opts.urn:
                 raise TypeError("Missing required property 'app'")
             __props__.__dict__["app"] = app
-            if name is None and not opts.urn:
-                raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             if region is None and not opts.urn:
                 raise TypeError("Missing required property 'region'")

@@ -109,11 +109,11 @@ def get_volume(app: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('fly:index/getVolume:getVolume', __args__, opts=opts, typ=GetVolumeResult).value
 
     return AwaitableGetVolumeResult(
-        app=__ret__.app,
-        id=__ret__.id,
-        name=__ret__.name,
-        region=__ret__.region,
-        size=__ret__.size)
+        app=pulumi.get(__ret__, 'app'),
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        region=pulumi.get(__ret__, 'region'),
+        size=pulumi.get(__ret__, 'size'))
 
 
 @_utilities.lift_output_func(get_volume)

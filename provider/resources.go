@@ -63,8 +63,9 @@ func flyDataSource(mod string, res string) tokens.ModuleMember {
 var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the random package.
-func Provider() pf.ProviderInfo {
+func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
+		P:           pf.ShimProvider(shim.NewProvider()),
 		Name:        "fly",
 		Description: "A Pulumi package for creating and managing Fly.io resources.",
 		Keywords: []string{
@@ -127,8 +128,5 @@ func Provider() pf.ProviderInfo {
 		},
 	}
 	info.SetAutonaming(255, "-")
-	return pf.ProviderInfo{
-		ProviderInfo: info,
-		NewProvider:  shim.NewProvider,
-	}
+	return info
 }

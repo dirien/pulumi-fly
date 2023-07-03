@@ -65,7 +65,7 @@ export class App extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: AppArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: AppArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: AppArgs | AppState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -77,9 +77,6 @@ export class App extends pulumi.CustomResource {
             resourceInputs["orgid"] = state ? state.orgid : undefined;
         } else {
             const args = argsOrState as AppArgs | undefined;
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["org"] = args ? args.org : undefined;
             resourceInputs["appurl"] = undefined /*out*/;
@@ -119,7 +116,7 @@ export interface AppArgs {
     /**
      * Name of application
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Optional org slug to operate upon
      */
