@@ -202,9 +202,6 @@
                     "description": "Optional org slug to operate upon\n"
                 }
             },
-            "requiredInputs": [
-                "name"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering App resources.\n",
                 "properties": {
@@ -669,7 +666,6 @@
             },
             "requiredInputs": [
                 "app",
-                "name",
                 "region",
                 "size"
             ],

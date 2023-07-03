@@ -9,9 +9,9 @@ replace (
 
 require (
 	github.com/fly-apps/terraform-provider-fly/shim v0.0.0
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.9.2
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.48.1-0.20230527113951-a0f92e793f31
-	github.com/pulumi/pulumi/sdk/v3 v3.69.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.13.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.50.1
+	github.com/pulumi/pulumi/sdk/v3 v3.73.1-0.20230623071431-db579129f4c9
 )
 
 require (
@@ -189,7 +189,7 @@ require (
 	github.com/pulumi/pulumi-java/pkg v0.9.4 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.4 // indirect
 	github.com/pulumi/pulumi-yaml v1.1.1 // indirect
-	github.com/pulumi/pulumi/pkg/v3 v3.69.0 // indirect
+	github.com/pulumi/pulumi/pkg/v3 v3.73.1-0.20230623071431-db579129f4c9 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/quic-go/qpack v0.4.0 // indirect
 	github.com/quic-go/qtls-go1-19 v0.3.2 // indirect

@@ -80,9 +80,6 @@ export class Volume extends pulumi.CustomResource {
             if ((!args || args.app === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'app'");
             }
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             if ((!args || args.region === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'region'");
             }
@@ -132,7 +129,7 @@ export interface VolumeArgs {
     /**
      * name
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * region
      */

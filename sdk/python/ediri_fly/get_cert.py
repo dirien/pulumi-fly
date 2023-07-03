@@ -133,13 +133,13 @@ def get_cert(app: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('fly:index/getCert:getCert', __args__, opts=opts, typ=GetCertResult).value
 
     return AwaitableGetCertResult(
-        app=__ret__.app,
-        check=__ret__.check,
-        dnsvalidationhostname=__ret__.dnsvalidationhostname,
-        dnsvalidationinstructions=__ret__.dnsvalidationinstructions,
-        dnsvalidationtarget=__ret__.dnsvalidationtarget,
-        hostname=__ret__.hostname,
-        id=__ret__.id)
+        app=pulumi.get(__ret__, 'app'),
+        check=pulumi.get(__ret__, 'check'),
+        dnsvalidationhostname=pulumi.get(__ret__, 'dnsvalidationhostname'),
+        dnsvalidationinstructions=pulumi.get(__ret__, 'dnsvalidationinstructions'),
+        dnsvalidationtarget=pulumi.get(__ret__, 'dnsvalidationtarget'),
+        hostname=pulumi.get(__ret__, 'hostname'),
+        id=pulumi.get(__ret__, 'id'))
 
 
 @_utilities.lift_output_func(get_cert)

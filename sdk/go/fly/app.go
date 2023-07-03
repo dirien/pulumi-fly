@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -35,12 +34,9 @@ type App struct {
 func NewApp(ctx *pulumi.Context,
 	name string, args *AppArgs, opts ...pulumi.ResourceOption) (*App, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &AppArgs{}
 	}
 
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource App
 	err := ctx.RegisterResource("fly:index/app:App", name, args, &resource, opts...)
@@ -91,7 +87,7 @@ func (AppState) ElementType() reflect.Type {
 
 type appArgs struct {
 	// Name of application
-	Name string `pulumi:"name"`
+	Name *string `pulumi:"name"`
 	// Optional org slug to operate upon
 	Org *string `pulumi:"org"`
 }
@@ -99,7 +95,7 @@ type appArgs struct {
 // The set of arguments for constructing a App resource.
 type AppArgs struct {
 	// Name of application
-	Name pulumi.StringInput
+	Name pulumi.StringPtrInput
 	// Optional org slug to operate upon
 	Org pulumi.StringPtrInput
 }

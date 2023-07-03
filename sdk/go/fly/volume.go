@@ -41,9 +41,6 @@ func NewVolume(ctx *pulumi.Context,
 	if args.App == nil {
 		return nil, errors.New("invalid value for required argument 'App'")
 	}
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	if args.Region == nil {
 		return nil, errors.New("invalid value for required argument 'Region'")
 	}
@@ -102,7 +99,7 @@ type volumeArgs struct {
 	// Name of app to attach to
 	App string `pulumi:"app"`
 	// name
-	Name string `pulumi:"name"`
+	Name *string `pulumi:"name"`
 	// region
 	Region string `pulumi:"region"`
 	// Size of volume in GB
@@ -114,7 +111,7 @@ type VolumeArgs struct {
 	// Name of app to attach to
 	App pulumi.StringInput
 	// name
-	Name pulumi.StringInput
+	Name pulumi.StringPtrInput
 	// region
 	Region pulumi.StringInput
 	// Size of volume in GB
