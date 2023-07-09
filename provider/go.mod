@@ -10,7 +10,7 @@ replace (
 require (
 	github.com/fly-apps/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.13.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.50.1
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.53.0
 	github.com/pulumi/pulumi/sdk/v3 v3.74.0
 )
 
@@ -43,6 +43,7 @@ require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/Khan/genqlient v0.6.0 // indirect
 	github.com/Masterminds/goutils v1.1.1 // indirect
+	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect

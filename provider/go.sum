@@ -298,6 +298,7 @@ github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible/go
 github.com/Masterminds/goutils v1.1.1 h1:5nUrii3FMTL5diU80unEVvNevw1nH4+ZV4DSLVJLSYI=
 github.com/Masterminds/goutils v1.1.1/go.mod h1:8cTjp+g8YejhMuvIA5y2vz3BpJxksy863GQaJW2MFNU=
 github.com/Masterminds/semver v1.5.0 h1:H65muMkzWKEuNDnfl9d70GUjFniHKHRbFPGBuZ3QEww=
+github.com/Masterminds/semver v1.5.0/go.mod h1:MB6lktGJrhw8PrUyiEoblNEGEQ+RzHPF078ddwwvV3Y=
 github.com/Masterminds/semver/v3 v3.1.1 h1:hLg3sBzpNErnxhQtUy/mmLR2I9foDujNK030IGemrRc=
 github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
 github.com/Masterminds/sprig/v3 v3.2.1/go.mod h1:UoaO7Yp8KlPnJIYWTFkMaqPUYKTfGFPhxNuwnnxkKlk=
@@ -1666,8 +1667,8 @@ github.com/pulumi/pulumi-java/pkg v0.9.4/go.mod h1:c6rSw/+q4O0IImgJ9axxoC6QesbPY
 github.com/pulumi/pulumi-terraform-bridge/pf v0.13.0 h1:MsKkGsFNeS44GLdnGh7IgTfOu3cmZeJ3PO8ha2p9FJw=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.13.0/go.mod h1:pCWhBZJPLg8zvjd2CZMUvcxTJIDOlZlgYu5zzEKKh/8=
 github.com/pulumi/pulumi-terraform-bridge/testing v0.0.1 h1:SCg1gjfY9N4yn8U8peIUYATifjoDABkyR7H9lmefsfc=
-github.com/pulumi/pulumi-terraform-bridge/v3 v3.50.1 h1:3lfYzYjs/8ZtJuOm3xHhnGV9T5FQ+MObIOIcNEOQxEk=
-github.com/pulumi/pulumi-terraform-bridge/v3 v3.50.1/go.mod h1:ek2NJSTqeI5+V6wL2Cv8qy3f7S0Uc04UT/m6U582fSs=
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.53.0 h1:XP754+36CpyiT5tEzqd43U8gYGqDML9hkiWMaoV0WG0=
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.53.0/go.mod h1:Bm1kuEs0xouFxEG2Lv/I3OhnME+VId9DbkRClnwFqsI=
 github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.4 h1:rIzMmtcVpPX8ynaz6/nW5AHNY63DiNfCohqmxWvMpM4=
 github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.4/go.mod h1:Kt8RIZWa/N8rW3+0g6NrqCBmF3o+HuIhFaZpssEkG6w=
 github.com/pulumi/pulumi-yaml v1.1.1 h1:8pyBNIU8+ym0wYpjhsCqN+cutygfK1XbhY2YEeNfyXY=
@@ -1678,7 +1679,7 @@ github.com/pulumi/pulumi/sdk/v3 v3.74.0 h1:U+7fc/iLFy/aZMyQNOSxrp2voqBk8VKLyodgw
 github.com/pulumi/pulumi/sdk/v3 v3.74.0/go.mod h1:BUUBfQZsH0FPuznRfFHkR+b96VlXELnn+DgidFj4XSQ=
 github.com/pulumi/schema-tools v0.1.2 h1:Fd9xvUjgck4NA+7/jSk7InqCUT4Kj940+EcnbQKpfZo=
 github.com/pulumi/schema-tools v0.1.2/go.mod h1:62lgj52Tzq11eqWTIaKd+EVyYAu5dEcDJxMhTjvMO/k=
-github.com/pulumi/terraform-diff-reader v0.0.0-20201211191010-ad4715e9285e h1:Dik4Qe/+xguB8JagPyXNlbOnRiXGmq/PSPQTGunYnTk=
+github.com/pulumi/terraform-diff-reader v0.0.2 h1:kTE4nEXU3/SYXESvAIem+wyHMI3abqkI3OhJ0G04LLI=
 github.com/quic-go/qpack v0.4.0 h1:Cr9BXA1sQS2SmDUWjSofMPNKmvF6IiIfDRmgU0w1ZCo=
 github.com/quic-go/qpack v0.4.0/go.mod h1:UZVnYIfi5GRk+zI9UMaCPsmZ2xKJP7XBUvVyT1Knj9A=
 github.com/quic-go/qtls-go1-19 v0.3.2 h1:tFxjCFcTQzK+oMxG6Zcvp4Dq8dx4yD3dDiIiyc86Z5U=
