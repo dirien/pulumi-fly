@@ -10,7 +10,7 @@ replace (
 require (
 	github.com/fly-apps/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.14.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.53.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.54.0
 	github.com/pulumi/pulumi/sdk/v3 v3.75.0
 )
 
@@ -136,9 +136,9 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.17.0 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.3.2 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.3.3 // indirect
 	github.com/hashicorp/terraform-plugin-framework-validators v0.10.0 // indirect
-	github.com/hashicorp/terraform-plugin-go v0.17.0 // indirect
+	github.com/hashicorp/terraform-plugin-go v0.18.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.1 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
