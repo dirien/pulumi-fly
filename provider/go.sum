@@ -1674,8 +1674,8 @@ github.com/pulumi/pulumi-yaml v1.1.1 h1:8pyBNIU8+ym0wYpjhsCqN+cutygfK1XbhY2YEeNf
 github.com/pulumi/pulumi-yaml v1.1.1/go.mod h1:GhpdS6rFpwqvUtKdA+fQy8P28iNvncng39IXh5q68vE=
 github.com/pulumi/pulumi/pkg/v3 v3.76.1 h1:OdQHwI2oB8Q1Es13by63QhDqIdk7Kl4w39UTrX3M44Y=
 github.com/pulumi/pulumi/pkg/v3 v3.76.1/go.mod h1:DnDxyPUhLJv334MdPIIGYD0V7i7fVb7j9AvYf18MI6w=
-github.com/pulumi/pulumi/sdk/v3 v3.77.1 h1:DfMCVjtzaSYqpZmMmRdHA5i1vaD6zYsCkDmcZqojREI=
-github.com/pulumi/pulumi/sdk/v3 v3.77.1/go.mod h1:FEFictCHoa8CYzKDSc0t9ErrNiaO9n7pChreLQLDH+M=
+github.com/pulumi/pulumi/sdk/v3 v3.78.1 h1:itSfMcILvEq5wOpGEAzeZdpH973yJ4sRn02nx5SCJHM=
+github.com/pulumi/pulumi/sdk/v3 v3.78.1/go.mod h1:FEFictCHoa8CYzKDSc0t9ErrNiaO9n7pChreLQLDH+M=
 github.com/pulumi/schema-tools v0.1.2 h1:Fd9xvUjgck4NA+7/jSk7InqCUT4Kj940+EcnbQKpfZo=
 github.com/pulumi/schema-tools v0.1.2/go.mod h1:62lgj52Tzq11eqWTIaKd+EVyYAu5dEcDJxMhTjvMO/k=
 github.com/pulumi/terraform-diff-reader v0.0.2 h1:kTE4nEXU3/SYXESvAIem+wyHMI3abqkI3OhJ0G04LLI=
