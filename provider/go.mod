@@ -11,7 +11,7 @@ require (
 	github.com/fly-apps/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.15.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.57.0
-	github.com/pulumi/pulumi/sdk/v3 v3.77.1
+	github.com/pulumi/pulumi/sdk/v3 v3.78.1
 )
 
 require (
