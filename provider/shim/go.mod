@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/fly-apps/terraform-provider-fly v0.0.23
-	github.com/hashicorp/terraform-plugin-framework v1.3.4
+	github.com/hashicorp/terraform-plugin-framework v1.3.5
 )
 
 require (
