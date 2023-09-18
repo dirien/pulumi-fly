@@ -115,7 +115,7 @@ jobs:
           password: ${{ env.PYPI_PASSWORD }}
           packages_dir: ${{github.workspace}}/sdk/python/bin/dist
       - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
-        uses: JS-DevTools/npm-publish@5a85faf05d2ade2d5b6682bfe5359915d5159c6c # tag=v2.2.1
+        uses: JS-DevTools/npm-publish@fe72237be0920f7a0cafd6a966c9b929c9466e9b # tag=v2.2.2
         with:
           access: "public"
           token: ${{ env.NPM_TOKEN }}
