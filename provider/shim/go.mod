@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/fly-apps/terraform-provider-fly v0.0.23
-	github.com/hashicorp/terraform-plugin-framework v1.4.2
+	github.com/hashicorp/terraform-plugin-framework v1.5.0
 )
 
 require (
@@ -20,7 +20,7 @@ require (
 	github.com/hashicorp/go-hclog v1.5.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/terraform-plugin-framework-validators v0.10.0 // indirect
-	github.com/hashicorp/terraform-plugin-go v0.19.0 // indirect
+	github.com/hashicorp/terraform-plugin-go v0.20.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.27.0 // indirect
 	github.com/imroc/req/v3 v3.37.1 // indirect
@@ -37,7 +37,7 @@ require (
 	github.com/refraction-networking/utls v1.3.2 // indirect
 	github.com/stretchr/testify v1.8.3 // indirect
 	github.com/vektah/gqlparser/v2 v2.5.3 // indirect
-	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
+	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1 // indirect
