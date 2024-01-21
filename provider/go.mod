@@ -9,7 +9,7 @@ replace (
 
 require (
 	github.com/fly-apps/terraform-provider-fly/shim v0.0.0
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.23.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.24.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.71.0
 	github.com/pulumi/pulumi/sdk/v3 v3.102.0
 )
