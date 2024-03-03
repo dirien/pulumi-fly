@@ -4,15 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Fly volume resource
- *
- * ## Example Usage
- *
- * ## Import
- *
- * <break><break>```sh<break> $ pulumi import fly:index/volume:Volume exampleApp <app_id>,<volume_internal_id> <break>```<break><break>
- */
 export class Volume extends pulumi.CustomResource {
     /**
      * Get an existing Volume resource's state with the given name, ID, and optional extra
@@ -42,15 +33,16 @@ export class Volume extends pulumi.CustomResource {
     }
 
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     public readonly app!: pulumi.Output<string>;
+    public readonly encrypted!: pulumi.Output<boolean>;
     /**
-     * name
+     * A user-provided identifier
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     public readonly region!: pulumi.Output<string>;
     /**
@@ -72,6 +64,7 @@ export class Volume extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as VolumeState | undefined;
             resourceInputs["app"] = state ? state.app : undefined;
+            resourceInputs["encrypted"] = state ? state.encrypted : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["region"] = state ? state.region : undefined;
             resourceInputs["size"] = state ? state.size : undefined;
@@ -87,6 +80,7 @@ export class Volume extends pulumi.CustomResource {
                 throw new Error("Missing required property 'size'");
             }
             resourceInputs["app"] = args ? args.app : undefined;
+            resourceInputs["encrypted"] = args ? args.encrypted : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["region"] = args ? args.region : undefined;
             resourceInputs["size"] = args ? args.size : undefined;
@@ -101,15 +95,16 @@ export class Volume extends pulumi.CustomResource {
  */
 export interface VolumeState {
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     app?: pulumi.Input<string>;
+    encrypted?: pulumi.Input<boolean>;
     /**
-     * name
+     * A user-provided identifier
      */
     name?: pulumi.Input<string>;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     region?: pulumi.Input<string>;
     /**
@@ -123,15 +118,16 @@ export interface VolumeState {
  */
 export interface VolumeArgs {
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     app: pulumi.Input<string>;
+    encrypted?: pulumi.Input<boolean>;
     /**
-     * name
+     * A user-provided identifier
      */
     name?: pulumi.Input<string>;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     region: pulumi.Input<string>;
     /**

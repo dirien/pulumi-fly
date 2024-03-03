@@ -6,35 +6,43 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface MachineMount {
-    encrypted: boolean;
     /**
-     * Path for volume to be mounted on vm
+     * Path for volume to be mounted on vm, ex: `/data`
      */
     path: string;
-    sizeGb: number;
     /**
-     * Name or ID of volume
+     * ID of volume
      */
     volume: string;
 }
 
 export interface MachineService {
     /**
-     * Port application listens on internally
+     * Port the machine listens on
      */
     internalPort: number;
     /**
-     * External ports and handlers
+     * How the port is exposed
      */
     ports: outputs.MachineServicePort[];
     /**
-     * network protocol
+     * `udp` or `tcp`
      */
     protocol: string;
 }
 
 export interface MachineServicePort {
+    /**
+     * Automatically redirect to HTTPS on "http" handler
+     */
+    forceHttps: boolean;
+    /**
+     * How the edge should process requests; ex empty, or `tls` to attach app's certificate
+     */
     handlers?: string[];
+    /**
+     * Mapped external port number
+     */
     port: number;
 }
 

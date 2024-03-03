@@ -4,15 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Fly ip resource
- *
- * ## Example Usage
- *
- * ## Import
- *
- * <break><break>```sh<break> $ pulumi import fly:index/ip:Ip exampleIp <app_id>,<ip_address> <break>```<break><break>
- */
 export class Ip extends pulumi.CustomResource {
     /**
      * Get an existing Ip resource's state with the given name, ID, and optional extra
@@ -42,19 +33,19 @@ export class Ip extends pulumi.CustomResource {
     }
 
     /**
-     * IP address
+     * Empty if using `sharedV4`
      */
     public /*out*/ readonly address!: pulumi.Output<string>;
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     public readonly app!: pulumi.Output<string>;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     public readonly region!: pulumi.Output<string>;
     /**
-     * v4 or v6
+     * One of the following values (by regex): `^(v4|v6|private_v6)$`
      */
     public readonly type!: pulumi.Output<string>;
 
@@ -98,19 +89,19 @@ export class Ip extends pulumi.CustomResource {
  */
 export interface IpState {
     /**
-     * IP address
+     * Empty if using `sharedV4`
      */
     address?: pulumi.Input<string>;
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     app?: pulumi.Input<string>;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     region?: pulumi.Input<string>;
     /**
-     * v4 or v6
+     * One of the following values (by regex): `^(v4|v6|private_v6)$`
      */
     type?: pulumi.Input<string>;
 }
@@ -120,15 +111,15 @@ export interface IpState {
  */
 export interface IpArgs {
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     app: pulumi.Input<string>;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     region?: pulumi.Input<string>;
     /**
-     * v4 or v6
+     * One of the following values (by regex): `^(v4|v6|private_v6)$`
      */
     type: pulumi.Input<string>;
 }

@@ -10,38 +10,29 @@ using Pulumi;
 
 namespace ediri.Fly
 {
-    /// <summary>
-    /// Fly ip resource
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ## Import
-    /// 
-    /// &lt;break&gt;&lt;break&gt;```sh&lt;break&gt; $ pulumi import fly:index/ip:Ip exampleIp &lt;app_id&gt;,&lt;ip_address&gt; &lt;break&gt;```&lt;break&gt;&lt;break&gt;
-    /// </summary>
     [FlyResourceType("fly:index/ip:Ip")]
     public partial class Ip : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// IP address
+        /// Empty if using `shared_v4`
         /// </summary>
         [Output("address")]
         public Output<string> Address { get; private set; } = null!;
 
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Output("app")]
         public Output<string> App { get; private set; } = null!;
 
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
 
         /// <summary>
-        /// v4 or v6
+        /// One of the following values (by regex): `^(v4|v6|private_v6)$`
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -94,19 +85,19 @@ namespace ediri.Fly
     public sealed class IpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
 
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// v4 or v6
+        /// One of the following values (by regex): `^(v4|v6|private_v6)$`
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -120,25 +111,25 @@ namespace ediri.Fly
     public sealed class IpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// IP address
+        /// Empty if using `shared_v4`
         /// </summary>
         [Input("address")]
         public Input<string>? Address { get; set; }
 
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app")]
         public Input<string>? App { get; set; }
 
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// v4 or v6
+        /// One of the following values (by regex): `^(v4|v6|private_v6)$`
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

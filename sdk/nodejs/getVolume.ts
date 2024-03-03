@@ -4,9 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Fly volume resource
- */
 export function getVolume(args: GetVolumeArgs, opts?: pulumi.InvokeOptions): Promise<GetVolumeResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -21,11 +18,11 @@ export function getVolume(args: GetVolumeArgs, opts?: pulumi.InvokeOptions): Pro
  */
 export interface GetVolumeArgs {
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     app: string;
     /**
-     * ID of volume
+     * A fly-generated ID
      */
     id: string;
 }
@@ -35,19 +32,20 @@ export interface GetVolumeArgs {
  */
 export interface GetVolumeResult {
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     readonly app: string;
+    readonly encrypted: boolean;
     /**
-     * ID of volume
+     * A fly-generated ID
      */
     readonly id: string;
     /**
-     * name
+     * A user-provided identifier
      */
     readonly name: string;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     readonly region: string;
     /**
@@ -55,9 +53,6 @@ export interface GetVolumeResult {
      */
     readonly size: number;
 }
-/**
- * Fly volume resource
- */
 export function getVolumeOutput(args: GetVolumeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVolumeResult> {
     return pulumi.output(args).apply((a: any) => getVolume(a, opts))
 }
@@ -67,11 +62,11 @@ export function getVolumeOutput(args: GetVolumeOutputArgs, opts?: pulumi.InvokeO
  */
 export interface GetVolumeOutputArgs {
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     app: pulumi.Input<string>;
     /**
-     * ID of volume
+     * A fly-generated ID
      */
     id: pulumi.Input<string>;
 }

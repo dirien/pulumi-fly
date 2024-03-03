@@ -8,24 +8,19 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly volume resource
-//
-// ## Example Usage
-//
-// ## Import
-//
-// <break><break>```sh<break> $ pulumi import fly:index/volume:Volume exampleApp <app_id>,<volume_internal_id> <break>```<break><break>
 type Volume struct {
 	pulumi.CustomResourceState
 
-	// Name of app to attach to
-	App pulumi.StringOutput `pulumi:"app"`
-	// name
+	// The App this resource will be created in
+	App       pulumi.StringOutput `pulumi:"app"`
+	Encrypted pulumi.BoolOutput   `pulumi:"encrypted"`
+	// A user-provided identifier
 	Name pulumi.StringOutput `pulumi:"name"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Size of volume in GB
 	Size pulumi.IntOutput `pulumi:"size"`
@@ -47,7 +42,7 @@ func NewVolume(ctx *pulumi.Context,
 	if args.Size == nil {
 		return nil, errors.New("invalid value for required argument 'Size'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Volume
 	err := ctx.RegisterResource("fly:index/volume:Volume", name, args, &resource, opts...)
 	if err != nil {
@@ -70,22 +65,24 @@ func GetVolume(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Volume resources.
 type volumeState struct {
-	// Name of app to attach to
-	App *string `pulumi:"app"`
-	// name
+	// The App this resource will be created in
+	App       *string `pulumi:"app"`
+	Encrypted *bool   `pulumi:"encrypted"`
+	// A user-provided identifier
 	Name *string `pulumi:"name"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region *string `pulumi:"region"`
 	// Size of volume in GB
 	Size *int `pulumi:"size"`
 }
 
 type VolumeState struct {
-	// Name of app to attach to
-	App pulumi.StringPtrInput
-	// name
+	// The App this resource will be created in
+	App       pulumi.StringPtrInput
+	Encrypted pulumi.BoolPtrInput
+	// A user-provided identifier
 	Name pulumi.StringPtrInput
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region pulumi.StringPtrInput
 	// Size of volume in GB
 	Size pulumi.IntPtrInput
@@ -96,11 +93,12 @@ func (VolumeState) ElementType() reflect.Type {
 }
 
 type volumeArgs struct {
-	// Name of app to attach to
-	App string `pulumi:"app"`
-	// name
+	// The App this resource will be created in
+	App       string `pulumi:"app"`
+	Encrypted *bool  `pulumi:"encrypted"`
+	// A user-provided identifier
 	Name *string `pulumi:"name"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region string `pulumi:"region"`
 	// Size of volume in GB
 	Size int `pulumi:"size"`
@@ -108,11 +106,12 @@ type volumeArgs struct {
 
 // The set of arguments for constructing a Volume resource.
 type VolumeArgs struct {
-	// Name of app to attach to
-	App pulumi.StringInput
-	// name
+	// The App this resource will be created in
+	App       pulumi.StringInput
+	Encrypted pulumi.BoolPtrInput
+	// A user-provided identifier
 	Name pulumi.StringPtrInput
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region pulumi.StringInput
 	// Size of volume in GB
 	Size pulumi.IntInput
@@ -205,17 +204,21 @@ func (o VolumeOutput) ToVolumeOutputWithContext(ctx context.Context) VolumeOutpu
 	return o
 }
 
-// Name of app to attach to
+// The App this resource will be created in
 func (o VolumeOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v *Volume) pulumi.StringOutput { return v.App }).(pulumi.StringOutput)
 }
 
-// name
+func (o VolumeOutput) Encrypted() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Volume) pulumi.BoolOutput { return v.Encrypted }).(pulumi.BoolOutput)
+}
+
+// A user-provided identifier
 func (o VolumeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Volume) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// region
+// Fly region, ex `ord`, `sin`, `mad`
 func (o VolumeOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *Volume) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }

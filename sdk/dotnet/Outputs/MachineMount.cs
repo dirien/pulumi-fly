@@ -14,30 +14,22 @@ namespace ediri.Fly.Outputs
     [OutputType]
     public sealed class MachineMount
     {
-        public readonly bool? Encrypted;
         /// <summary>
-        /// Path for volume to be mounted on vm
+        /// Path for volume to be mounted on vm, ex: `/data`
         /// </summary>
         public readonly string Path;
-        public readonly int? SizeGb;
         /// <summary>
-        /// Name or ID of volume
+        /// ID of volume
         /// </summary>
         public readonly string Volume;
 
         [OutputConstructor]
         private MachineMount(
-            bool? encrypted,
-
             string path,
-
-            int? sizeGb,
 
             string volume)
         {
-            Encrypted = encrypted;
             Path = path;
-            SizeGb = sizeGb;
             Volume = volume;
         }
     }

@@ -12,37 +12,9 @@ namespace ediri.Fly
 {
     public static class GetApp
     {
-        /// <summary>
-        /// Retrieve info about graphql app
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```terraform
-        /// data "fly_app" "example" {
-        ///   name = "hellofromterraform"
-        ///   depends_on = [
-        ///     fly_app.exampleApp
-        ///   ]
-        /// }
-        /// ```
-        /// </summary>
         public static Task<GetAppResult> InvokeAsync(GetAppArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAppResult>("fly:index/getApp:getApp", args ?? new GetAppArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Retrieve info about graphql app
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```terraform
-        /// data "fly_app" "example" {
-        ///   name = "hellofromterraform"
-        ///   depends_on = [
-        ///     fly_app.exampleApp
-        ///   ]
-        /// }
-        /// ```
-        /// </summary>
         public static Output<GetAppResult> Invoke(GetAppInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAppResult>("fly:index/getApp:getApp", args ?? new GetAppInvokeArgs(), options.WithDefaults());
     }
@@ -94,6 +66,10 @@ namespace ediri.Fly
         /// Name of app
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+        /// </summary>
+        public readonly string Sharedipaddress;
         public readonly string Status;
 
         [OutputConstructor]
@@ -114,6 +90,8 @@ namespace ediri.Fly
 
             string name,
 
+            string sharedipaddress,
+
             string status)
         {
             Appurl = appurl;
@@ -124,6 +102,7 @@ namespace ediri.Fly
             Id = id;
             Ipaddresses = ipaddresses;
             Name = name;
+            Sharedipaddress = sharedipaddress;
             Status = status;
         }
     }

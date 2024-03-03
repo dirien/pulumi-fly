@@ -4,9 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Fly certificate data source
- */
 export function getCert(args: GetCertArgs, opts?: pulumi.InvokeOptions): Promise<GetCertResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -21,12 +18,9 @@ export function getCert(args: GetCertArgs, opts?: pulumi.InvokeOptions): Promise
  */
 export interface GetCertArgs {
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     app: string;
-    /**
-     * hostname
-     */
     hostname: string;
 }
 
@@ -35,37 +29,19 @@ export interface GetCertArgs {
  */
 export interface GetCertResult {
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     readonly app: string;
-    /**
-     * check
-     */
     readonly check: boolean;
-    /**
-     * DnsValidationHostname
-     */
-    readonly dnsvalidationhostname: string;
-    /**
-     * DnsValidationHostname
-     */
-    readonly dnsvalidationinstructions: string;
-    /**
-     * DnsValidationTarget
-     */
-    readonly dnsvalidationtarget: string;
-    /**
-     * hostname
-     */
+    readonly dnsValidationHostname: string;
+    readonly dnsValidationInstructions: string;
+    readonly dnsValidationTarget: string;
     readonly hostname: string;
     /**
-     * ID of certificate
+     * A fly-generated ID
      */
     readonly id: string;
 }
-/**
- * Fly certificate data source
- */
 export function getCertOutput(args: GetCertOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertResult> {
     return pulumi.output(args).apply((a: any) => getCert(a, opts))
 }
@@ -75,11 +51,8 @@ export function getCertOutput(args: GetCertOutputArgs, opts?: pulumi.InvokeOptio
  */
 export interface GetCertOutputArgs {
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     app: pulumi.Input<string>;
-    /**
-     * hostname
-     */
     hostname: pulumi.Input<string>;
 }

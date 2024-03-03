@@ -10,32 +10,26 @@ using Pulumi;
 
 namespace ediri.Fly
 {
-    /// <summary>
-    /// Fly volume resource
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ## Import
-    /// 
-    /// &lt;break&gt;&lt;break&gt;```sh&lt;break&gt; $ pulumi import fly:index/volume:Volume exampleApp &lt;app_id&gt;,&lt;volume_internal_id&gt; &lt;break&gt;```&lt;break&gt;&lt;break&gt;
-    /// </summary>
     [FlyResourceType("fly:index/volume:Volume")]
     public partial class Volume : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Output("app")]
         public Output<string> App { get; private set; } = null!;
 
+        [Output("encrypted")]
+        public Output<bool> Encrypted { get; private set; } = null!;
+
         /// <summary>
-        /// name
+        /// A user-provided identifier
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
@@ -94,19 +88,22 @@ namespace ediri.Fly
     public sealed class VolumeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
 
+        [Input("encrypted")]
+        public Input<bool>? Encrypted { get; set; }
+
         /// <summary>
-        /// name
+        /// A user-provided identifier
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
@@ -126,19 +123,22 @@ namespace ediri.Fly
     public sealed class VolumeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app")]
         public Input<string>? App { get; set; }
 
+        [Input("encrypted")]
+        public Input<bool>? Encrypted { get; set; }
+
         /// <summary>
-        /// name
+        /// A user-provided identifier
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }

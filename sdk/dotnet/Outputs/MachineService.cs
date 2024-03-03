@@ -15,15 +15,15 @@ namespace ediri.Fly.Outputs
     public sealed class MachineService
     {
         /// <summary>
-        /// Port application listens on internally
+        /// Port the machine listens on
         /// </summary>
         public readonly int InternalPort;
         /// <summary>
-        /// External ports and handlers
+        /// How the port is exposed
         /// </summary>
         public readonly ImmutableArray<Outputs.MachineServicePort> Ports;
         /// <summary>
-        /// network protocol
+        /// `udp` or `tcp`
         /// </summary>
         public readonly string Protocol;
 

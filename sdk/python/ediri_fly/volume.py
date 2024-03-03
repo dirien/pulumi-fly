@@ -17,17 +17,20 @@ class VolumeArgs:
                  app: pulumi.Input[str],
                  region: pulumi.Input[str],
                  size: pulumi.Input[int],
+                 encrypted: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Volume resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] region: region
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
         :param pulumi.Input[int] size: Size of volume in GB
-        :param pulumi.Input[str] name: name
+        :param pulumi.Input[str] name: A user-provided identifier
         """
         pulumi.set(__self__, "app", app)
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "size", size)
+        if encrypted is not None:
+            pulumi.set(__self__, "encrypted", encrypted)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
@@ -35,7 +38,7 @@ class VolumeArgs:
     @pulumi.getter
     def app(self) -> pulumi.Input[str]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -47,7 +50,7 @@ class VolumeArgs:
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -69,9 +72,18 @@ class VolumeArgs:
 
     @property
     @pulumi.getter
+    def encrypted(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "encrypted")
+
+    @encrypted.setter
+    def encrypted(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "encrypted", value)
+
+    @property
+    @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        name
+        A user-provided identifier
         """
         return pulumi.get(self, "name")
 
@@ -84,18 +96,21 @@ class VolumeArgs:
 class _VolumeState:
     def __init__(__self__, *,
                  app: Optional[pulumi.Input[str]] = None,
+                 encrypted: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Volume resources.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] name: name
-        :param pulumi.Input[str] region: region
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] name: A user-provided identifier
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
         :param pulumi.Input[int] size: Size of volume in GB
         """
         if app is not None:
             pulumi.set(__self__, "app", app)
+        if encrypted is not None:
+            pulumi.set(__self__, "encrypted", encrypted)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if region is not None:
@@ -107,7 +122,7 @@ class _VolumeState:
     @pulumi.getter
     def app(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -117,9 +132,18 @@ class _VolumeState:
 
     @property
     @pulumi.getter
+    def encrypted(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "encrypted")
+
+    @encrypted.setter
+    def encrypted(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "encrypted", value)
+
+    @property
+    @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        name
+        A user-provided identifier
         """
         return pulumi.get(self, "name")
 
@@ -131,7 +155,7 @@ class _VolumeState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -158,24 +182,18 @@ class Volume(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  app: Optional[pulumi.Input[str]] = None,
+                 encrypted: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Fly volume resource
-
-        ## Example Usage
-
-        ## Import
-
-        <break><break>```sh<break> $ pulumi import fly:index/volume:Volume exampleApp <app_id>,<volume_internal_id> <break>```<break><break>
-
+        Create a Volume resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] name: name
-        :param pulumi.Input[str] region: region
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] name: A user-provided identifier
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
         :param pulumi.Input[int] size: Size of volume in GB
         """
         ...
@@ -185,14 +203,7 @@ class Volume(pulumi.CustomResource):
                  args: VolumeArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Fly volume resource
-
-        ## Example Usage
-
-        ## Import
-
-        <break><break>```sh<break> $ pulumi import fly:index/volume:Volume exampleApp <app_id>,<volume_internal_id> <break>```<break><break>
-
+        Create a Volume resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param VolumeArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -209,6 +220,7 @@ class Volume(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  app: Optional[pulumi.Input[str]] = None,
+                 encrypted: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None,
@@ -224,6 +236,7 @@ class Volume(pulumi.CustomResource):
             if app is None and not opts.urn:
                 raise TypeError("Missing required property 'app'")
             __props__.__dict__["app"] = app
+            __props__.__dict__["encrypted"] = encrypted
             __props__.__dict__["name"] = name
             if region is None and not opts.urn:
                 raise TypeError("Missing required property 'region'")
@@ -242,6 +255,7 @@ class Volume(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             app: Optional[pulumi.Input[str]] = None,
+            encrypted: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
             region: Optional[pulumi.Input[str]] = None,
             size: Optional[pulumi.Input[int]] = None) -> 'Volume':
@@ -252,9 +266,9 @@ class Volume(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] name: name
-        :param pulumi.Input[str] region: region
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] name: A user-provided identifier
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
         :param pulumi.Input[int] size: Size of volume in GB
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -262,6 +276,7 @@ class Volume(pulumi.CustomResource):
         __props__ = _VolumeState.__new__(_VolumeState)
 
         __props__.__dict__["app"] = app
+        __props__.__dict__["encrypted"] = encrypted
         __props__.__dict__["name"] = name
         __props__.__dict__["region"] = region
         __props__.__dict__["size"] = size
@@ -271,15 +286,20 @@ class Volume(pulumi.CustomResource):
     @pulumi.getter
     def app(self) -> pulumi.Output[str]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
     @property
     @pulumi.getter
+    def encrypted(self) -> pulumi.Output[bool]:
+        return pulumi.get(self, "encrypted")
+
+    @property
+    @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        name
+        A user-provided identifier
         """
         return pulumi.get(self, "name")
 
@@ -287,7 +307,7 @@ class Volume(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 

@@ -12,15 +12,9 @@ namespace ediri.Fly
 {
     public static class GetCert
     {
-        /// <summary>
-        /// Fly certificate data source
-        /// </summary>
         public static Task<GetCertResult> InvokeAsync(GetCertArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCertResult>("fly:index/getCert:getCert", args ?? new GetCertArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Fly certificate data source
-        /// </summary>
         public static Output<GetCertResult> Invoke(GetCertInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCertResult>("fly:index/getCert:getCert", args ?? new GetCertInvokeArgs(), options.WithDefaults());
     }
@@ -29,14 +23,11 @@ namespace ediri.Fly
     public sealed class GetCertArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public string App { get; set; } = null!;
 
-        /// <summary>
-        /// hostname
-        /// </summary>
         [Input("hostname", required: true)]
         public string Hostname { get; set; } = null!;
 
@@ -49,14 +40,11 @@ namespace ediri.Fly
     public sealed class GetCertInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
 
-        /// <summary>
-        /// hostname
-        /// </summary>
         [Input("hostname", required: true)]
         public Input<string> Hostname { get; set; } = null!;
 
@@ -71,31 +59,16 @@ namespace ediri.Fly
     public sealed class GetCertResult
     {
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         public readonly string App;
-        /// <summary>
-        /// check
-        /// </summary>
         public readonly bool Check;
-        /// <summary>
-        /// DnsValidationHostname
-        /// </summary>
-        public readonly string Dnsvalidationhostname;
-        /// <summary>
-        /// DnsValidationHostname
-        /// </summary>
-        public readonly string Dnsvalidationinstructions;
-        /// <summary>
-        /// DnsValidationTarget
-        /// </summary>
-        public readonly string Dnsvalidationtarget;
-        /// <summary>
-        /// hostname
-        /// </summary>
+        public readonly string DnsValidationHostname;
+        public readonly string DnsValidationInstructions;
+        public readonly string DnsValidationTarget;
         public readonly string Hostname;
         /// <summary>
-        /// ID of certificate
+        /// A fly-generated ID
         /// </summary>
         public readonly string Id;
 
@@ -105,11 +78,11 @@ namespace ediri.Fly
 
             bool check,
 
-            string dnsvalidationhostname,
+            string dnsValidationHostname,
 
-            string dnsvalidationinstructions,
+            string dnsValidationInstructions,
 
-            string dnsvalidationtarget,
+            string dnsValidationTarget,
 
             string hostname,
 
@@ -117,9 +90,9 @@ namespace ediri.Fly
         {
             App = app;
             Check = check;
-            Dnsvalidationhostname = dnsvalidationhostname;
-            Dnsvalidationinstructions = dnsvalidationinstructions;
-            Dnsvalidationtarget = dnsvalidationtarget;
+            DnsValidationHostname = dnsValidationHostname;
+            DnsValidationInstructions = dnsValidationInstructions;
+            DnsValidationTarget = dnsValidationTarget;
             Hostname = hostname;
             Id = id;
         }

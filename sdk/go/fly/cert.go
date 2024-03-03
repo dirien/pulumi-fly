@@ -8,31 +8,21 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Fly certificate resource
-//
-// ## Example Usage
-//
-// ## Import
-//
-// <break><break>```sh<break> $ pulumi import fly:index/cert:Cert exampleCert <app_id>,<hostname> <break>```<break><break>
 type Cert struct {
 	pulumi.CustomResourceState
 
-	// Name of app to attach to
-	App pulumi.StringOutput `pulumi:"app"`
-	// check
-	Check pulumi.BoolOutput `pulumi:"check"`
-	// DnsValidationHostname
-	Dnsvalidationhostname pulumi.StringOutput `pulumi:"dnsvalidationhostname"`
-	// DnsValidationHostname
-	Dnsvalidationinstructions pulumi.StringOutput `pulumi:"dnsvalidationinstructions"`
-	// DnsValidationTarget
-	Dnsvalidationtarget pulumi.StringOutput `pulumi:"dnsvalidationtarget"`
-	// hostname
-	Hostname pulumi.StringOutput `pulumi:"hostname"`
+	// The App this resource will be created in
+	App                       pulumi.StringOutput `pulumi:"app"`
+	Check                     pulumi.BoolOutput   `pulumi:"check"`
+	DnsValidationHostname     pulumi.StringOutput `pulumi:"dnsValidationHostname"`
+	DnsValidationInstructions pulumi.StringOutput `pulumi:"dnsValidationInstructions"`
+	DnsValidationTarget       pulumi.StringOutput `pulumi:"dnsValidationTarget"`
+	Hostname                  pulumi.StringOutput `pulumi:"hostname"`
 }
 
 // NewCert registers a new resource with the given unique name, arguments, and options.
@@ -48,7 +38,7 @@ func NewCert(ctx *pulumi.Context,
 	if args.Hostname == nil {
 		return nil, errors.New("invalid value for required argument 'Hostname'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Cert
 	err := ctx.RegisterResource("fly:index/cert:Cert", name, args, &resource, opts...)
 	if err != nil {
@@ -71,33 +61,23 @@ func GetCert(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cert resources.
 type certState struct {
-	// Name of app to attach to
-	App *string `pulumi:"app"`
-	// check
-	Check *bool `pulumi:"check"`
-	// DnsValidationHostname
-	Dnsvalidationhostname *string `pulumi:"dnsvalidationhostname"`
-	// DnsValidationHostname
-	Dnsvalidationinstructions *string `pulumi:"dnsvalidationinstructions"`
-	// DnsValidationTarget
-	Dnsvalidationtarget *string `pulumi:"dnsvalidationtarget"`
-	// hostname
-	Hostname *string `pulumi:"hostname"`
+	// The App this resource will be created in
+	App                       *string `pulumi:"app"`
+	Check                     *bool   `pulumi:"check"`
+	DnsValidationHostname     *string `pulumi:"dnsValidationHostname"`
+	DnsValidationInstructions *string `pulumi:"dnsValidationInstructions"`
+	DnsValidationTarget       *string `pulumi:"dnsValidationTarget"`
+	Hostname                  *string `pulumi:"hostname"`
 }
 
 type CertState struct {
-	// Name of app to attach to
-	App pulumi.StringPtrInput
-	// check
-	Check pulumi.BoolPtrInput
-	// DnsValidationHostname
-	Dnsvalidationhostname pulumi.StringPtrInput
-	// DnsValidationHostname
-	Dnsvalidationinstructions pulumi.StringPtrInput
-	// DnsValidationTarget
-	Dnsvalidationtarget pulumi.StringPtrInput
-	// hostname
-	Hostname pulumi.StringPtrInput
+	// The App this resource will be created in
+	App                       pulumi.StringPtrInput
+	Check                     pulumi.BoolPtrInput
+	DnsValidationHostname     pulumi.StringPtrInput
+	DnsValidationInstructions pulumi.StringPtrInput
+	DnsValidationTarget       pulumi.StringPtrInput
+	Hostname                  pulumi.StringPtrInput
 }
 
 func (CertState) ElementType() reflect.Type {
@@ -105,17 +85,15 @@ func (CertState) ElementType() reflect.Type {
 }
 
 type certArgs struct {
-	// Name of app to attach to
-	App string `pulumi:"app"`
-	// hostname
+	// The App this resource will be created in
+	App      string `pulumi:"app"`
 	Hostname string `pulumi:"hostname"`
 }
 
 // The set of arguments for constructing a Cert resource.
 type CertArgs struct {
-	// Name of app to attach to
-	App pulumi.StringInput
-	// hostname
+	// The App this resource will be created in
+	App      pulumi.StringInput
 	Hostname pulumi.StringInput
 }
 
@@ -206,32 +184,27 @@ func (o CertOutput) ToCertOutputWithContext(ctx context.Context) CertOutput {
 	return o
 }
 
-// Name of app to attach to
+// The App this resource will be created in
 func (o CertOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.App }).(pulumi.StringOutput)
 }
 
-// check
 func (o CertOutput) Check() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Cert) pulumi.BoolOutput { return v.Check }).(pulumi.BoolOutput)
 }
 
-// DnsValidationHostname
-func (o CertOutput) Dnsvalidationhostname() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.Dnsvalidationhostname }).(pulumi.StringOutput)
+func (o CertOutput) DnsValidationHostname() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.DnsValidationHostname }).(pulumi.StringOutput)
 }
 
-// DnsValidationHostname
-func (o CertOutput) Dnsvalidationinstructions() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.Dnsvalidationinstructions }).(pulumi.StringOutput)
+func (o CertOutput) DnsValidationInstructions() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.DnsValidationInstructions }).(pulumi.StringOutput)
 }
 
-// DnsValidationTarget
-func (o CertOutput) Dnsvalidationtarget() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.Dnsvalidationtarget }).(pulumi.StringOutput)
+func (o CertOutput) DnsValidationTarget() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.DnsValidationTarget }).(pulumi.StringOutput)
 }
 
-// hostname
 func (o CertOutput) Hostname() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cert) pulumi.StringOutput { return v.Hostname }).(pulumi.StringOutput)
 }

@@ -25,8 +25,8 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
+	"github.com/andrewbaxter/terraform-provider-fly/shim"
 	"github.com/dirien/pulumi-fly/provider/pkg/version"
-	"github.com/fly-apps/terraform-provider-fly/shim"
 )
 
 // all of the random token components used below.
@@ -79,7 +79,7 @@ func Provider() tfbridge.ProviderInfo {
 		License:           "Apache-2.0",
 		Homepage:          "https://github.com/dirien/pulumi-fly",
 		Repository:        "https://github.com/dirien/pulumi-fly",
-		GitHubOrg:         "fly-apps",
+		GitHubOrg:         "andrewbaxter",
 		PluginDownloadURL: "github://api.github.com/dirien/pulumi-fly",
 		Version:           version.Version,
 		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),

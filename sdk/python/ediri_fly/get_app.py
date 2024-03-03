@@ -21,7 +21,7 @@ class GetAppResult:
     """
     A collection of values returned by getApp.
     """
-    def __init__(__self__, appurl=None, currentrelease=None, deployed=None, healthchecks=None, hostname=None, id=None, ipaddresses=None, name=None, status=None):
+    def __init__(__self__, appurl=None, currentrelease=None, deployed=None, healthchecks=None, hostname=None, id=None, ipaddresses=None, name=None, sharedipaddress=None, status=None):
         if appurl and not isinstance(appurl, str):
             raise TypeError("Expected argument 'appurl' to be a str")
         pulumi.set(__self__, "appurl", appurl)
@@ -46,6 +46,9 @@ class GetAppResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
+        if sharedipaddress and not isinstance(sharedipaddress, str):
+            raise TypeError("Expected argument 'sharedipaddress' to be a str")
+        pulumi.set(__self__, "sharedipaddress", sharedipaddress)
         if status and not isinstance(status, str):
             raise TypeError("Expected argument 'status' to be a str")
         pulumi.set(__self__, "status", status)
@@ -98,6 +101,14 @@ class GetAppResult:
 
     @property
     @pulumi.getter
+    def sharedipaddress(self) -> str:
+        """
+        A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+        """
+        return pulumi.get(self, "sharedipaddress")
+
+    @property
+    @pulumi.getter
     def status(self) -> str:
         return pulumi.get(self, "status")
 
@@ -116,16 +127,14 @@ class AwaitableGetAppResult(GetAppResult):
             id=self.id,
             ipaddresses=self.ipaddresses,
             name=self.name,
+            sharedipaddress=self.sharedipaddress,
             status=self.status)
 
 
 def get_app(name: Optional[str] = None,
             opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetAppResult:
     """
-    Retrieve info about graphql app
-
-    ## Example Usage
-
+    Use this data source to access information about an existing resource.
 
     :param str name: Name of app
     """
@@ -143,6 +152,7 @@ def get_app(name: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'),
         ipaddresses=pulumi.get(__ret__, 'ipaddresses'),
         name=pulumi.get(__ret__, 'name'),
+        sharedipaddress=pulumi.get(__ret__, 'sharedipaddress'),
         status=pulumi.get(__ret__, 'status'))
 
 
@@ -150,10 +160,7 @@ def get_app(name: Optional[str] = None,
 def get_app_output(name: Optional[pulumi.Input[str]] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAppResult]:
     """
-    Retrieve info about graphql app
-
-    ## Example Usage
-
+    Use this data source to access information about an existing resource.
 
     :param str name: Name of app
     """

@@ -21,22 +21,22 @@ class GetCertResult:
     """
     A collection of values returned by getCert.
     """
-    def __init__(__self__, app=None, check=None, dnsvalidationhostname=None, dnsvalidationinstructions=None, dnsvalidationtarget=None, hostname=None, id=None):
+    def __init__(__self__, app=None, check=None, dns_validation_hostname=None, dns_validation_instructions=None, dns_validation_target=None, hostname=None, id=None):
         if app and not isinstance(app, str):
             raise TypeError("Expected argument 'app' to be a str")
         pulumi.set(__self__, "app", app)
         if check and not isinstance(check, bool):
             raise TypeError("Expected argument 'check' to be a bool")
         pulumi.set(__self__, "check", check)
-        if dnsvalidationhostname and not isinstance(dnsvalidationhostname, str):
-            raise TypeError("Expected argument 'dnsvalidationhostname' to be a str")
-        pulumi.set(__self__, "dnsvalidationhostname", dnsvalidationhostname)
-        if dnsvalidationinstructions and not isinstance(dnsvalidationinstructions, str):
-            raise TypeError("Expected argument 'dnsvalidationinstructions' to be a str")
-        pulumi.set(__self__, "dnsvalidationinstructions", dnsvalidationinstructions)
-        if dnsvalidationtarget and not isinstance(dnsvalidationtarget, str):
-            raise TypeError("Expected argument 'dnsvalidationtarget' to be a str")
-        pulumi.set(__self__, "dnsvalidationtarget", dnsvalidationtarget)
+        if dns_validation_hostname and not isinstance(dns_validation_hostname, str):
+            raise TypeError("Expected argument 'dns_validation_hostname' to be a str")
+        pulumi.set(__self__, "dns_validation_hostname", dns_validation_hostname)
+        if dns_validation_instructions and not isinstance(dns_validation_instructions, str):
+            raise TypeError("Expected argument 'dns_validation_instructions' to be a str")
+        pulumi.set(__self__, "dns_validation_instructions", dns_validation_instructions)
+        if dns_validation_target and not isinstance(dns_validation_target, str):
+            raise TypeError("Expected argument 'dns_validation_target' to be a str")
+        pulumi.set(__self__, "dns_validation_target", dns_validation_target)
         if hostname and not isinstance(hostname, str):
             raise TypeError("Expected argument 'hostname' to be a str")
         pulumi.set(__self__, "hostname", hostname)
@@ -48,55 +48,40 @@ class GetCertResult:
     @pulumi.getter
     def app(self) -> str:
         """
-        Name of app attached to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
     @property
     @pulumi.getter
     def check(self) -> bool:
-        """
-        check
-        """
         return pulumi.get(self, "check")
 
     @property
-    @pulumi.getter
-    def dnsvalidationhostname(self) -> str:
-        """
-        DnsValidationHostname
-        """
-        return pulumi.get(self, "dnsvalidationhostname")
+    @pulumi.getter(name="dnsValidationHostname")
+    def dns_validation_hostname(self) -> str:
+        return pulumi.get(self, "dns_validation_hostname")
 
     @property
-    @pulumi.getter
-    def dnsvalidationinstructions(self) -> str:
-        """
-        DnsValidationHostname
-        """
-        return pulumi.get(self, "dnsvalidationinstructions")
+    @pulumi.getter(name="dnsValidationInstructions")
+    def dns_validation_instructions(self) -> str:
+        return pulumi.get(self, "dns_validation_instructions")
 
     @property
-    @pulumi.getter
-    def dnsvalidationtarget(self) -> str:
-        """
-        DnsValidationTarget
-        """
-        return pulumi.get(self, "dnsvalidationtarget")
+    @pulumi.getter(name="dnsValidationTarget")
+    def dns_validation_target(self) -> str:
+        return pulumi.get(self, "dns_validation_target")
 
     @property
     @pulumi.getter
     def hostname(self) -> str:
-        """
-        hostname
-        """
         return pulumi.get(self, "hostname")
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        ID of certificate
+        A fly-generated ID
         """
         return pulumi.get(self, "id")
 
@@ -109,9 +94,9 @@ class AwaitableGetCertResult(GetCertResult):
         return GetCertResult(
             app=self.app,
             check=self.check,
-            dnsvalidationhostname=self.dnsvalidationhostname,
-            dnsvalidationinstructions=self.dnsvalidationinstructions,
-            dnsvalidationtarget=self.dnsvalidationtarget,
+            dns_validation_hostname=self.dns_validation_hostname,
+            dns_validation_instructions=self.dns_validation_instructions,
+            dns_validation_target=self.dns_validation_target,
             hostname=self.hostname,
             id=self.id)
 
@@ -120,11 +105,9 @@ def get_cert(app: Optional[str] = None,
              hostname: Optional[str] = None,
              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetCertResult:
     """
-    Fly certificate data source
+    Use this data source to access information about an existing resource.
 
-
-    :param str app: Name of app attached to
-    :param str hostname: hostname
+    :param str app: The App this resource will be created in
     """
     __args__ = dict()
     __args__['app'] = app
@@ -135,9 +118,9 @@ def get_cert(app: Optional[str] = None,
     return AwaitableGetCertResult(
         app=pulumi.get(__ret__, 'app'),
         check=pulumi.get(__ret__, 'check'),
-        dnsvalidationhostname=pulumi.get(__ret__, 'dnsvalidationhostname'),
-        dnsvalidationinstructions=pulumi.get(__ret__, 'dnsvalidationinstructions'),
-        dnsvalidationtarget=pulumi.get(__ret__, 'dnsvalidationtarget'),
+        dns_validation_hostname=pulumi.get(__ret__, 'dns_validation_hostname'),
+        dns_validation_instructions=pulumi.get(__ret__, 'dns_validation_instructions'),
+        dns_validation_target=pulumi.get(__ret__, 'dns_validation_target'),
         hostname=pulumi.get(__ret__, 'hostname'),
         id=pulumi.get(__ret__, 'id'))
 
@@ -147,10 +130,8 @@ def get_cert_output(app: Optional[pulumi.Input[str]] = None,
                     hostname: Optional[pulumi.Input[str]] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertResult]:
     """
-    Fly certificate data source
+    Use this data source to access information about an existing resource.
 
-
-    :param str app: Name of app attached to
-    :param str hostname: hostname
+    :param str app: The App this resource will be created in
     """
     ...

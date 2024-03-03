@@ -7,14 +7,12 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Retrieve info about graphql app
-//
-// ## Example Usage
 func LookupApp(ctx *pulumi.Context, args *LookupAppArgs, opts ...pulumi.InvokeOption) (*LookupAppResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupAppResult
 	err := ctx.Invoke("fly:index/getApp:getApp", args, &rv, opts...)
 	if err != nil {
@@ -40,8 +38,10 @@ type LookupAppResult struct {
 	Id          string   `pulumi:"id"`
 	Ipaddresses []string `pulumi:"ipaddresses"`
 	// Name of app
-	Name   string `pulumi:"name"`
-	Status string `pulumi:"status"`
+	Name string `pulumi:"name"`
+	// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+	Sharedipaddress string `pulumi:"sharedipaddress"`
+	Status          string `pulumi:"status"`
 }
 
 func LookupAppOutput(ctx *pulumi.Context, args LookupAppOutputArgs, opts ...pulumi.InvokeOption) LookupAppResultOutput {
@@ -114,6 +114,11 @@ func (o LookupAppResultOutput) Ipaddresses() pulumi.StringArrayOutput {
 // Name of app
 func (o LookupAppResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupAppResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+func (o LookupAppResultOutput) Sharedipaddress() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupAppResult) string { return v.Sharedipaddress }).(pulumi.StringOutput)
 }
 
 func (o LookupAppResultOutput) Status() pulumi.StringOutput {

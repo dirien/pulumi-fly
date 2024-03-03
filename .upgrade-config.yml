@@ -1,0 +1,3 @@
+upstream-provider-name: terraform-provider-fly
+upstream-provider-org: andrewbaxter
+allow-missing-docs: true

@@ -14,15 +14,28 @@ namespace ediri.Fly.Outputs
     [OutputType]
     public sealed class MachineServicePort
     {
+        /// <summary>
+        /// Automatically redirect to HTTPS on "http" handler
+        /// </summary>
+        public readonly bool? ForceHttps;
+        /// <summary>
+        /// How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        /// </summary>
         public readonly ImmutableArray<string> Handlers;
+        /// <summary>
+        /// Mapped external port number
+        /// </summary>
         public readonly int Port;
 
         [OutputConstructor]
         private MachineServicePort(
+            bool? forceHttps,
+
             ImmutableArray<string> handlers,
 
             int port)
         {
+            ForceHttps = forceHttps;
             Handlers = handlers;
             Port = port;
         }

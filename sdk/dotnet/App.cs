@@ -10,23 +10,17 @@ using Pulumi;
 
 namespace ediri.Fly
 {
-    /// <summary>
-    /// Fly app resource
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ## Import
-    /// 
-    /// &lt;break&gt;&lt;break&gt;```sh&lt;break&gt; $ pulumi import fly:index/app:App exampleApp &lt;app_id&gt; &lt;break&gt;```&lt;break&gt;&lt;break&gt;
-    /// </summary>
     [FlyResourceType("fly:index/app:App")]
     public partial class App : global::Pulumi.CustomResource
     {
+        [Output("appUrl")]
+        public Output<string> AppUrl { get; private set; } = null!;
+
         /// <summary>
-        /// readonly appUrl
+        /// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
         /// </summary>
-        [Output("appurl")]
-        public Output<string> Appurl { get; private set; } = null!;
+        [Output("assignSharedIpAddress")]
+        public Output<bool> AssignSharedIpAddress { get; private set; } = null!;
 
         /// <summary>
         /// Name of application
@@ -35,16 +29,19 @@ namespace ediri.Fly
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Optional org slug to operate upon
+        /// The name of the organization to generate the app in, ex: `personal` (your initial org)
         /// </summary>
         [Output("org")]
         public Output<string> Org { get; private set; } = null!;
 
+        [Output("orgId")]
+        public Output<string> OrgId { get; private set; } = null!;
+
         /// <summary>
-        /// readonly orgid
+        /// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
         /// </summary>
-        [Output("orgid")]
-        public Output<string> Orgid { get; private set; } = null!;
+        [Output("sharedIpAddress")]
+        public Output<string> SharedIpAddress { get; private set; } = null!;
 
 
         /// <summary>
@@ -94,13 +91,19 @@ namespace ediri.Fly
     public sealed class AppArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+        /// </summary>
+        [Input("assignSharedIpAddress")]
+        public Input<bool>? AssignSharedIpAddress { get; set; }
+
+        /// <summary>
         /// Name of application
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Optional org slug to operate upon
+        /// The name of the organization to generate the app in, ex: `personal` (your initial org)
         /// </summary>
         [Input("org")]
         public Input<string>? Org { get; set; }
@@ -113,11 +116,14 @@ namespace ediri.Fly
 
     public sealed class AppState : global::Pulumi.ResourceArgs
     {
+        [Input("appUrl")]
+        public Input<string>? AppUrl { get; set; }
+
         /// <summary>
-        /// readonly appUrl
+        /// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
         /// </summary>
-        [Input("appurl")]
-        public Input<string>? Appurl { get; set; }
+        [Input("assignSharedIpAddress")]
+        public Input<bool>? AssignSharedIpAddress { get; set; }
 
         /// <summary>
         /// Name of application
@@ -126,16 +132,19 @@ namespace ediri.Fly
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Optional org slug to operate upon
+        /// The name of the organization to generate the app in, ex: `personal` (your initial org)
         /// </summary>
         [Input("org")]
         public Input<string>? Org { get; set; }
 
+        [Input("orgId")]
+        public Input<string>? OrgId { get; set; }
+
         /// <summary>
-        /// readonly orgid
+        /// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
         /// </summary>
-        [Input("orgid")]
-        public Input<string>? Orgid { get; set; }
+        [Input("sharedIpAddress")]
+        public Input<string>? SharedIpAddress { get; set; }
 
         public AppState()
         {

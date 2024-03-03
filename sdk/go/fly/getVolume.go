@@ -7,12 +7,12 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly volume resource
 func LookupVolume(ctx *pulumi.Context, args *LookupVolumeArgs, opts ...pulumi.InvokeOption) (*LookupVolumeResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupVolumeResult
 	err := ctx.Invoke("fly:index/getVolume:getVolume", args, &rv, opts...)
 	if err != nil {
@@ -23,21 +23,22 @@ func LookupVolume(ctx *pulumi.Context, args *LookupVolumeArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getVolume.
 type LookupVolumeArgs struct {
-	// Name of app attached to
+	// The App this resource will be created in
 	App string `pulumi:"app"`
-	// ID of volume
+	// A fly-generated ID
 	Id string `pulumi:"id"`
 }
 
 // A collection of values returned by getVolume.
 type LookupVolumeResult struct {
-	// Name of app attached to
-	App string `pulumi:"app"`
-	// ID of volume
+	// The App this resource will be created in
+	App       string `pulumi:"app"`
+	Encrypted bool   `pulumi:"encrypted"`
+	// A fly-generated ID
 	Id string `pulumi:"id"`
-	// name
+	// A user-provided identifier
 	Name string `pulumi:"name"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region string `pulumi:"region"`
 	// Size of volume in GB
 	Size int `pulumi:"size"`
@@ -58,9 +59,9 @@ func LookupVolumeOutput(ctx *pulumi.Context, args LookupVolumeOutputArgs, opts .
 
 // A collection of arguments for invoking getVolume.
 type LookupVolumeOutputArgs struct {
-	// Name of app attached to
+	// The App this resource will be created in
 	App pulumi.StringInput `pulumi:"app"`
-	// ID of volume
+	// A fly-generated ID
 	Id pulumi.StringInput `pulumi:"id"`
 }
 
@@ -83,22 +84,26 @@ func (o LookupVolumeResultOutput) ToLookupVolumeResultOutputWithContext(ctx cont
 	return o
 }
 
-// Name of app attached to
+// The App this resource will be created in
 func (o LookupVolumeResultOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVolumeResult) string { return v.App }).(pulumi.StringOutput)
 }
 
-// ID of volume
+func (o LookupVolumeResultOutput) Encrypted() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupVolumeResult) bool { return v.Encrypted }).(pulumi.BoolOutput)
+}
+
+// A fly-generated ID
 func (o LookupVolumeResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVolumeResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// name
+// A user-provided identifier
 func (o LookupVolumeResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVolumeResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// region
+// Fly region, ex `ord`, `sin`, `mad`
 func (o LookupVolumeResultOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVolumeResult) string { return v.Region }).(pulumi.StringOutput)
 }

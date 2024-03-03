@@ -13,14 +13,27 @@ namespace ediri.Fly.Inputs
 
     public sealed class MachineServicePortGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Automatically redirect to HTTPS on "http" handler
+        /// </summary>
+        [Input("forceHttps")]
+        public Input<bool>? ForceHttps { get; set; }
+
         [Input("handlers")]
         private InputList<string>? _handlers;
+
+        /// <summary>
+        /// How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        /// </summary>
         public InputList<string> Handlers
         {
             get => _handlers ?? (_handlers = new InputList<string>());
             set => _handlers = value;
         }
 
+        /// <summary>
+        /// Mapped external port number
+        /// </summary>
         [Input("port", required: true)]
         public Input<int> Port { get; set; } = null!;
 

@@ -12,15 +12,9 @@ namespace ediri.Fly
 {
     public static class GetVolume
     {
-        /// <summary>
-        /// Fly volume resource
-        /// </summary>
         public static Task<GetVolumeResult> InvokeAsync(GetVolumeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetVolumeResult>("fly:index/getVolume:getVolume", args ?? new GetVolumeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Fly volume resource
-        /// </summary>
         public static Output<GetVolumeResult> Invoke(GetVolumeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetVolumeResult>("fly:index/getVolume:getVolume", args ?? new GetVolumeInvokeArgs(), options.WithDefaults());
     }
@@ -29,13 +23,13 @@ namespace ediri.Fly
     public sealed class GetVolumeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public string App { get; set; } = null!;
 
         /// <summary>
-        /// ID of volume
+        /// A fly-generated ID
         /// </summary>
         [Input("id", required: true)]
         public string Id { get; set; } = null!;
@@ -49,13 +43,13 @@ namespace ediri.Fly
     public sealed class GetVolumeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
 
         /// <summary>
-        /// ID of volume
+        /// A fly-generated ID
         /// </summary>
         [Input("id", required: true)]
         public Input<string> Id { get; set; } = null!;
@@ -71,19 +65,20 @@ namespace ediri.Fly
     public sealed class GetVolumeResult
     {
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         public readonly string App;
+        public readonly bool Encrypted;
         /// <summary>
-        /// ID of volume
+        /// A fly-generated ID
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// name
+        /// A user-provided identifier
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         public readonly string Region;
         /// <summary>
@@ -95,6 +90,8 @@ namespace ediri.Fly
         private GetVolumeResult(
             string app,
 
+            bool encrypted,
+
             string id,
 
             string name,
@@ -104,6 +101,7 @@ namespace ediri.Fly
             int size)
         {
             App = app;
+            Encrypted = encrypted;
             Id = id;
             Name = name;
             Region = region;

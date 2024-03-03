@@ -8,26 +8,20 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly ip resource
-//
-// ## Example Usage
-//
-// ## Import
-//
-// <break><break>```sh<break> $ pulumi import fly:index/ip:Ip exampleIp <app_id>,<ip_address> <break>```<break><break>
 type Ip struct {
 	pulumi.CustomResourceState
 
-	// IP address
+	// Empty if using `sharedV4`
 	Address pulumi.StringOutput `pulumi:"address"`
-	// Name of app to attach to
+	// The App this resource will be created in
 	App pulumi.StringOutput `pulumi:"app"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region pulumi.StringOutput `pulumi:"region"`
-	// v4 or v6
+	// One of the following values (by regex): `^(v4|v6|private_v6)$`
 	Type pulumi.StringOutput `pulumi:"type"`
 }
 
@@ -44,7 +38,7 @@ func NewIp(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Ip
 	err := ctx.RegisterResource("fly:index/ip:Ip", name, args, &resource, opts...)
 	if err != nil {
@@ -67,24 +61,24 @@ func GetIp(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Ip resources.
 type ipState struct {
-	// IP address
+	// Empty if using `sharedV4`
 	Address *string `pulumi:"address"`
-	// Name of app to attach to
+	// The App this resource will be created in
 	App *string `pulumi:"app"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region *string `pulumi:"region"`
-	// v4 or v6
+	// One of the following values (by regex): `^(v4|v6|private_v6)$`
 	Type *string `pulumi:"type"`
 }
 
 type IpState struct {
-	// IP address
+	// Empty if using `sharedV4`
 	Address pulumi.StringPtrInput
-	// Name of app to attach to
+	// The App this resource will be created in
 	App pulumi.StringPtrInput
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region pulumi.StringPtrInput
-	// v4 or v6
+	// One of the following values (by regex): `^(v4|v6|private_v6)$`
 	Type pulumi.StringPtrInput
 }
 
@@ -93,21 +87,21 @@ func (IpState) ElementType() reflect.Type {
 }
 
 type ipArgs struct {
-	// Name of app to attach to
+	// The App this resource will be created in
 	App string `pulumi:"app"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region *string `pulumi:"region"`
-	// v4 or v6
+	// One of the following values (by regex): `^(v4|v6|private_v6)$`
 	Type string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a Ip resource.
 type IpArgs struct {
-	// Name of app to attach to
+	// The App this resource will be created in
 	App pulumi.StringInput
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region pulumi.StringPtrInput
-	// v4 or v6
+	// One of the following values (by regex): `^(v4|v6|private_v6)$`
 	Type pulumi.StringInput
 }
 
@@ -198,22 +192,22 @@ func (o IpOutput) ToIpOutputWithContext(ctx context.Context) IpOutput {
 	return o
 }
 
-// IP address
+// Empty if using `sharedV4`
 func (o IpOutput) Address() pulumi.StringOutput {
 	return o.ApplyT(func(v *Ip) pulumi.StringOutput { return v.Address }).(pulumi.StringOutput)
 }
 
-// Name of app to attach to
+// The App this resource will be created in
 func (o IpOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v *Ip) pulumi.StringOutput { return v.App }).(pulumi.StringOutput)
 }
 
-// region
+// Fly region, ex `ord`, `sin`, `mad`
 func (o IpOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *Ip) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
-// v4 or v6
+// One of the following values (by regex): `^(v4|v6|private_v6)$`
 func (o IpOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *Ip) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

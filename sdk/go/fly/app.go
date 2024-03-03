@@ -7,27 +7,23 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly app resource
-//
-// ## Example Usage
-//
-// ## Import
-//
-// <break><break>```sh<break> $ pulumi import fly:index/app:App exampleApp <app_id> <break>```<break><break>
 type App struct {
 	pulumi.CustomResourceState
 
-	// readonly appUrl
-	Appurl pulumi.StringOutput `pulumi:"appurl"`
+	AppUrl pulumi.StringOutput `pulumi:"appUrl"`
+	// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+	AssignSharedIpAddress pulumi.BoolOutput `pulumi:"assignSharedIpAddress"`
 	// Name of application
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Optional org slug to operate upon
-	Org pulumi.StringOutput `pulumi:"org"`
-	// readonly orgid
-	Orgid pulumi.StringOutput `pulumi:"orgid"`
+	// The name of the organization to generate the app in, ex: `personal` (your initial org)
+	Org   pulumi.StringOutput `pulumi:"org"`
+	OrgId pulumi.StringOutput `pulumi:"orgId"`
+	// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+	SharedIpAddress pulumi.StringOutput `pulumi:"sharedIpAddress"`
 }
 
 // NewApp registers a new resource with the given unique name, arguments, and options.
@@ -37,7 +33,7 @@ func NewApp(ctx *pulumi.Context,
 		args = &AppArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource App
 	err := ctx.RegisterResource("fly:index/app:App", name, args, &resource, opts...)
 	if err != nil {
@@ -60,25 +56,29 @@ func GetApp(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering App resources.
 type appState struct {
-	// readonly appUrl
-	Appurl *string `pulumi:"appurl"`
+	AppUrl *string `pulumi:"appUrl"`
+	// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+	AssignSharedIpAddress *bool `pulumi:"assignSharedIpAddress"`
 	// Name of application
 	Name *string `pulumi:"name"`
-	// Optional org slug to operate upon
-	Org *string `pulumi:"org"`
-	// readonly orgid
-	Orgid *string `pulumi:"orgid"`
+	// The name of the organization to generate the app in, ex: `personal` (your initial org)
+	Org   *string `pulumi:"org"`
+	OrgId *string `pulumi:"orgId"`
+	// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+	SharedIpAddress *string `pulumi:"sharedIpAddress"`
 }
 
 type AppState struct {
-	// readonly appUrl
-	Appurl pulumi.StringPtrInput
+	AppUrl pulumi.StringPtrInput
+	// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+	AssignSharedIpAddress pulumi.BoolPtrInput
 	// Name of application
 	Name pulumi.StringPtrInput
-	// Optional org slug to operate upon
-	Org pulumi.StringPtrInput
-	// readonly orgid
-	Orgid pulumi.StringPtrInput
+	// The name of the organization to generate the app in, ex: `personal` (your initial org)
+	Org   pulumi.StringPtrInput
+	OrgId pulumi.StringPtrInput
+	// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+	SharedIpAddress pulumi.StringPtrInput
 }
 
 func (AppState) ElementType() reflect.Type {
@@ -86,17 +86,21 @@ func (AppState) ElementType() reflect.Type {
 }
 
 type appArgs struct {
+	// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+	AssignSharedIpAddress *bool `pulumi:"assignSharedIpAddress"`
 	// Name of application
 	Name *string `pulumi:"name"`
-	// Optional org slug to operate upon
+	// The name of the organization to generate the app in, ex: `personal` (your initial org)
 	Org *string `pulumi:"org"`
 }
 
 // The set of arguments for constructing a App resource.
 type AppArgs struct {
+	// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+	AssignSharedIpAddress pulumi.BoolPtrInput
 	// Name of application
 	Name pulumi.StringPtrInput
-	// Optional org slug to operate upon
+	// The name of the organization to generate the app in, ex: `personal` (your initial org)
 	Org pulumi.StringPtrInput
 }
 
@@ -187,9 +191,13 @@ func (o AppOutput) ToAppOutputWithContext(ctx context.Context) AppOutput {
 	return o
 }
 
-// readonly appUrl
-func (o AppOutput) Appurl() pulumi.StringOutput {
-	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.Appurl }).(pulumi.StringOutput)
+func (o AppOutput) AppUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.AppUrl }).(pulumi.StringOutput)
+}
+
+// Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+func (o AppOutput) AssignSharedIpAddress() pulumi.BoolOutput {
+	return o.ApplyT(func(v *App) pulumi.BoolOutput { return v.AssignSharedIpAddress }).(pulumi.BoolOutput)
 }
 
 // Name of application
@@ -197,14 +205,18 @@ func (o AppOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Optional org slug to operate upon
+// The name of the organization to generate the app in, ex: `personal` (your initial org)
 func (o AppOutput) Org() pulumi.StringOutput {
 	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.Org }).(pulumi.StringOutput)
 }
 
-// readonly orgid
-func (o AppOutput) Orgid() pulumi.StringOutput {
-	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.Orgid }).(pulumi.StringOutput)
+func (o AppOutput) OrgId() pulumi.StringOutput {
+	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.OrgId }).(pulumi.StringOutput)
+}
+
+// A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+func (o AppOutput) SharedIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v *App) pulumi.StringOutput { return v.SharedIpAddress }).(pulumi.StringOutput)
 }
 
 type AppArrayOutput struct{ *pulumi.OutputState }

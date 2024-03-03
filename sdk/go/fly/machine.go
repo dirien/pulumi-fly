@@ -8,46 +8,35 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly machine resource
-//
-// ## Example Usage
-//
-// ## Import
-//
-// <break><break>```sh<break> $ pulumi import fly:index/machine:Machine exampleMachine <app_id>,<machine_id> <break>```<break><break>
 type Machine struct {
 	pulumi.CustomResourceState
 
-	// fly app
+	// The App this resource will be created in
 	App pulumi.StringOutput `pulumi:"app"`
-	// cmd
-	Cmds pulumi.StringArrayOutput `pulumi:"cmds"`
-	// cpu count
-	Cpus pulumi.IntOutput `pulumi:"cpus"`
-	// cpu type
-	Cputype pulumi.StringOutput `pulumi:"cputype"`
-	// image entrypoint
+	// Optional boolean telling the Machine to destroy itself once it's complete
+	AutoDestroy pulumi.BoolOutput        `pulumi:"autoDestroy"`
+	Cmds        pulumi.StringArrayOutput `pulumi:"cmds"`
+	// Which machine flavor, ex: `shared`
+	CpuType     pulumi.StringOutput      `pulumi:"cpuType"`
+	Cpus        pulumi.IntOutput         `pulumi:"cpus"`
 	Entrypoints pulumi.StringArrayOutput `pulumi:"entrypoints"`
-	// Optional environment variables, keys and values must be strings
-	Env pulumi.StringMapOutput `pulumi:"env"`
-	// exec command
+	// Keys and values must be strings
+	Env   pulumi.StringMapOutput   `pulumi:"env"`
 	Execs pulumi.StringArrayOutput `pulumi:"execs"`
-	// docker image
+	// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
 	Image pulumi.StringOutput `pulumi:"image"`
-	// memory mb
-	Memorymb pulumi.IntOutput `pulumi:"memorymb"`
-	// Volume mounts
+	// Amount of memory in MB. `256`, `512`, `1024`, ...
+	Memory pulumi.IntOutput        `pulumi:"memory"`
 	Mounts MachineMountArrayOutput `pulumi:"mounts"`
-	// machine name
-	Name pulumi.StringOutput `pulumi:"name"`
-	// Private IP
-	Privateip pulumi.StringOutput `pulumi:"privateip"`
-	// machine region
-	Region pulumi.StringOutput `pulumi:"region"`
-	// services
+	// A user-provided identifier
+	Name      pulumi.StringOutput `pulumi:"name"`
+	PrivateIp pulumi.StringOutput `pulumi:"privateIp"`
+	// Fly region, ex `ord`, `sin`, `mad`
+	Region   pulumi.StringOutput       `pulumi:"region"`
 	Services MachineServiceArrayOutput `pulumi:"services"`
 }
 
@@ -67,7 +56,7 @@ func NewMachine(ctx *pulumi.Context,
 	if args.Region == nil {
 		return nil, errors.New("invalid value for required argument 'Region'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Machine
 	err := ctx.RegisterResource("fly:index/machine:Machine", name, args, &resource, opts...)
 	if err != nil {
@@ -90,64 +79,54 @@ func GetMachine(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Machine resources.
 type machineState struct {
-	// fly app
+	// The App this resource will be created in
 	App *string `pulumi:"app"`
-	// cmd
-	Cmds []string `pulumi:"cmds"`
-	// cpu count
-	Cpus *int `pulumi:"cpus"`
-	// cpu type
-	Cputype *string `pulumi:"cputype"`
-	// image entrypoint
+	// Optional boolean telling the Machine to destroy itself once it's complete
+	AutoDestroy *bool    `pulumi:"autoDestroy"`
+	Cmds        []string `pulumi:"cmds"`
+	// Which machine flavor, ex: `shared`
+	CpuType     *string  `pulumi:"cpuType"`
+	Cpus        *int     `pulumi:"cpus"`
 	Entrypoints []string `pulumi:"entrypoints"`
-	// Optional environment variables, keys and values must be strings
-	Env map[string]string `pulumi:"env"`
-	// exec command
-	Execs []string `pulumi:"execs"`
-	// docker image
+	// Keys and values must be strings
+	Env   map[string]string `pulumi:"env"`
+	Execs []string          `pulumi:"execs"`
+	// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
 	Image *string `pulumi:"image"`
-	// memory mb
-	Memorymb *int `pulumi:"memorymb"`
-	// Volume mounts
+	// Amount of memory in MB. `256`, `512`, `1024`, ...
+	Memory *int           `pulumi:"memory"`
 	Mounts []MachineMount `pulumi:"mounts"`
-	// machine name
-	Name *string `pulumi:"name"`
-	// Private IP
-	Privateip *string `pulumi:"privateip"`
-	// machine region
-	Region *string `pulumi:"region"`
-	// services
+	// A user-provided identifier
+	Name      *string `pulumi:"name"`
+	PrivateIp *string `pulumi:"privateIp"`
+	// Fly region, ex `ord`, `sin`, `mad`
+	Region   *string          `pulumi:"region"`
 	Services []MachineService `pulumi:"services"`
 }
 
 type MachineState struct {
-	// fly app
+	// The App this resource will be created in
 	App pulumi.StringPtrInput
-	// cmd
-	Cmds pulumi.StringArrayInput
-	// cpu count
-	Cpus pulumi.IntPtrInput
-	// cpu type
-	Cputype pulumi.StringPtrInput
-	// image entrypoint
+	// Optional boolean telling the Machine to destroy itself once it's complete
+	AutoDestroy pulumi.BoolPtrInput
+	Cmds        pulumi.StringArrayInput
+	// Which machine flavor, ex: `shared`
+	CpuType     pulumi.StringPtrInput
+	Cpus        pulumi.IntPtrInput
 	Entrypoints pulumi.StringArrayInput
-	// Optional environment variables, keys and values must be strings
-	Env pulumi.StringMapInput
-	// exec command
+	// Keys and values must be strings
+	Env   pulumi.StringMapInput
 	Execs pulumi.StringArrayInput
-	// docker image
+	// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
 	Image pulumi.StringPtrInput
-	// memory mb
-	Memorymb pulumi.IntPtrInput
-	// Volume mounts
+	// Amount of memory in MB. `256`, `512`, `1024`, ...
+	Memory pulumi.IntPtrInput
 	Mounts MachineMountArrayInput
-	// machine name
-	Name pulumi.StringPtrInput
-	// Private IP
-	Privateip pulumi.StringPtrInput
-	// machine region
-	Region pulumi.StringPtrInput
-	// services
+	// A user-provided identifier
+	Name      pulumi.StringPtrInput
+	PrivateIp pulumi.StringPtrInput
+	// Fly region, ex `ord`, `sin`, `mad`
+	Region   pulumi.StringPtrInput
 	Services MachineServiceArrayInput
 }
 
@@ -156,61 +135,53 @@ func (MachineState) ElementType() reflect.Type {
 }
 
 type machineArgs struct {
-	// fly app
+	// The App this resource will be created in
 	App string `pulumi:"app"`
-	// cmd
-	Cmds []string `pulumi:"cmds"`
-	// cpu count
-	Cpus *int `pulumi:"cpus"`
-	// cpu type
-	Cputype *string `pulumi:"cputype"`
-	// image entrypoint
+	// Optional boolean telling the Machine to destroy itself once it's complete
+	AutoDestroy *bool    `pulumi:"autoDestroy"`
+	Cmds        []string `pulumi:"cmds"`
+	// Which machine flavor, ex: `shared`
+	CpuType     *string  `pulumi:"cpuType"`
+	Cpus        *int     `pulumi:"cpus"`
 	Entrypoints []string `pulumi:"entrypoints"`
-	// Optional environment variables, keys and values must be strings
-	Env map[string]string `pulumi:"env"`
-	// exec command
-	Execs []string `pulumi:"execs"`
-	// docker image
+	// Keys and values must be strings
+	Env   map[string]string `pulumi:"env"`
+	Execs []string          `pulumi:"execs"`
+	// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
 	Image string `pulumi:"image"`
-	// memory mb
-	Memorymb *int `pulumi:"memorymb"`
-	// Volume mounts
+	// Amount of memory in MB. `256`, `512`, `1024`, ...
+	Memory *int           `pulumi:"memory"`
 	Mounts []MachineMount `pulumi:"mounts"`
-	// machine name
+	// A user-provided identifier
 	Name *string `pulumi:"name"`
-	// machine region
-	Region string `pulumi:"region"`
-	// services
+	// Fly region, ex `ord`, `sin`, `mad`
+	Region   string           `pulumi:"region"`
 	Services []MachineService `pulumi:"services"`
 }
 
 // The set of arguments for constructing a Machine resource.
 type MachineArgs struct {
-	// fly app
+	// The App this resource will be created in
 	App pulumi.StringInput
-	// cmd
-	Cmds pulumi.StringArrayInput
-	// cpu count
-	Cpus pulumi.IntPtrInput
-	// cpu type
-	Cputype pulumi.StringPtrInput
-	// image entrypoint
+	// Optional boolean telling the Machine to destroy itself once it's complete
+	AutoDestroy pulumi.BoolPtrInput
+	Cmds        pulumi.StringArrayInput
+	// Which machine flavor, ex: `shared`
+	CpuType     pulumi.StringPtrInput
+	Cpus        pulumi.IntPtrInput
 	Entrypoints pulumi.StringArrayInput
-	// Optional environment variables, keys and values must be strings
-	Env pulumi.StringMapInput
-	// exec command
+	// Keys and values must be strings
+	Env   pulumi.StringMapInput
 	Execs pulumi.StringArrayInput
-	// docker image
+	// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
 	Image pulumi.StringInput
-	// memory mb
-	Memorymb pulumi.IntPtrInput
-	// Volume mounts
+	// Amount of memory in MB. `256`, `512`, `1024`, ...
+	Memory pulumi.IntPtrInput
 	Mounts MachineMountArrayInput
-	// machine name
+	// A user-provided identifier
 	Name pulumi.StringPtrInput
-	// machine region
-	Region pulumi.StringInput
-	// services
+	// Fly region, ex `ord`, `sin`, `mad`
+	Region   pulumi.StringInput
 	Services MachineServiceArrayInput
 }
 
@@ -301,72 +272,70 @@ func (o MachineOutput) ToMachineOutputWithContext(ctx context.Context) MachineOu
 	return o
 }
 
-// fly app
+// The App this resource will be created in
 func (o MachineOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.App }).(pulumi.StringOutput)
 }
 
-// cmd
+// Optional boolean telling the Machine to destroy itself once it's complete
+func (o MachineOutput) AutoDestroy() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Machine) pulumi.BoolOutput { return v.AutoDestroy }).(pulumi.BoolOutput)
+}
+
 func (o MachineOutput) Cmds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringArrayOutput { return v.Cmds }).(pulumi.StringArrayOutput)
 }
 
-// cpu count
+// Which machine flavor, ex: `shared`
+func (o MachineOutput) CpuType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.CpuType }).(pulumi.StringOutput)
+}
+
 func (o MachineOutput) Cpus() pulumi.IntOutput {
 	return o.ApplyT(func(v *Machine) pulumi.IntOutput { return v.Cpus }).(pulumi.IntOutput)
 }
 
-// cpu type
-func (o MachineOutput) Cputype() pulumi.StringOutput {
-	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.Cputype }).(pulumi.StringOutput)
-}
-
-// image entrypoint
 func (o MachineOutput) Entrypoints() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringArrayOutput { return v.Entrypoints }).(pulumi.StringArrayOutput)
 }
 
-// Optional environment variables, keys and values must be strings
+// Keys and values must be strings
 func (o MachineOutput) Env() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringMapOutput { return v.Env }).(pulumi.StringMapOutput)
 }
 
-// exec command
 func (o MachineOutput) Execs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringArrayOutput { return v.Execs }).(pulumi.StringArrayOutput)
 }
 
-// docker image
+// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
 func (o MachineOutput) Image() pulumi.StringOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.Image }).(pulumi.StringOutput)
 }
 
-// memory mb
-func (o MachineOutput) Memorymb() pulumi.IntOutput {
-	return o.ApplyT(func(v *Machine) pulumi.IntOutput { return v.Memorymb }).(pulumi.IntOutput)
+// Amount of memory in MB. `256`, `512`, `1024`, ...
+func (o MachineOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v *Machine) pulumi.IntOutput { return v.Memory }).(pulumi.IntOutput)
 }
 
-// Volume mounts
 func (o MachineOutput) Mounts() MachineMountArrayOutput {
 	return o.ApplyT(func(v *Machine) MachineMountArrayOutput { return v.Mounts }).(MachineMountArrayOutput)
 }
 
-// machine name
+// A user-provided identifier
 func (o MachineOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Private IP
-func (o MachineOutput) Privateip() pulumi.StringOutput {
-	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.Privateip }).(pulumi.StringOutput)
+func (o MachineOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
-// machine region
+// Fly region, ex `ord`, `sin`, `mad`
 func (o MachineOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *Machine) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
-// services
 func (o MachineOutput) Services() MachineServiceArrayOutput {
 	return o.ApplyT(func(v *Machine) MachineServiceArrayOutput { return v.Services }).(MachineServiceArrayOutput)
 }

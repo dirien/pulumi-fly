@@ -10,99 +10,75 @@ using Pulumi;
 
 namespace ediri.Fly
 {
-    /// <summary>
-    /// Fly machine resource
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ## Import
-    /// 
-    /// &lt;break&gt;&lt;break&gt;```sh&lt;break&gt; $ pulumi import fly:index/machine:Machine exampleMachine &lt;app_id&gt;,&lt;machine_id&gt; &lt;break&gt;```&lt;break&gt;&lt;break&gt;
-    /// </summary>
     [FlyResourceType("fly:index/machine:Machine")]
     public partial class Machine : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// fly app
+        /// The App this resource will be created in
         /// </summary>
         [Output("app")]
         public Output<string> App { get; private set; } = null!;
 
         /// <summary>
-        /// cmd
+        /// Optional boolean telling the Machine to destroy itself once it's complete
         /// </summary>
+        [Output("autoDestroy")]
+        public Output<bool> AutoDestroy { get; private set; } = null!;
+
         [Output("cmds")]
         public Output<ImmutableArray<string>> Cmds { get; private set; } = null!;
 
         /// <summary>
-        /// cpu count
+        /// Which machine flavor, ex: `shared`
         /// </summary>
+        [Output("cpuType")]
+        public Output<string> CpuType { get; private set; } = null!;
+
         [Output("cpus")]
         public Output<int> Cpus { get; private set; } = null!;
 
-        /// <summary>
-        /// cpu type
-        /// </summary>
-        [Output("cputype")]
-        public Output<string> Cputype { get; private set; } = null!;
-
-        /// <summary>
-        /// image entrypoint
-        /// </summary>
         [Output("entrypoints")]
         public Output<ImmutableArray<string>> Entrypoints { get; private set; } = null!;
 
         /// <summary>
-        /// Optional environment variables, keys and values must be strings
+        /// Keys and values must be strings
         /// </summary>
         [Output("env")]
         public Output<ImmutableDictionary<string, string>> Env { get; private set; } = null!;
 
-        /// <summary>
-        /// exec command
-        /// </summary>
         [Output("execs")]
         public Output<ImmutableArray<string>> Execs { get; private set; } = null!;
 
         /// <summary>
-        /// docker image
+        /// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
         /// </summary>
         [Output("image")]
         public Output<string> Image { get; private set; } = null!;
 
         /// <summary>
-        /// memory mb
+        /// Amount of memory in MB. `256`, `512`, `1024`, ...
         /// </summary>
-        [Output("memorymb")]
-        public Output<int> Memorymb { get; private set; } = null!;
+        [Output("memory")]
+        public Output<int> Memory { get; private set; } = null!;
 
-        /// <summary>
-        /// Volume mounts
-        /// </summary>
         [Output("mounts")]
         public Output<ImmutableArray<Outputs.MachineMount>> Mounts { get; private set; } = null!;
 
         /// <summary>
-        /// machine name
+        /// A user-provided identifier
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
-        /// <summary>
-        /// Private IP
-        /// </summary>
-        [Output("privateip")]
-        public Output<string> Privateip { get; private set; } = null!;
+        [Output("privateIp")]
+        public Output<string> PrivateIp { get; private set; } = null!;
 
         /// <summary>
-        /// machine region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
 
-        /// <summary>
-        /// services
-        /// </summary>
         [Output("services")]
         public Output<ImmutableArray<Outputs.MachineService>> Services { get; private set; } = null!;
 
@@ -154,17 +130,19 @@ namespace ediri.Fly
     public sealed class MachineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// fly app
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
 
+        /// <summary>
+        /// Optional boolean telling the Machine to destroy itself once it's complete
+        /// </summary>
+        [Input("autoDestroy")]
+        public Input<bool>? AutoDestroy { get; set; }
+
         [Input("cmds")]
         private InputList<string>? _cmds;
-
-        /// <summary>
-        /// cmd
-        /// </summary>
         public InputList<string> Cmds
         {
             get => _cmds ?? (_cmds = new InputList<string>());
@@ -172,23 +150,16 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// cpu count
+        /// Which machine flavor, ex: `shared`
         /// </summary>
+        [Input("cpuType")]
+        public Input<string>? CpuType { get; set; }
+
         [Input("cpus")]
         public Input<int>? Cpus { get; set; }
 
-        /// <summary>
-        /// cpu type
-        /// </summary>
-        [Input("cputype")]
-        public Input<string>? Cputype { get; set; }
-
         [Input("entrypoints")]
         private InputList<string>? _entrypoints;
-
-        /// <summary>
-        /// image entrypoint
-        /// </summary>
         public InputList<string> Entrypoints
         {
             get => _entrypoints ?? (_entrypoints = new InputList<string>());
@@ -199,7 +170,7 @@ namespace ediri.Fly
         private InputMap<string>? _env;
 
         /// <summary>
-        /// Optional environment variables, keys and values must be strings
+        /// Keys and values must be strings
         /// </summary>
         public InputMap<string> Env
         {
@@ -209,10 +180,6 @@ namespace ediri.Fly
 
         [Input("execs")]
         private InputList<string>? _execs;
-
-        /// <summary>
-        /// exec command
-        /// </summary>
         public InputList<string> Execs
         {
             get => _execs ?? (_execs = new InputList<string>());
@@ -220,23 +187,19 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// docker image
+        /// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
         /// </summary>
         [Input("image", required: true)]
         public Input<string> Image { get; set; } = null!;
 
         /// <summary>
-        /// memory mb
+        /// Amount of memory in MB. `256`, `512`, `1024`, ...
         /// </summary>
-        [Input("memorymb")]
-        public Input<int>? Memorymb { get; set; }
+        [Input("memory")]
+        public Input<int>? Memory { get; set; }
 
         [Input("mounts")]
         private InputList<Inputs.MachineMountArgs>? _mounts;
-
-        /// <summary>
-        /// Volume mounts
-        /// </summary>
         public InputList<Inputs.MachineMountArgs> Mounts
         {
             get => _mounts ?? (_mounts = new InputList<Inputs.MachineMountArgs>());
@@ -244,23 +207,19 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// machine name
+        /// A user-provided identifier
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// machine region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
         [Input("services")]
         private InputList<Inputs.MachineServiceArgs>? _services;
-
-        /// <summary>
-        /// services
-        /// </summary>
         public InputList<Inputs.MachineServiceArgs> Services
         {
             get => _services ?? (_services = new InputList<Inputs.MachineServiceArgs>());
@@ -276,17 +235,19 @@ namespace ediri.Fly
     public sealed class MachineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// fly app
+        /// The App this resource will be created in
         /// </summary>
         [Input("app")]
         public Input<string>? App { get; set; }
 
+        /// <summary>
+        /// Optional boolean telling the Machine to destroy itself once it's complete
+        /// </summary>
+        [Input("autoDestroy")]
+        public Input<bool>? AutoDestroy { get; set; }
+
         [Input("cmds")]
         private InputList<string>? _cmds;
-
-        /// <summary>
-        /// cmd
-        /// </summary>
         public InputList<string> Cmds
         {
             get => _cmds ?? (_cmds = new InputList<string>());
@@ -294,23 +255,16 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// cpu count
+        /// Which machine flavor, ex: `shared`
         /// </summary>
+        [Input("cpuType")]
+        public Input<string>? CpuType { get; set; }
+
         [Input("cpus")]
         public Input<int>? Cpus { get; set; }
 
-        /// <summary>
-        /// cpu type
-        /// </summary>
-        [Input("cputype")]
-        public Input<string>? Cputype { get; set; }
-
         [Input("entrypoints")]
         private InputList<string>? _entrypoints;
-
-        /// <summary>
-        /// image entrypoint
-        /// </summary>
         public InputList<string> Entrypoints
         {
             get => _entrypoints ?? (_entrypoints = new InputList<string>());
@@ -321,7 +275,7 @@ namespace ediri.Fly
         private InputMap<string>? _env;
 
         /// <summary>
-        /// Optional environment variables, keys and values must be strings
+        /// Keys and values must be strings
         /// </summary>
         public InputMap<string> Env
         {
@@ -331,10 +285,6 @@ namespace ediri.Fly
 
         [Input("execs")]
         private InputList<string>? _execs;
-
-        /// <summary>
-        /// exec command
-        /// </summary>
         public InputList<string> Execs
         {
             get => _execs ?? (_execs = new InputList<string>());
@@ -342,23 +292,19 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// docker image
+        /// Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
         /// </summary>
         [Input("image")]
         public Input<string>? Image { get; set; }
 
         /// <summary>
-        /// memory mb
+        /// Amount of memory in MB. `256`, `512`, `1024`, ...
         /// </summary>
-        [Input("memorymb")]
-        public Input<int>? Memorymb { get; set; }
+        [Input("memory")]
+        public Input<int>? Memory { get; set; }
 
         [Input("mounts")]
         private InputList<Inputs.MachineMountGetArgs>? _mounts;
-
-        /// <summary>
-        /// Volume mounts
-        /// </summary>
         public InputList<Inputs.MachineMountGetArgs> Mounts
         {
             get => _mounts ?? (_mounts = new InputList<Inputs.MachineMountGetArgs>());
@@ -366,29 +312,22 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// machine name
+        /// A user-provided identifier
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// Private IP
-        /// </summary>
-        [Input("privateip")]
-        public Input<string>? Privateip { get; set; }
+        [Input("privateIp")]
+        public Input<string>? PrivateIp { get; set; }
 
         /// <summary>
-        /// machine region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         [Input("services")]
         private InputList<Inputs.MachineServiceGetArgs>? _services;
-
-        /// <summary>
-        /// services
-        /// </summary>
         public InputList<Inputs.MachineServiceGetArgs> Services
         {
             get => _services ?? (_services = new InputList<Inputs.MachineServiceGetArgs>());

@@ -4,9 +4,12 @@
 package config
 
 import (
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // fly.io api token. If not set checks env for FLY_API_TOKEN
 func GetFlyApiToken(ctx *pulumi.Context) string {

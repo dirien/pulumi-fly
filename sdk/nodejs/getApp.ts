@@ -4,11 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Retrieve info about graphql app
- *
- * ## Example Usage
- */
 export function getApp(args: GetAppArgs, opts?: pulumi.InvokeOptions): Promise<GetAppResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -45,13 +40,12 @@ export interface GetAppResult {
      * Name of app
      */
     readonly name: string;
+    /**
+     * A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
+     */
+    readonly sharedipaddress: string;
     readonly status: string;
 }
-/**
- * Retrieve info about graphql app
- *
- * ## Example Usage
- */
 export function getAppOutput(args: GetAppOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAppResult> {
     return pulumi.output(args).apply((a: any) => getApp(a, opts))
 }
