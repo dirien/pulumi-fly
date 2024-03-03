@@ -4,15 +4,12 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Fly ip data source
- */
 export function getIp(args: GetIpArgs, opts?: pulumi.InvokeOptions): Promise<GetIpResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("fly:index/getIp:getIp", {
-        "address": args.address,
         "app": args.app,
+        "id": args.id,
     }, opts);
 }
 
@@ -21,13 +18,13 @@ export function getIp(args: GetIpArgs, opts?: pulumi.InvokeOptions): Promise<Get
  */
 export interface GetIpArgs {
     /**
-     * IP address
-     */
-    address: string;
-    /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     app: string;
+    /**
+     * A fly-generated ID
+     */
+    id: string;
 }
 
 /**
@@ -35,29 +32,26 @@ export interface GetIpArgs {
  */
 export interface GetIpResult {
     /**
-     * IP address
+     * Empty if using `sharedV4`
      */
     readonly address: string;
     /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     readonly app: string;
     /**
-     * ID of address
+     * A fly-generated ID
      */
     readonly id: string;
     /**
-     * region
+     * Fly region, ex `ord`, `sin`, `mad`
      */
     readonly region: string;
     /**
-     * v4 or v6
+     * `v4`, `v6`, or `privateV6`
      */
     readonly type: string;
 }
-/**
- * Fly ip data source
- */
 export function getIpOutput(args: GetIpOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIpResult> {
     return pulumi.output(args).apply((a: any) => getIp(a, opts))
 }
@@ -67,11 +61,11 @@ export function getIpOutput(args: GetIpOutputArgs, opts?: pulumi.InvokeOptions):
  */
 export interface GetIpOutputArgs {
     /**
-     * IP address
-     */
-    address: pulumi.Input<string>;
-    /**
-     * Name of app attached to
+     * The App this resource will be created in
      */
     app: pulumi.Input<string>;
+    /**
+     * A fly-generated ID
+     */
+    id: pulumi.Input<string>;
 }

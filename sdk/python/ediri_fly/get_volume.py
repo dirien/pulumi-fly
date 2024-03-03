@@ -21,10 +21,13 @@ class GetVolumeResult:
     """
     A collection of values returned by getVolume.
     """
-    def __init__(__self__, app=None, id=None, name=None, region=None, size=None):
+    def __init__(__self__, app=None, encrypted=None, id=None, name=None, region=None, size=None):
         if app and not isinstance(app, str):
             raise TypeError("Expected argument 'app' to be a str")
         pulumi.set(__self__, "app", app)
+        if encrypted and not isinstance(encrypted, bool):
+            raise TypeError("Expected argument 'encrypted' to be a bool")
+        pulumi.set(__self__, "encrypted", encrypted)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -42,15 +45,20 @@ class GetVolumeResult:
     @pulumi.getter
     def app(self) -> str:
         """
-        Name of app attached to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
     @property
     @pulumi.getter
+    def encrypted(self) -> bool:
+        return pulumi.get(self, "encrypted")
+
+    @property
+    @pulumi.getter
     def id(self) -> str:
         """
-        ID of volume
+        A fly-generated ID
         """
         return pulumi.get(self, "id")
 
@@ -58,7 +66,7 @@ class GetVolumeResult:
     @pulumi.getter
     def name(self) -> str:
         """
-        name
+        A user-provided identifier
         """
         return pulumi.get(self, "name")
 
@@ -66,7 +74,7 @@ class GetVolumeResult:
     @pulumi.getter
     def region(self) -> str:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -86,6 +94,7 @@ class AwaitableGetVolumeResult(GetVolumeResult):
             yield self
         return GetVolumeResult(
             app=self.app,
+            encrypted=self.encrypted,
             id=self.id,
             name=self.name,
             region=self.region,
@@ -96,11 +105,10 @@ def get_volume(app: Optional[str] = None,
                id: Optional[str] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetVolumeResult:
     """
-    Fly volume resource
+    Use this data source to access information about an existing resource.
 
-
-    :param str app: Name of app attached to
-    :param str id: ID of volume
+    :param str app: The App this resource will be created in
+    :param str id: A fly-generated ID
     """
     __args__ = dict()
     __args__['app'] = app
@@ -110,6 +118,7 @@ def get_volume(app: Optional[str] = None,
 
     return AwaitableGetVolumeResult(
         app=pulumi.get(__ret__, 'app'),
+        encrypted=pulumi.get(__ret__, 'encrypted'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         region=pulumi.get(__ret__, 'region'),
@@ -121,10 +130,9 @@ def get_volume_output(app: Optional[pulumi.Input[str]] = None,
                       id: Optional[pulumi.Input[str]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetVolumeResult]:
     """
-    Fly volume resource
+    Use this data source to access information about an existing resource.
 
-
-    :param str app: Name of app attached to
-    :param str id: ID of volume
+    :param str app: The App this resource will be created in
+    :param str id: A fly-generated ID
     """
     ...

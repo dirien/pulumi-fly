@@ -12,15 +12,9 @@ namespace ediri.Fly
 {
     public static class GetIp
     {
-        /// <summary>
-        /// Fly ip data source
-        /// </summary>
         public static Task<GetIpResult> InvokeAsync(GetIpArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetIpResult>("fly:index/getIp:getIp", args ?? new GetIpArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Fly ip data source
-        /// </summary>
         public static Output<GetIpResult> Invoke(GetIpInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetIpResult>("fly:index/getIp:getIp", args ?? new GetIpInvokeArgs(), options.WithDefaults());
     }
@@ -29,16 +23,16 @@ namespace ediri.Fly
     public sealed class GetIpArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// IP address
-        /// </summary>
-        [Input("address", required: true)]
-        public string Address { get; set; } = null!;
-
-        /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public string App { get; set; } = null!;
+
+        /// <summary>
+        /// A fly-generated ID
+        /// </summary>
+        [Input("id", required: true)]
+        public string Id { get; set; } = null!;
 
         public GetIpArgs()
         {
@@ -49,16 +43,16 @@ namespace ediri.Fly
     public sealed class GetIpInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// IP address
-        /// </summary>
-        [Input("address", required: true)]
-        public Input<string> Address { get; set; } = null!;
-
-        /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
+
+        /// <summary>
+        /// A fly-generated ID
+        /// </summary>
+        [Input("id", required: true)]
+        public Input<string> Id { get; set; } = null!;
 
         public GetIpInvokeArgs()
         {
@@ -71,23 +65,23 @@ namespace ediri.Fly
     public sealed class GetIpResult
     {
         /// <summary>
-        /// IP address
+        /// Empty if using `shared_v4`
         /// </summary>
         public readonly string Address;
         /// <summary>
-        /// Name of app attached to
+        /// The App this resource will be created in
         /// </summary>
         public readonly string App;
         /// <summary>
-        /// ID of address
+        /// A fly-generated ID
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// region
+        /// Fly region, ex `ord`, `sin`, `mad`
         /// </summary>
         public readonly string Region;
         /// <summary>
-        /// v4 or v6
+        /// `v4`, `v6`, or `private_v6`
         /// </summary>
         public readonly string Type;
 

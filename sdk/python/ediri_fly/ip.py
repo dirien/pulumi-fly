@@ -19,9 +19,9 @@ class IpArgs:
                  region: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Ip resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] type: v4 or v6
-        :param pulumi.Input[str] region: region
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] type: One of the following values (by regex): `^(v4|v6|private_v6)$`
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
         """
         pulumi.set(__self__, "app", app)
         pulumi.set(__self__, "type", type)
@@ -32,7 +32,7 @@ class IpArgs:
     @pulumi.getter
     def app(self) -> pulumi.Input[str]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -44,7 +44,7 @@ class IpArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
         """
-        v4 or v6
+        One of the following values (by regex): `^(v4|v6|private_v6)$`
         """
         return pulumi.get(self, "type")
 
@@ -56,7 +56,7 @@ class IpArgs:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -74,10 +74,10 @@ class _IpState:
                  type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Ip resources.
-        :param pulumi.Input[str] address: IP address
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] region: region
-        :param pulumi.Input[str] type: v4 or v6
+        :param pulumi.Input[str] address: Empty if using `shared_v4`
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
+        :param pulumi.Input[str] type: One of the following values (by regex): `^(v4|v6|private_v6)$`
         """
         if address is not None:
             pulumi.set(__self__, "address", address)
@@ -92,7 +92,7 @@ class _IpState:
     @pulumi.getter
     def address(self) -> Optional[pulumi.Input[str]]:
         """
-        IP address
+        Empty if using `shared_v4`
         """
         return pulumi.get(self, "address")
 
@@ -104,7 +104,7 @@ class _IpState:
     @pulumi.getter
     def app(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -116,7 +116,7 @@ class _IpState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -128,7 +128,7 @@ class _IpState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        v4 or v6
+        One of the following values (by regex): `^(v4|v6|private_v6)$`
         """
         return pulumi.get(self, "type")
 
@@ -147,19 +147,12 @@ class Ip(pulumi.CustomResource):
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Fly ip resource
-
-        ## Example Usage
-
-        ## Import
-
-        <break><break>```sh<break> $ pulumi import fly:index/ip:Ip exampleIp <app_id>,<ip_address> <break>```<break><break>
-
+        Create a Ip resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] region: region
-        :param pulumi.Input[str] type: v4 or v6
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
+        :param pulumi.Input[str] type: One of the following values (by regex): `^(v4|v6|private_v6)$`
         """
         ...
     @overload
@@ -168,14 +161,7 @@ class Ip(pulumi.CustomResource):
                  args: IpArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Fly ip resource
-
-        ## Example Usage
-
-        ## Import
-
-        <break><break>```sh<break> $ pulumi import fly:index/ip:Ip exampleIp <app_id>,<ip_address> <break>```<break><break>
-
+        Create a Ip resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param IpArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -232,10 +218,10 @@ class Ip(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] address: IP address
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] region: region
-        :param pulumi.Input[str] type: v4 or v6
+        :param pulumi.Input[str] address: Empty if using `shared_v4`
+        :param pulumi.Input[str] app: The App this resource will be created in
+        :param pulumi.Input[str] region: Fly region, ex `ord`, `sin`, `mad`
+        :param pulumi.Input[str] type: One of the following values (by regex): `^(v4|v6|private_v6)$`
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -251,7 +237,7 @@ class Ip(pulumi.CustomResource):
     @pulumi.getter
     def address(self) -> pulumi.Output[str]:
         """
-        IP address
+        Empty if using `shared_v4`
         """
         return pulumi.get(self, "address")
 
@@ -259,7 +245,7 @@ class Ip(pulumi.CustomResource):
     @pulumi.getter
     def app(self) -> pulumi.Output[str]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -267,7 +253,7 @@ class Ip(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -275,7 +261,7 @@ class Ip(pulumi.CustomResource):
     @pulumi.getter
     def type(self) -> pulumi.Output[str]:
         """
-        v4 or v6
+        One of the following values (by regex): `^(v4|v6|private_v6)$`
         """
         return pulumi.get(self, "type")
 

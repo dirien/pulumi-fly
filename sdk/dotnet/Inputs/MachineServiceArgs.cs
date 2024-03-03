@@ -14,7 +14,7 @@ namespace ediri.Fly.Inputs
     public sealed class MachineServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Port application listens on internally
+        /// Port the machine listens on
         /// </summary>
         [Input("internalPort", required: true)]
         public Input<int> InternalPort { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace ediri.Fly.Inputs
         private InputList<Inputs.MachineServicePortArgs>? _ports;
 
         /// <summary>
-        /// External ports and handlers
+        /// How the port is exposed
         /// </summary>
         public InputList<Inputs.MachineServicePortArgs> Ports
         {
@@ -32,7 +32,7 @@ namespace ediri.Fly.Inputs
         }
 
         /// <summary>
-        /// network protocol
+        /// `udp` or `tcp`
         /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;

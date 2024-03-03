@@ -12,49 +12,28 @@ namespace ediri.Fly
 {
     /// <summary>
     /// Fly certificate resource
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ## Import
-    /// 
-    /// &lt;break&gt;&lt;break&gt;```sh&lt;break&gt; $ pulumi import fly:index/cert:Cert exampleCert &lt;app_id&gt;,&lt;hostname&gt; &lt;break&gt;```&lt;break&gt;&lt;break&gt;
     /// </summary>
     [FlyResourceType("fly:index/cert:Cert")]
     public partial class Cert : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Output("app")]
         public Output<string> App { get; private set; } = null!;
 
-        /// <summary>
-        /// check
-        /// </summary>
         [Output("check")]
         public Output<bool> Check { get; private set; } = null!;
 
-        /// <summary>
-        /// DnsValidationHostname
-        /// </summary>
-        [Output("dnsvalidationhostname")]
-        public Output<string> Dnsvalidationhostname { get; private set; } = null!;
+        [Output("dnsValidationHostname")]
+        public Output<string> DnsValidationHostname { get; private set; } = null!;
 
-        /// <summary>
-        /// DnsValidationHostname
-        /// </summary>
-        [Output("dnsvalidationinstructions")]
-        public Output<string> Dnsvalidationinstructions { get; private set; } = null!;
+        [Output("dnsValidationInstructions")]
+        public Output<string> DnsValidationInstructions { get; private set; } = null!;
 
-        /// <summary>
-        /// DnsValidationTarget
-        /// </summary>
-        [Output("dnsvalidationtarget")]
-        public Output<string> Dnsvalidationtarget { get; private set; } = null!;
+        [Output("dnsValidationTarget")]
+        public Output<string> DnsValidationTarget { get; private set; } = null!;
 
-        /// <summary>
-        /// hostname
-        /// </summary>
         [Output("hostname")]
         public Output<string> Hostname { get; private set; } = null!;
 
@@ -106,14 +85,11 @@ namespace ediri.Fly
     public sealed class CertArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app", required: true)]
         public Input<string> App { get; set; } = null!;
 
-        /// <summary>
-        /// hostname
-        /// </summary>
         [Input("hostname", required: true)]
         public Input<string> Hostname { get; set; } = null!;
 
@@ -126,38 +102,23 @@ namespace ediri.Fly
     public sealed class CertState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of app to attach to
+        /// The App this resource will be created in
         /// </summary>
         [Input("app")]
         public Input<string>? App { get; set; }
 
-        /// <summary>
-        /// check
-        /// </summary>
         [Input("check")]
         public Input<bool>? Check { get; set; }
 
-        /// <summary>
-        /// DnsValidationHostname
-        /// </summary>
-        [Input("dnsvalidationhostname")]
-        public Input<string>? Dnsvalidationhostname { get; set; }
+        [Input("dnsValidationHostname")]
+        public Input<string>? DnsValidationHostname { get; set; }
 
-        /// <summary>
-        /// DnsValidationHostname
-        /// </summary>
-        [Input("dnsvalidationinstructions")]
-        public Input<string>? Dnsvalidationinstructions { get; set; }
+        [Input("dnsValidationInstructions")]
+        public Input<string>? DnsValidationInstructions { get; set; }
 
-        /// <summary>
-        /// DnsValidationTarget
-        /// </summary>
-        [Input("dnsvalidationtarget")]
-        public Input<string>? Dnsvalidationtarget { get; set; }
+        [Input("dnsValidationTarget")]
+        public Input<string>? DnsValidationTarget { get; set; }
 
-        /// <summary>
-        /// hostname
-        /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
 

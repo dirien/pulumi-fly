@@ -18,8 +18,7 @@ class CertArgs:
                  hostname: pulumi.Input[str]):
         """
         The set of arguments for constructing a Cert resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] hostname: hostname
+        :param pulumi.Input[str] app: The App this resource will be created in
         """
         pulumi.set(__self__, "app", app)
         pulumi.set(__self__, "hostname", hostname)
@@ -28,7 +27,7 @@ class CertArgs:
     @pulumi.getter
     def app(self) -> pulumi.Input[str]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -39,9 +38,6 @@ class CertArgs:
     @property
     @pulumi.getter
     def hostname(self) -> pulumi.Input[str]:
-        """
-        hostname
-        """
         return pulumi.get(self, "hostname")
 
     @hostname.setter
@@ -54,29 +50,24 @@ class _CertState:
     def __init__(__self__, *,
                  app: Optional[pulumi.Input[str]] = None,
                  check: Optional[pulumi.Input[bool]] = None,
-                 dnsvalidationhostname: Optional[pulumi.Input[str]] = None,
-                 dnsvalidationinstructions: Optional[pulumi.Input[str]] = None,
-                 dnsvalidationtarget: Optional[pulumi.Input[str]] = None,
+                 dns_validation_hostname: Optional[pulumi.Input[str]] = None,
+                 dns_validation_instructions: Optional[pulumi.Input[str]] = None,
+                 dns_validation_target: Optional[pulumi.Input[str]] = None,
                  hostname: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Cert resources.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[bool] check: check
-        :param pulumi.Input[str] dnsvalidationhostname: DnsValidationHostname
-        :param pulumi.Input[str] dnsvalidationinstructions: DnsValidationHostname
-        :param pulumi.Input[str] dnsvalidationtarget: DnsValidationTarget
-        :param pulumi.Input[str] hostname: hostname
+        :param pulumi.Input[str] app: The App this resource will be created in
         """
         if app is not None:
             pulumi.set(__self__, "app", app)
         if check is not None:
             pulumi.set(__self__, "check", check)
-        if dnsvalidationhostname is not None:
-            pulumi.set(__self__, "dnsvalidationhostname", dnsvalidationhostname)
-        if dnsvalidationinstructions is not None:
-            pulumi.set(__self__, "dnsvalidationinstructions", dnsvalidationinstructions)
-        if dnsvalidationtarget is not None:
-            pulumi.set(__self__, "dnsvalidationtarget", dnsvalidationtarget)
+        if dns_validation_hostname is not None:
+            pulumi.set(__self__, "dns_validation_hostname", dns_validation_hostname)
+        if dns_validation_instructions is not None:
+            pulumi.set(__self__, "dns_validation_instructions", dns_validation_instructions)
+        if dns_validation_target is not None:
+            pulumi.set(__self__, "dns_validation_target", dns_validation_target)
         if hostname is not None:
             pulumi.set(__self__, "hostname", hostname)
 
@@ -84,7 +75,7 @@ class _CertState:
     @pulumi.getter
     def app(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -95,9 +86,6 @@ class _CertState:
     @property
     @pulumi.getter
     def check(self) -> Optional[pulumi.Input[bool]]:
-        """
-        check
-        """
         return pulumi.get(self, "check")
 
     @check.setter
@@ -105,47 +93,35 @@ class _CertState:
         pulumi.set(self, "check", value)
 
     @property
-    @pulumi.getter
-    def dnsvalidationhostname(self) -> Optional[pulumi.Input[str]]:
-        """
-        DnsValidationHostname
-        """
-        return pulumi.get(self, "dnsvalidationhostname")
+    @pulumi.getter(name="dnsValidationHostname")
+    def dns_validation_hostname(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dns_validation_hostname")
 
-    @dnsvalidationhostname.setter
-    def dnsvalidationhostname(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "dnsvalidationhostname", value)
+    @dns_validation_hostname.setter
+    def dns_validation_hostname(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dns_validation_hostname", value)
 
     @property
-    @pulumi.getter
-    def dnsvalidationinstructions(self) -> Optional[pulumi.Input[str]]:
-        """
-        DnsValidationHostname
-        """
-        return pulumi.get(self, "dnsvalidationinstructions")
+    @pulumi.getter(name="dnsValidationInstructions")
+    def dns_validation_instructions(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dns_validation_instructions")
 
-    @dnsvalidationinstructions.setter
-    def dnsvalidationinstructions(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "dnsvalidationinstructions", value)
+    @dns_validation_instructions.setter
+    def dns_validation_instructions(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dns_validation_instructions", value)
 
     @property
-    @pulumi.getter
-    def dnsvalidationtarget(self) -> Optional[pulumi.Input[str]]:
-        """
-        DnsValidationTarget
-        """
-        return pulumi.get(self, "dnsvalidationtarget")
+    @pulumi.getter(name="dnsValidationTarget")
+    def dns_validation_target(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dns_validation_target")
 
-    @dnsvalidationtarget.setter
-    def dnsvalidationtarget(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "dnsvalidationtarget", value)
+    @dns_validation_target.setter
+    def dns_validation_target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dns_validation_target", value)
 
     @property
     @pulumi.getter
     def hostname(self) -> Optional[pulumi.Input[str]]:
-        """
-        hostname
-        """
         return pulumi.get(self, "hostname")
 
     @hostname.setter
@@ -164,16 +140,9 @@ class Cert(pulumi.CustomResource):
         """
         Fly certificate resource
 
-        ## Example Usage
-
-        ## Import
-
-        <break><break>```sh<break> $ pulumi import fly:index/cert:Cert exampleCert <app_id>,<hostname> <break>```<break><break>
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[str] hostname: hostname
+        :param pulumi.Input[str] app: The App this resource will be created in
         """
         ...
     @overload
@@ -183,12 +152,6 @@ class Cert(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Fly certificate resource
-
-        ## Example Usage
-
-        ## Import
-
-        <break><break>```sh<break> $ pulumi import fly:index/cert:Cert exampleCert <app_id>,<hostname> <break>```<break><break>
 
         :param str resource_name: The name of the resource.
         :param CertArgs args: The arguments to use to populate this resource's properties.
@@ -223,9 +186,9 @@ class Cert(pulumi.CustomResource):
                 raise TypeError("Missing required property 'hostname'")
             __props__.__dict__["hostname"] = hostname
             __props__.__dict__["check"] = None
-            __props__.__dict__["dnsvalidationhostname"] = None
-            __props__.__dict__["dnsvalidationinstructions"] = None
-            __props__.__dict__["dnsvalidationtarget"] = None
+            __props__.__dict__["dns_validation_hostname"] = None
+            __props__.__dict__["dns_validation_instructions"] = None
+            __props__.__dict__["dns_validation_target"] = None
         super(Cert, __self__).__init__(
             'fly:index/cert:Cert',
             resource_name,
@@ -238,9 +201,9 @@ class Cert(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             app: Optional[pulumi.Input[str]] = None,
             check: Optional[pulumi.Input[bool]] = None,
-            dnsvalidationhostname: Optional[pulumi.Input[str]] = None,
-            dnsvalidationinstructions: Optional[pulumi.Input[str]] = None,
-            dnsvalidationtarget: Optional[pulumi.Input[str]] = None,
+            dns_validation_hostname: Optional[pulumi.Input[str]] = None,
+            dns_validation_instructions: Optional[pulumi.Input[str]] = None,
+            dns_validation_target: Optional[pulumi.Input[str]] = None,
             hostname: Optional[pulumi.Input[str]] = None) -> 'Cert':
         """
         Get an existing Cert resource's state with the given name, id, and optional extra
@@ -249,12 +212,7 @@ class Cert(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] app: Name of app to attach to
-        :param pulumi.Input[bool] check: check
-        :param pulumi.Input[str] dnsvalidationhostname: DnsValidationHostname
-        :param pulumi.Input[str] dnsvalidationinstructions: DnsValidationHostname
-        :param pulumi.Input[str] dnsvalidationtarget: DnsValidationTarget
-        :param pulumi.Input[str] hostname: hostname
+        :param pulumi.Input[str] app: The App this resource will be created in
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -262,9 +220,9 @@ class Cert(pulumi.CustomResource):
 
         __props__.__dict__["app"] = app
         __props__.__dict__["check"] = check
-        __props__.__dict__["dnsvalidationhostname"] = dnsvalidationhostname
-        __props__.__dict__["dnsvalidationinstructions"] = dnsvalidationinstructions
-        __props__.__dict__["dnsvalidationtarget"] = dnsvalidationtarget
+        __props__.__dict__["dns_validation_hostname"] = dns_validation_hostname
+        __props__.__dict__["dns_validation_instructions"] = dns_validation_instructions
+        __props__.__dict__["dns_validation_target"] = dns_validation_target
         __props__.__dict__["hostname"] = hostname
         return Cert(resource_name, opts=opts, __props__=__props__)
 
@@ -272,47 +230,32 @@ class Cert(pulumi.CustomResource):
     @pulumi.getter
     def app(self) -> pulumi.Output[str]:
         """
-        Name of app to attach to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
     @property
     @pulumi.getter
     def check(self) -> pulumi.Output[bool]:
-        """
-        check
-        """
         return pulumi.get(self, "check")
 
     @property
-    @pulumi.getter
-    def dnsvalidationhostname(self) -> pulumi.Output[str]:
-        """
-        DnsValidationHostname
-        """
-        return pulumi.get(self, "dnsvalidationhostname")
+    @pulumi.getter(name="dnsValidationHostname")
+    def dns_validation_hostname(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "dns_validation_hostname")
 
     @property
-    @pulumi.getter
-    def dnsvalidationinstructions(self) -> pulumi.Output[str]:
-        """
-        DnsValidationHostname
-        """
-        return pulumi.get(self, "dnsvalidationinstructions")
+    @pulumi.getter(name="dnsValidationInstructions")
+    def dns_validation_instructions(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "dns_validation_instructions")
 
     @property
-    @pulumi.getter
-    def dnsvalidationtarget(self) -> pulumi.Output[str]:
-        """
-        DnsValidationTarget
-        """
-        return pulumi.get(self, "dnsvalidationtarget")
+    @pulumi.getter(name="dnsValidationTarget")
+    def dns_validation_target(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "dns_validation_target")
 
     @property
     @pulumi.getter
     def hostname(self) -> pulumi.Output[str]:
-        """
-        hostname
-        """
         return pulumi.get(self, "hostname")
 

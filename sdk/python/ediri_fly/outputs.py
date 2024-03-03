@@ -18,44 +18,21 @@ __all__ = [
 
 @pulumi.output_type
 class MachineMount(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "sizeGb":
-            suggest = "size_gb"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in MachineMount. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        MachineMount.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        MachineMount.__key_warning(key)
-        return super().get(key, default)
-
     def __init__(__self__, *,
                  path: str,
-                 volume: str,
-                 encrypted: Optional[bool] = None,
-                 size_gb: Optional[int] = None):
+                 volume: str):
         """
-        :param str path: Path for volume to be mounted on vm
-        :param str volume: Name or ID of volume
+        :param str path: Path for volume to be mounted on vm, ex: `/data`
+        :param str volume: ID of volume
         """
         pulumi.set(__self__, "path", path)
         pulumi.set(__self__, "volume", volume)
-        if encrypted is not None:
-            pulumi.set(__self__, "encrypted", encrypted)
-        if size_gb is not None:
-            pulumi.set(__self__, "size_gb", size_gb)
 
     @property
     @pulumi.getter
     def path(self) -> str:
         """
-        Path for volume to be mounted on vm
+        Path for volume to be mounted on vm, ex: `/data`
         """
         return pulumi.get(self, "path")
 
@@ -63,19 +40,9 @@ class MachineMount(dict):
     @pulumi.getter
     def volume(self) -> str:
         """
-        Name or ID of volume
+        ID of volume
         """
         return pulumi.get(self, "volume")
-
-    @property
-    @pulumi.getter
-    def encrypted(self) -> Optional[bool]:
-        return pulumi.get(self, "encrypted")
-
-    @property
-    @pulumi.getter(name="sizeGb")
-    def size_gb(self) -> Optional[int]:
-        return pulumi.get(self, "size_gb")
 
 
 @pulumi.output_type
@@ -102,9 +69,9 @@ class MachineService(dict):
                  ports: Sequence['outputs.MachineServicePort'],
                  protocol: str):
         """
-        :param int internal_port: Port application listens on internally
-        :param Sequence['MachineServicePortArgs'] ports: External ports and handlers
-        :param str protocol: network protocol
+        :param int internal_port: Port the machine listens on
+        :param Sequence['MachineServicePortArgs'] ports: How the port is exposed
+        :param str protocol: `udp` or `tcp`
         """
         pulumi.set(__self__, "internal_port", internal_port)
         pulumi.set(__self__, "ports", ports)
@@ -114,7 +81,7 @@ class MachineService(dict):
     @pulumi.getter(name="internalPort")
     def internal_port(self) -> int:
         """
-        Port application listens on internally
+        Port the machine listens on
         """
         return pulumi.get(self, "internal_port")
 
@@ -122,7 +89,7 @@ class MachineService(dict):
     @pulumi.getter
     def ports(self) -> Sequence['outputs.MachineServicePort']:
         """
-        External ports and handlers
+        How the port is exposed
         """
         return pulumi.get(self, "ports")
 
@@ -130,28 +97,67 @@ class MachineService(dict):
     @pulumi.getter
     def protocol(self) -> str:
         """
-        network protocol
+        `udp` or `tcp`
         """
         return pulumi.get(self, "protocol")
 
 
 @pulumi.output_type
 class MachineServicePort(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "forceHttps":
+            suggest = "force_https"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in MachineServicePort. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        MachineServicePort.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        MachineServicePort.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  port: int,
+                 force_https: Optional[bool] = None,
                  handlers: Optional[Sequence[str]] = None):
+        """
+        :param int port: Mapped external port number
+        :param bool force_https: Automatically redirect to HTTPS on "http" handler
+        :param Sequence[str] handlers: How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        """
         pulumi.set(__self__, "port", port)
+        if force_https is not None:
+            pulumi.set(__self__, "force_https", force_https)
         if handlers is not None:
             pulumi.set(__self__, "handlers", handlers)
 
     @property
     @pulumi.getter
     def port(self) -> int:
+        """
+        Mapped external port number
+        """
         return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="forceHttps")
+    def force_https(self) -> Optional[bool]:
+        """
+        Automatically redirect to HTTPS on "http" handler
+        """
+        return pulumi.get(self, "force_https")
 
     @property
     @pulumi.getter
     def handlers(self) -> Optional[Sequence[str]]:
+        """
+        How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        """
         return pulumi.get(self, "handlers")
 
 

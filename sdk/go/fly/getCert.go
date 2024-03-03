@@ -7,12 +7,12 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly certificate data source
 func LookupCert(ctx *pulumi.Context, args *LookupCertArgs, opts ...pulumi.InvokeOption) (*LookupCertResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupCertResult
 	err := ctx.Invoke("fly:index/getCert:getCert", args, &rv, opts...)
 	if err != nil {
@@ -23,27 +23,21 @@ func LookupCert(ctx *pulumi.Context, args *LookupCertArgs, opts ...pulumi.Invoke
 
 // A collection of arguments for invoking getCert.
 type LookupCertArgs struct {
-	// Name of app attached to
-	App string `pulumi:"app"`
-	// hostname
+	// The App this resource will be created in
+	App      string `pulumi:"app"`
 	Hostname string `pulumi:"hostname"`
 }
 
 // A collection of values returned by getCert.
 type LookupCertResult struct {
-	// Name of app attached to
-	App string `pulumi:"app"`
-	// check
-	Check bool `pulumi:"check"`
-	// DnsValidationHostname
-	Dnsvalidationhostname string `pulumi:"dnsvalidationhostname"`
-	// DnsValidationHostname
-	Dnsvalidationinstructions string `pulumi:"dnsvalidationinstructions"`
-	// DnsValidationTarget
-	Dnsvalidationtarget string `pulumi:"dnsvalidationtarget"`
-	// hostname
-	Hostname string `pulumi:"hostname"`
-	// ID of certificate
+	// The App this resource will be created in
+	App                       string `pulumi:"app"`
+	Check                     bool   `pulumi:"check"`
+	DnsValidationHostname     string `pulumi:"dnsValidationHostname"`
+	DnsValidationInstructions string `pulumi:"dnsValidationInstructions"`
+	DnsValidationTarget       string `pulumi:"dnsValidationTarget"`
+	Hostname                  string `pulumi:"hostname"`
+	// A fly-generated ID
 	Id string `pulumi:"id"`
 }
 
@@ -62,9 +56,8 @@ func LookupCertOutput(ctx *pulumi.Context, args LookupCertOutputArgs, opts ...pu
 
 // A collection of arguments for invoking getCert.
 type LookupCertOutputArgs struct {
-	// Name of app attached to
-	App pulumi.StringInput `pulumi:"app"`
-	// hostname
+	// The App this resource will be created in
+	App      pulumi.StringInput `pulumi:"app"`
 	Hostname pulumi.StringInput `pulumi:"hostname"`
 }
 
@@ -87,37 +80,32 @@ func (o LookupCertResultOutput) ToLookupCertResultOutputWithContext(ctx context.
 	return o
 }
 
-// Name of app attached to
+// The App this resource will be created in
 func (o LookupCertResultOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertResult) string { return v.App }).(pulumi.StringOutput)
 }
 
-// check
 func (o LookupCertResultOutput) Check() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupCertResult) bool { return v.Check }).(pulumi.BoolOutput)
 }
 
-// DnsValidationHostname
-func (o LookupCertResultOutput) Dnsvalidationhostname() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupCertResult) string { return v.Dnsvalidationhostname }).(pulumi.StringOutput)
+func (o LookupCertResultOutput) DnsValidationHostname() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertResult) string { return v.DnsValidationHostname }).(pulumi.StringOutput)
 }
 
-// DnsValidationHostname
-func (o LookupCertResultOutput) Dnsvalidationinstructions() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupCertResult) string { return v.Dnsvalidationinstructions }).(pulumi.StringOutput)
+func (o LookupCertResultOutput) DnsValidationInstructions() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertResult) string { return v.DnsValidationInstructions }).(pulumi.StringOutput)
 }
 
-// DnsValidationTarget
-func (o LookupCertResultOutput) Dnsvalidationtarget() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupCertResult) string { return v.Dnsvalidationtarget }).(pulumi.StringOutput)
+func (o LookupCertResultOutput) DnsValidationTarget() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertResult) string { return v.DnsValidationTarget }).(pulumi.StringOutput)
 }
 
-// hostname
 func (o LookupCertResultOutput) Hostname() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertResult) string { return v.Hostname }).(pulumi.StringOutput)
 }
 
-// ID of certificate
+// A fly-generated ID
 func (o LookupCertResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertResult) string { return v.Id }).(pulumi.StringOutput)
 }

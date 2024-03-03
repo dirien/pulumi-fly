@@ -7,15 +7,16 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+var _ = internal.GetEnvOrDefault
+
 type MachineMount struct {
-	Encrypted *bool `pulumi:"encrypted"`
-	// Path for volume to be mounted on vm
-	Path   string `pulumi:"path"`
-	SizeGb *int   `pulumi:"sizeGb"`
-	// Name or ID of volume
+	// Path for volume to be mounted on vm, ex: `/data`
+	Path string `pulumi:"path"`
+	// ID of volume
 	Volume string `pulumi:"volume"`
 }
 
@@ -31,11 +32,9 @@ type MachineMountInput interface {
 }
 
 type MachineMountArgs struct {
-	Encrypted pulumi.BoolPtrInput `pulumi:"encrypted"`
-	// Path for volume to be mounted on vm
-	Path   pulumi.StringInput `pulumi:"path"`
-	SizeGb pulumi.IntPtrInput `pulumi:"sizeGb"`
-	// Name or ID of volume
+	// Path for volume to be mounted on vm, ex: `/data`
+	Path pulumi.StringInput `pulumi:"path"`
+	// ID of volume
 	Volume pulumi.StringInput `pulumi:"volume"`
 }
 
@@ -90,20 +89,12 @@ func (o MachineMountOutput) ToMachineMountOutputWithContext(ctx context.Context)
 	return o
 }
 
-func (o MachineMountOutput) Encrypted() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v MachineMount) *bool { return v.Encrypted }).(pulumi.BoolPtrOutput)
-}
-
-// Path for volume to be mounted on vm
+// Path for volume to be mounted on vm, ex: `/data`
 func (o MachineMountOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v MachineMount) string { return v.Path }).(pulumi.StringOutput)
 }
 
-func (o MachineMountOutput) SizeGb() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v MachineMount) *int { return v.SizeGb }).(pulumi.IntPtrOutput)
-}
-
-// Name or ID of volume
+// ID of volume
 func (o MachineMountOutput) Volume() pulumi.StringOutput {
 	return o.ApplyT(func(v MachineMount) string { return v.Volume }).(pulumi.StringOutput)
 }
@@ -129,11 +120,11 @@ func (o MachineMountArrayOutput) Index(i pulumi.IntInput) MachineMountOutput {
 }
 
 type MachineService struct {
-	// Port application listens on internally
+	// Port the machine listens on
 	InternalPort int `pulumi:"internalPort"`
-	// External ports and handlers
+	// How the port is exposed
 	Ports []MachineServicePort `pulumi:"ports"`
-	// network protocol
+	// `udp` or `tcp`
 	Protocol string `pulumi:"protocol"`
 }
 
@@ -149,11 +140,11 @@ type MachineServiceInput interface {
 }
 
 type MachineServiceArgs struct {
-	// Port application listens on internally
+	// Port the machine listens on
 	InternalPort pulumi.IntInput `pulumi:"internalPort"`
-	// External ports and handlers
+	// How the port is exposed
 	Ports MachineServicePortArrayInput `pulumi:"ports"`
-	// network protocol
+	// `udp` or `tcp`
 	Protocol pulumi.StringInput `pulumi:"protocol"`
 }
 
@@ -208,17 +199,17 @@ func (o MachineServiceOutput) ToMachineServiceOutputWithContext(ctx context.Cont
 	return o
 }
 
-// Port application listens on internally
+// Port the machine listens on
 func (o MachineServiceOutput) InternalPort() pulumi.IntOutput {
 	return o.ApplyT(func(v MachineService) int { return v.InternalPort }).(pulumi.IntOutput)
 }
 
-// External ports and handlers
+// How the port is exposed
 func (o MachineServiceOutput) Ports() MachineServicePortArrayOutput {
 	return o.ApplyT(func(v MachineService) []MachineServicePort { return v.Ports }).(MachineServicePortArrayOutput)
 }
 
-// network protocol
+// `udp` or `tcp`
 func (o MachineServiceOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v MachineService) string { return v.Protocol }).(pulumi.StringOutput)
 }
@@ -244,8 +235,12 @@ func (o MachineServiceArrayOutput) Index(i pulumi.IntInput) MachineServiceOutput
 }
 
 type MachineServicePort struct {
+	// Automatically redirect to HTTPS on "http" handler
+	ForceHttps *bool `pulumi:"forceHttps"`
+	// How the edge should process requests; ex empty, or `tls` to attach app's certificate
 	Handlers []string `pulumi:"handlers"`
-	Port     int      `pulumi:"port"`
+	// Mapped external port number
+	Port int `pulumi:"port"`
 }
 
 // MachineServicePortInput is an input type that accepts MachineServicePortArgs and MachineServicePortOutput values.
@@ -260,8 +255,12 @@ type MachineServicePortInput interface {
 }
 
 type MachineServicePortArgs struct {
+	// Automatically redirect to HTTPS on "http" handler
+	ForceHttps pulumi.BoolPtrInput `pulumi:"forceHttps"`
+	// How the edge should process requests; ex empty, or `tls` to attach app's certificate
 	Handlers pulumi.StringArrayInput `pulumi:"handlers"`
-	Port     pulumi.IntInput         `pulumi:"port"`
+	// Mapped external port number
+	Port pulumi.IntInput `pulumi:"port"`
 }
 
 func (MachineServicePortArgs) ElementType() reflect.Type {
@@ -315,10 +314,17 @@ func (o MachineServicePortOutput) ToMachineServicePortOutputWithContext(ctx cont
 	return o
 }
 
+// Automatically redirect to HTTPS on "http" handler
+func (o MachineServicePortOutput) ForceHttps() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v MachineServicePort) *bool { return v.ForceHttps }).(pulumi.BoolPtrOutput)
+}
+
+// How the edge should process requests; ex empty, or `tls` to attach app's certificate
 func (o MachineServicePortOutput) Handlers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v MachineServicePort) []string { return v.Handlers }).(pulumi.StringArrayOutput)
 }
 
+// Mapped external port number
 func (o MachineServicePortOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v MachineServicePort) int { return v.Port }).(pulumi.IntOutput)
 }

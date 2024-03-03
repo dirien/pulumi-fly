@@ -6,34 +6,42 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface MachineMount {
-    encrypted?: pulumi.Input<boolean>;
     /**
-     * Path for volume to be mounted on vm
+     * Path for volume to be mounted on vm, ex: `/data`
      */
     path: pulumi.Input<string>;
-    sizeGb?: pulumi.Input<number>;
     /**
-     * Name or ID of volume
+     * ID of volume
      */
     volume: pulumi.Input<string>;
 }
 
 export interface MachineService {
     /**
-     * Port application listens on internally
+     * Port the machine listens on
      */
     internalPort: pulumi.Input<number>;
     /**
-     * External ports and handlers
+     * How the port is exposed
      */
     ports: pulumi.Input<pulumi.Input<inputs.MachineServicePort>[]>;
     /**
-     * network protocol
+     * `udp` or `tcp`
      */
     protocol: pulumi.Input<string>;
 }
 
 export interface MachineServicePort {
+    /**
+     * Automatically redirect to HTTPS on "http" handler
+     */
+    forceHttps?: pulumi.Input<boolean>;
+    /**
+     * How the edge should process requests; ex empty, or `tls` to attach app's certificate
+     */
     handlers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Mapped external port number
+     */
     port: pulumi.Input<number>;
 }

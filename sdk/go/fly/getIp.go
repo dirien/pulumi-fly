@@ -7,12 +7,12 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-fly/sdk/go/fly/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Fly ip data source
 func LookupIp(ctx *pulumi.Context, args *LookupIpArgs, opts ...pulumi.InvokeOption) (*LookupIpResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupIpResult
 	err := ctx.Invoke("fly:index/getIp:getIp", args, &rv, opts...)
 	if err != nil {
@@ -23,23 +23,23 @@ func LookupIp(ctx *pulumi.Context, args *LookupIpArgs, opts ...pulumi.InvokeOpti
 
 // A collection of arguments for invoking getIp.
 type LookupIpArgs struct {
-	// IP address
-	Address string `pulumi:"address"`
-	// Name of app attached to
+	// The App this resource will be created in
 	App string `pulumi:"app"`
+	// A fly-generated ID
+	Id string `pulumi:"id"`
 }
 
 // A collection of values returned by getIp.
 type LookupIpResult struct {
-	// IP address
+	// Empty if using `sharedV4`
 	Address string `pulumi:"address"`
-	// Name of app attached to
+	// The App this resource will be created in
 	App string `pulumi:"app"`
-	// ID of address
+	// A fly-generated ID
 	Id string `pulumi:"id"`
-	// region
+	// Fly region, ex `ord`, `sin`, `mad`
 	Region string `pulumi:"region"`
-	// v4 or v6
+	// `v4`, `v6`, or `privateV6`
 	Type string `pulumi:"type"`
 }
 
@@ -58,10 +58,10 @@ func LookupIpOutput(ctx *pulumi.Context, args LookupIpOutputArgs, opts ...pulumi
 
 // A collection of arguments for invoking getIp.
 type LookupIpOutputArgs struct {
-	// IP address
-	Address pulumi.StringInput `pulumi:"address"`
-	// Name of app attached to
+	// The App this resource will be created in
 	App pulumi.StringInput `pulumi:"app"`
+	// A fly-generated ID
+	Id pulumi.StringInput `pulumi:"id"`
 }
 
 func (LookupIpOutputArgs) ElementType() reflect.Type {
@@ -83,27 +83,27 @@ func (o LookupIpResultOutput) ToLookupIpResultOutputWithContext(ctx context.Cont
 	return o
 }
 
-// IP address
+// Empty if using `sharedV4`
 func (o LookupIpResultOutput) Address() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupIpResult) string { return v.Address }).(pulumi.StringOutput)
 }
 
-// Name of app attached to
+// The App this resource will be created in
 func (o LookupIpResultOutput) App() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupIpResult) string { return v.App }).(pulumi.StringOutput)
 }
 
-// ID of address
+// A fly-generated ID
 func (o LookupIpResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupIpResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// region
+// Fly region, ex `ord`, `sin`, `mad`
 func (o LookupIpResultOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupIpResult) string { return v.Region }).(pulumi.StringOutput)
 }
 
-// v4 or v6
+// `v4`, `v6`, or `privateV6`
 func (o LookupIpResultOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupIpResult) string { return v.Type }).(pulumi.StringOutput)
 }

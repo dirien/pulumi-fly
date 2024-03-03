@@ -4,15 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Fly app resource
- *
- * ## Example Usage
- *
- * ## Import
- *
- * <break><break>```sh<break> $ pulumi import fly:index/app:App exampleApp <app_id> <break>```<break><break>
- */
 export class App extends pulumi.CustomResource {
     /**
      * Get an existing App resource's state with the given name, ID, and optional extra
@@ -41,22 +32,24 @@ export class App extends pulumi.CustomResource {
         return obj['__pulumiType'] === App.__pulumiType;
     }
 
+    public /*out*/ readonly appUrl!: pulumi.Output<string>;
     /**
-     * readonly appUrl
+     * Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
      */
-    public /*out*/ readonly appurl!: pulumi.Output<string>;
+    public readonly assignSharedIpAddress!: pulumi.Output<boolean>;
     /**
      * Name of application
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Optional org slug to operate upon
+     * The name of the organization to generate the app in, ex: `personal` (your initial org)
      */
     public readonly org!: pulumi.Output<string>;
+    public /*out*/ readonly orgId!: pulumi.Output<string>;
     /**
-     * readonly orgid
+     * A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
      */
-    public /*out*/ readonly orgid!: pulumi.Output<string>;
+    public /*out*/ readonly sharedIpAddress!: pulumi.Output<string>;
 
     /**
      * Create a App resource with the given unique name, arguments, and options.
@@ -71,16 +64,20 @@ export class App extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as AppState | undefined;
-            resourceInputs["appurl"] = state ? state.appurl : undefined;
+            resourceInputs["appUrl"] = state ? state.appUrl : undefined;
+            resourceInputs["assignSharedIpAddress"] = state ? state.assignSharedIpAddress : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["org"] = state ? state.org : undefined;
-            resourceInputs["orgid"] = state ? state.orgid : undefined;
+            resourceInputs["orgId"] = state ? state.orgId : undefined;
+            resourceInputs["sharedIpAddress"] = state ? state.sharedIpAddress : undefined;
         } else {
             const args = argsOrState as AppArgs | undefined;
+            resourceInputs["assignSharedIpAddress"] = args ? args.assignSharedIpAddress : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["org"] = args ? args.org : undefined;
-            resourceInputs["appurl"] = undefined /*out*/;
-            resourceInputs["orgid"] = undefined /*out*/;
+            resourceInputs["appUrl"] = undefined /*out*/;
+            resourceInputs["orgId"] = undefined /*out*/;
+            resourceInputs["sharedIpAddress"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(App.__pulumiType, name, resourceInputs, opts);
@@ -91,22 +88,24 @@ export class App extends pulumi.CustomResource {
  * Input properties used for looking up and filtering App resources.
  */
 export interface AppState {
+    appUrl?: pulumi.Input<string>;
     /**
-     * readonly appUrl
+     * Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
      */
-    appurl?: pulumi.Input<string>;
+    assignSharedIpAddress?: pulumi.Input<boolean>;
     /**
      * Name of application
      */
     name?: pulumi.Input<string>;
     /**
-     * Optional org slug to operate upon
+     * The name of the organization to generate the app in, ex: `personal` (your initial org)
      */
     org?: pulumi.Input<string>;
+    orgId?: pulumi.Input<string>;
     /**
-     * readonly orgid
+     * A shared ipv4 address, automatically attached in certain conditions or if explicitly requested
      */
-    orgid?: pulumi.Input<string>;
+    sharedIpAddress?: pulumi.Input<string>;
 }
 
 /**
@@ -114,11 +113,15 @@ export interface AppState {
  */
 export interface AppArgs {
     /**
+     * Assign a shared ipv4 address to the app. Note that depending on conditions an app may get a shared ip automatically.
+     */
+    assignSharedIpAddress?: pulumi.Input<boolean>;
+    /**
      * Name of application
      */
     name?: pulumi.Input<string>;
     /**
-     * Optional org slug to operate upon
+     * The name of the organization to generate the app in, ex: `personal` (your initial org)
      */
     org?: pulumi.Input<string>;
 }

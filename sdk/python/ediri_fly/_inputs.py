@@ -19,25 +19,19 @@ __all__ = [
 class MachineMountArgs:
     def __init__(__self__, *,
                  path: pulumi.Input[str],
-                 volume: pulumi.Input[str],
-                 encrypted: Optional[pulumi.Input[bool]] = None,
-                 size_gb: Optional[pulumi.Input[int]] = None):
+                 volume: pulumi.Input[str]):
         """
-        :param pulumi.Input[str] path: Path for volume to be mounted on vm
-        :param pulumi.Input[str] volume: Name or ID of volume
+        :param pulumi.Input[str] path: Path for volume to be mounted on vm, ex: `/data`
+        :param pulumi.Input[str] volume: ID of volume
         """
         pulumi.set(__self__, "path", path)
         pulumi.set(__self__, "volume", volume)
-        if encrypted is not None:
-            pulumi.set(__self__, "encrypted", encrypted)
-        if size_gb is not None:
-            pulumi.set(__self__, "size_gb", size_gb)
 
     @property
     @pulumi.getter
     def path(self) -> pulumi.Input[str]:
         """
-        Path for volume to be mounted on vm
+        Path for volume to be mounted on vm, ex: `/data`
         """
         return pulumi.get(self, "path")
 
@@ -49,31 +43,13 @@ class MachineMountArgs:
     @pulumi.getter
     def volume(self) -> pulumi.Input[str]:
         """
-        Name or ID of volume
+        ID of volume
         """
         return pulumi.get(self, "volume")
 
     @volume.setter
     def volume(self, value: pulumi.Input[str]):
         pulumi.set(self, "volume", value)
-
-    @property
-    @pulumi.getter
-    def encrypted(self) -> Optional[pulumi.Input[bool]]:
-        return pulumi.get(self, "encrypted")
-
-    @encrypted.setter
-    def encrypted(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "encrypted", value)
-
-    @property
-    @pulumi.getter(name="sizeGb")
-    def size_gb(self) -> Optional[pulumi.Input[int]]:
-        return pulumi.get(self, "size_gb")
-
-    @size_gb.setter
-    def size_gb(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "size_gb", value)
 
 
 @pulumi.input_type
@@ -83,9 +59,9 @@ class MachineServiceArgs:
                  ports: pulumi.Input[Sequence[pulumi.Input['MachineServicePortArgs']]],
                  protocol: pulumi.Input[str]):
         """
-        :param pulumi.Input[int] internal_port: Port application listens on internally
-        :param pulumi.Input[Sequence[pulumi.Input['MachineServicePortArgs']]] ports: External ports and handlers
-        :param pulumi.Input[str] protocol: network protocol
+        :param pulumi.Input[int] internal_port: Port the machine listens on
+        :param pulumi.Input[Sequence[pulumi.Input['MachineServicePortArgs']]] ports: How the port is exposed
+        :param pulumi.Input[str] protocol: `udp` or `tcp`
         """
         pulumi.set(__self__, "internal_port", internal_port)
         pulumi.set(__self__, "ports", ports)
@@ -95,7 +71,7 @@ class MachineServiceArgs:
     @pulumi.getter(name="internalPort")
     def internal_port(self) -> pulumi.Input[int]:
         """
-        Port application listens on internally
+        Port the machine listens on
         """
         return pulumi.get(self, "internal_port")
 
@@ -107,7 +83,7 @@ class MachineServiceArgs:
     @pulumi.getter
     def ports(self) -> pulumi.Input[Sequence[pulumi.Input['MachineServicePortArgs']]]:
         """
-        External ports and handlers
+        How the port is exposed
         """
         return pulumi.get(self, "ports")
 
@@ -119,7 +95,7 @@ class MachineServiceArgs:
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
         """
-        network protocol
+        `udp` or `tcp`
         """
         return pulumi.get(self, "protocol")
 
@@ -132,14 +108,25 @@ class MachineServiceArgs:
 class MachineServicePortArgs:
     def __init__(__self__, *,
                  port: pulumi.Input[int],
+                 force_https: Optional[pulumi.Input[bool]] = None,
                  handlers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[int] port: Mapped external port number
+        :param pulumi.Input[bool] force_https: Automatically redirect to HTTPS on "http" handler
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] handlers: How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        """
         pulumi.set(__self__, "port", port)
+        if force_https is not None:
+            pulumi.set(__self__, "force_https", force_https)
         if handlers is not None:
             pulumi.set(__self__, "handlers", handlers)
 
     @property
     @pulumi.getter
     def port(self) -> pulumi.Input[int]:
+        """
+        Mapped external port number
+        """
         return pulumi.get(self, "port")
 
     @port.setter
@@ -147,8 +134,23 @@ class MachineServicePortArgs:
         pulumi.set(self, "port", value)
 
     @property
+    @pulumi.getter(name="forceHttps")
+    def force_https(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Automatically redirect to HTTPS on "http" handler
+        """
+        return pulumi.get(self, "force_https")
+
+    @force_https.setter
+    def force_https(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_https", value)
+
+    @property
     @pulumi.getter
     def handlers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        """
         return pulumi.get(self, "handlers")
 
     @handlers.setter

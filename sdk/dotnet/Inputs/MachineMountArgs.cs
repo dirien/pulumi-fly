@@ -13,20 +13,14 @@ namespace ediri.Fly.Inputs
 
     public sealed class MachineMountArgs : global::Pulumi.ResourceArgs
     {
-        [Input("encrypted")]
-        public Input<bool>? Encrypted { get; set; }
-
         /// <summary>
-        /// Path for volume to be mounted on vm
+        /// Path for volume to be mounted on vm, ex: `/data`
         /// </summary>
         [Input("path", required: true)]
         public Input<string> Path { get; set; } = null!;
 
-        [Input("sizeGb")]
-        public Input<int>? SizeGb { get; set; }
-
         /// <summary>
-        /// Name or ID of volume
+        /// ID of volume
         /// </summary>
         [Input("volume", required: true)]
         public Input<string> Volume { get; set; } = null!;

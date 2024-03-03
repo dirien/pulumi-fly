@@ -42,7 +42,7 @@ class GetIpResult:
     @pulumi.getter
     def address(self) -> str:
         """
-        IP address
+        Empty if using `shared_v4`
         """
         return pulumi.get(self, "address")
 
@@ -50,7 +50,7 @@ class GetIpResult:
     @pulumi.getter
     def app(self) -> str:
         """
-        Name of app attached to
+        The App this resource will be created in
         """
         return pulumi.get(self, "app")
 
@@ -58,7 +58,7 @@ class GetIpResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        ID of address
+        A fly-generated ID
         """
         return pulumi.get(self, "id")
 
@@ -66,7 +66,7 @@ class GetIpResult:
     @pulumi.getter
     def region(self) -> str:
         """
-        region
+        Fly region, ex `ord`, `sin`, `mad`
         """
         return pulumi.get(self, "region")
 
@@ -74,7 +74,7 @@ class GetIpResult:
     @pulumi.getter
     def type(self) -> str:
         """
-        v4 or v6
+        `v4`, `v6`, or `private_v6`
         """
         return pulumi.get(self, "type")
 
@@ -92,19 +92,18 @@ class AwaitableGetIpResult(GetIpResult):
             type=self.type)
 
 
-def get_ip(address: Optional[str] = None,
-           app: Optional[str] = None,
+def get_ip(app: Optional[str] = None,
+           id: Optional[str] = None,
            opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetIpResult:
     """
-    Fly ip data source
+    Use this data source to access information about an existing resource.
 
-
-    :param str address: IP address
-    :param str app: Name of app attached to
+    :param str app: The App this resource will be created in
+    :param str id: A fly-generated ID
     """
     __args__ = dict()
-    __args__['address'] = address
     __args__['app'] = app
+    __args__['id'] = id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('fly:index/getIp:getIp', __args__, opts=opts, typ=GetIpResult).value
 
@@ -117,14 +116,13 @@ def get_ip(address: Optional[str] = None,
 
 
 @_utilities.lift_output_func(get_ip)
-def get_ip_output(address: Optional[pulumi.Input[str]] = None,
-                  app: Optional[pulumi.Input[str]] = None,
+def get_ip_output(app: Optional[pulumi.Input[str]] = None,
+                  id: Optional[pulumi.Input[str]] = None,
                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetIpResult]:
     """
-    Fly ip data source
+    Use this data source to access information about an existing resource.
 
-
-    :param str address: IP address
-    :param str app: Name of app attached to
+    :param str app: The App this resource will be created in
+    :param str id: A fly-generated ID
     """
     ...

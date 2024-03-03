@@ -6,12 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Fly certificate resource
- *
- * ## Example Usage
- *
- * ## Import
- *
- * <break><break>```sh<break> $ pulumi import fly:index/cert:Cert exampleCert <app_id>,<hostname> <break>```<break><break>
  */
 export class Cert extends pulumi.CustomResource {
     /**
@@ -42,28 +36,13 @@ export class Cert extends pulumi.CustomResource {
     }
 
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     public readonly app!: pulumi.Output<string>;
-    /**
-     * check
-     */
     public /*out*/ readonly check!: pulumi.Output<boolean>;
-    /**
-     * DnsValidationHostname
-     */
-    public /*out*/ readonly dnsvalidationhostname!: pulumi.Output<string>;
-    /**
-     * DnsValidationHostname
-     */
-    public /*out*/ readonly dnsvalidationinstructions!: pulumi.Output<string>;
-    /**
-     * DnsValidationTarget
-     */
-    public /*out*/ readonly dnsvalidationtarget!: pulumi.Output<string>;
-    /**
-     * hostname
-     */
+    public /*out*/ readonly dnsValidationHostname!: pulumi.Output<string>;
+    public /*out*/ readonly dnsValidationInstructions!: pulumi.Output<string>;
+    public /*out*/ readonly dnsValidationTarget!: pulumi.Output<string>;
     public readonly hostname!: pulumi.Output<string>;
 
     /**
@@ -81,9 +60,9 @@ export class Cert extends pulumi.CustomResource {
             const state = argsOrState as CertState | undefined;
             resourceInputs["app"] = state ? state.app : undefined;
             resourceInputs["check"] = state ? state.check : undefined;
-            resourceInputs["dnsvalidationhostname"] = state ? state.dnsvalidationhostname : undefined;
-            resourceInputs["dnsvalidationinstructions"] = state ? state.dnsvalidationinstructions : undefined;
-            resourceInputs["dnsvalidationtarget"] = state ? state.dnsvalidationtarget : undefined;
+            resourceInputs["dnsValidationHostname"] = state ? state.dnsValidationHostname : undefined;
+            resourceInputs["dnsValidationInstructions"] = state ? state.dnsValidationInstructions : undefined;
+            resourceInputs["dnsValidationTarget"] = state ? state.dnsValidationTarget : undefined;
             resourceInputs["hostname"] = state ? state.hostname : undefined;
         } else {
             const args = argsOrState as CertArgs | undefined;
@@ -96,9 +75,9 @@ export class Cert extends pulumi.CustomResource {
             resourceInputs["app"] = args ? args.app : undefined;
             resourceInputs["hostname"] = args ? args.hostname : undefined;
             resourceInputs["check"] = undefined /*out*/;
-            resourceInputs["dnsvalidationhostname"] = undefined /*out*/;
-            resourceInputs["dnsvalidationinstructions"] = undefined /*out*/;
-            resourceInputs["dnsvalidationtarget"] = undefined /*out*/;
+            resourceInputs["dnsValidationHostname"] = undefined /*out*/;
+            resourceInputs["dnsValidationInstructions"] = undefined /*out*/;
+            resourceInputs["dnsValidationTarget"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Cert.__pulumiType, name, resourceInputs, opts);
@@ -110,28 +89,13 @@ export class Cert extends pulumi.CustomResource {
  */
 export interface CertState {
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     app?: pulumi.Input<string>;
-    /**
-     * check
-     */
     check?: pulumi.Input<boolean>;
-    /**
-     * DnsValidationHostname
-     */
-    dnsvalidationhostname?: pulumi.Input<string>;
-    /**
-     * DnsValidationHostname
-     */
-    dnsvalidationinstructions?: pulumi.Input<string>;
-    /**
-     * DnsValidationTarget
-     */
-    dnsvalidationtarget?: pulumi.Input<string>;
-    /**
-     * hostname
-     */
+    dnsValidationHostname?: pulumi.Input<string>;
+    dnsValidationInstructions?: pulumi.Input<string>;
+    dnsValidationTarget?: pulumi.Input<string>;
     hostname?: pulumi.Input<string>;
 }
 
@@ -140,11 +104,8 @@ export interface CertState {
  */
 export interface CertArgs {
     /**
-     * Name of app to attach to
+     * The App this resource will be created in
      */
     app: pulumi.Input<string>;
-    /**
-     * hostname
-     */
     hostname: pulumi.Input<string>;
 }
