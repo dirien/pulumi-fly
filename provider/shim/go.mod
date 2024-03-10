@@ -6,7 +6,7 @@ toolchain go1.22.0
 
 require (
 	github.com/andrewbaxter/terraform-provider-fly v0.1.11
-	github.com/hashicorp/terraform-plugin-framework v1.6.0
+	github.com/hashicorp/terraform-plugin-framework v1.6.1
 )
 
 require (
