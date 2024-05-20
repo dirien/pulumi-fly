@@ -25,7 +25,7 @@
             "rootNamespace": "ediri"
         },
         "go": {
-            "importBasePath": "github.com/pulumi/pulumi-fly/sdk/go/fly",
+            "importBasePath": "github.com/dirien/pulumi-fly/sdk/go/fly",
             "generateResourceContainerTypes": true,
             "generateExtraInputTypes": true
         },
