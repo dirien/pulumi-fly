@@ -1,4 +1,4 @@
-module github.com/dirien/pulumi-fly/provider/sdk
+module github.com/dirien/pulumi-fly/sdk
 
 go 1.20
 

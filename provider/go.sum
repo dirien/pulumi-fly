@@ -349,8 +349,8 @@ github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d/go.mod h1:rBZYJk5
 github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137/go.mod h1:OMCwj8VM1Kc9e19TLln2VL61YJF0x1XFtfdL4JdbSyE=
 github.com/alexflint/go-filemutex v0.0.0-20171022225611-72bdc8eae2ae/go.mod h1:CgnQgUtFrFz9mxFNtED3jI5tLDjKlOM+oUF/sTk6ps0=
 github.com/alexflint/go-filemutex v1.1.0/go.mod h1:7P4iRhttt/nUvUOrYIhcpMzv2G6CY9UnI16Z+UJqRyk=
-github.com/andrewbaxter/terraform-provider-fly v0.1.11 h1:rV8Ma3BXcIshYCL9QOorYrqrzvzZIbGnad581nFppPw=
-github.com/andrewbaxter/terraform-provider-fly v0.1.11/go.mod h1:6/tdP0VTpdei6PDjzz9pJqm+hmL8MuHOZBqxJyAlXy0=
+github.com/andrewbaxter/terraform-provider-fly v0.1.13 h1:yAHuaqOstmsILfeUTwTLWJO3tXew5RqO11zautI/keI=
+github.com/andrewbaxter/terraform-provider-fly v0.1.13/go.mod h1:6/tdP0VTpdei6PDjzz9pJqm+hmL8MuHOZBqxJyAlXy0=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883 h1:bvNMNQO63//z+xNgfBlViaCIJKLlCJ6/fmUseuG0wVQ=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.6 h1:Yf9fFpf49Zrxb9NlQaluyE92/+X7UVHlhMNJN2sxfOI=

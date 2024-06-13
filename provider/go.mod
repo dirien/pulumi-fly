@@ -5,7 +5,6 @@ go 1.21
 toolchain go1.22.0
 
 replace (
-	github.com/andrewbaxter/terraform-provider-fly => github.com/andrewbaxter/terraform-provider-fly v0.1.11
 	github.com/andrewbaxter/terraform-provider-fly/shim => ./shim
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240229143312-4f60ee4e2975
 )

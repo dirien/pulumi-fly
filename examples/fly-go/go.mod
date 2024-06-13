@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/dirien/pulumi-fly v0.0.0
-	github.com/pulumi/pulumi/sdk/v3 v3.114.0
+	github.com/pulumi/pulumi/sdk/v3 v3.116.1
 )
 
 replace github.com/dirien/pulumi-fly => ../../sdk
