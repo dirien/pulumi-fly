@@ -453,10 +453,10 @@ class Machine(pulumi.CustomResource):
                  execs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  image: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
-                 mounts: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MachineMountArgs']]]]] = None,
+                 mounts: Optional[pulumi.Input[Sequence[pulumi.Input[Union['MachineMountArgs', 'MachineMountArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
-                 services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MachineServiceArgs']]]]] = None,
+                 services: Optional[pulumi.Input[Sequence[pulumi.Input[Union['MachineServiceArgs', 'MachineServiceArgsDict']]]]] = None,
                  __props__=None):
         """
         Create a Machine resource with the given unique name, props, and options.
@@ -504,10 +504,10 @@ class Machine(pulumi.CustomResource):
                  execs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  image: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
-                 mounts: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MachineMountArgs']]]]] = None,
+                 mounts: Optional[pulumi.Input[Sequence[pulumi.Input[Union['MachineMountArgs', 'MachineMountArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
-                 services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MachineServiceArgs']]]]] = None,
+                 services: Optional[pulumi.Input[Sequence[pulumi.Input[Union['MachineServiceArgs', 'MachineServiceArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -558,11 +558,11 @@ class Machine(pulumi.CustomResource):
             execs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             image: Optional[pulumi.Input[str]] = None,
             memory: Optional[pulumi.Input[int]] = None,
-            mounts: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MachineMountArgs']]]]] = None,
+            mounts: Optional[pulumi.Input[Sequence[pulumi.Input[Union['MachineMountArgs', 'MachineMountArgsDict']]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             private_ip: Optional[pulumi.Input[str]] = None,
             region: Optional[pulumi.Input[str]] = None,
-            services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MachineServiceArgs']]]]] = None) -> 'Machine':
+            services: Optional[pulumi.Input[Sequence[pulumi.Input[Union['MachineServiceArgs', 'MachineServiceArgsDict']]]]] = None) -> 'Machine':
         """
         Get an existing Machine resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
