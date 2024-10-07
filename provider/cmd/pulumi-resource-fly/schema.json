@@ -109,6 +109,10 @@
         },
         "fly:index/MachineServicePort:MachineServicePort": {
             "properties": {
+                "endPort": {
+                    "type": "integer",
+                    "description": "For a port range, the last port to listen on\n"
+                },
                 "forceHttps": {
                     "type": "boolean",
                     "description": "Automatically redirect to HTTPS on \"http\" handler\n"
@@ -122,18 +126,18 @@
                 },
                 "port": {
                     "type": "integer",
-                    "description": "Mapped external port number\n"
+                    "description": "Mapped external port number, either `port` or `start_port` and `end_port` must be set.\n"
+                },
+                "startPort": {
+                    "type": "integer",
+                    "description": "For a port range, the first port to listen on.\n"
                 }
             },
             "type": "object",
-            "required": [
-                "port"
-            ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "forceHttps",
-                        "port"
+                        "forceHttps"
                     ]
                 }
             }

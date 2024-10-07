@@ -1,6 +1,7 @@
 module github.com/dirien/pulumi-fly/provider
 
-go 1.21.12
+go 1.22.0
+
 toolchain go1.22.5
 
 replace (
@@ -41,7 +42,7 @@ require (
 	github.com/PuerkitoBio/rehttp v1.3.0 // indirect
 	github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
-	github.com/andrewbaxter/terraform-provider-fly v0.1.16 // indirect
+	github.com/andrewbaxter/terraform-provider-fly v0.1.17 // indirect
 	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/apparentlymart/go-cidr v1.1.0 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect

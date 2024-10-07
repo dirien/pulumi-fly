@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 export function getIp(args: GetIpArgs, opts?: pulumi.InvokeOptions): Promise<GetIpResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("fly:index/getIp:getIp", {
         "app": args.app,
@@ -53,7 +52,11 @@ export interface GetIpResult {
     readonly type: string;
 }
 export function getIpOutput(args: GetIpOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIpResult> {
-    return pulumi.output(args).apply((a: any) => getIp(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("fly:index/getIp:getIp", {
+        "app": args.app,
+        "id": args.id,
+    }, opts);
 }
 
 /**

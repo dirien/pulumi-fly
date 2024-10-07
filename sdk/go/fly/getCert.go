@@ -43,14 +43,20 @@ type LookupCertResult struct {
 
 func LookupCertOutput(ctx *pulumi.Context, args LookupCertOutputArgs, opts ...pulumi.InvokeOption) LookupCertResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupCertResult, error) {
+		ApplyT(func(v interface{}) (LookupCertResultOutput, error) {
 			args := v.(LookupCertArgs)
-			r, err := LookupCert(ctx, &args, opts...)
-			var s LookupCertResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv LookupCertResult
+			secret, err := ctx.InvokePackageRaw("fly:index/getCert:getCert", args, &rv, "", opts...)
+			if err != nil {
+				return LookupCertResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(LookupCertResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(LookupCertResultOutput), nil
+			}
+			return output, nil
 		}).(LookupCertResultOutput)
 }
 

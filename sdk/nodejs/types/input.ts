@@ -33,6 +33,10 @@ export interface MachineService {
 
 export interface MachineServicePort {
     /**
+     * For a port range, the last port to listen on
+     */
+    endPort?: pulumi.Input<number>;
+    /**
      * Automatically redirect to HTTPS on "http" handler
      */
     forceHttps?: pulumi.Input<boolean>;
@@ -41,7 +45,11 @@ export interface MachineServicePort {
      */
     handlers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Mapped external port number
+     * Mapped external port number, either `port` or `startPort` and `endPort` must be set.
      */
-    port: pulumi.Input<number>;
+    port?: pulumi.Input<number>;
+    /**
+     * For a port range, the first port to listen on.
+     */
+    startPort?: pulumi.Input<number>;
 }

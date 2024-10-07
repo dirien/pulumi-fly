@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 export function getCert(args: GetCertArgs, opts?: pulumi.InvokeOptions): Promise<GetCertResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("fly:index/getCert:getCert", {
         "app": args.app,
@@ -43,7 +42,11 @@ export interface GetCertResult {
     readonly id: string;
 }
 export function getCertOutput(args: GetCertOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertResult> {
-    return pulumi.output(args).apply((a: any) => getCert(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("fly:index/getCert:getCert", {
+        "app": args.app,
+        "hostname": args.hostname,
+    }, opts);
 }
 
 /**

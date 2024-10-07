@@ -1,10 +1,11 @@
 module github.com/fly-apps/terraform-provider-fly/shim
 
-go 1.21
+go 1.22.0
+
 toolchain go1.22.5
 
 require (
-	github.com/andrewbaxter/terraform-provider-fly v0.1.16
+	github.com/andrewbaxter/terraform-provider-fly v0.1.17
 	github.com/hashicorp/terraform-plugin-framework v1.12.0
 )
 
