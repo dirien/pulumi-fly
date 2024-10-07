@@ -236,8 +236,8 @@ github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da h1:KjTM2ks9d14ZYCvmH
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da/go.mod h1:eHEWzANqSiWQsof+nXEI9bUVUyV6F53Fp89EuCh2EAA=
 github.com/agext/levenshtein v1.2.3 h1:YB2fHEn0UJagG8T1rrWknE3ZQzWM06O8AMAatNn7lmo=
 github.com/agext/levenshtein v1.2.3/go.mod h1:JEDfjyjHDjOF/1e4FlBE/PkbqA9OfWu2ki2W0IB5558=
-github.com/andrewbaxter/terraform-provider-fly v0.1.16 h1:hv4GDA/dchvg9KTbZpLzCXtrDvKYBd/iuywB5rNTc20=
-github.com/andrewbaxter/terraform-provider-fly v0.1.16/go.mod h1:6/tdP0VTpdei6PDjzz9pJqm+hmL8MuHOZBqxJyAlXy0=
+github.com/andrewbaxter/terraform-provider-fly v0.1.17 h1:rRVznNpeFjTd+zpt7VRY0hIArJNe5o88VpXkD3Rf0r0=
+github.com/andrewbaxter/terraform-provider-fly v0.1.17/go.mod h1:6/tdP0VTpdei6PDjzz9pJqm+hmL8MuHOZBqxJyAlXy0=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883 h1:bvNMNQO63//z+xNgfBlViaCIJKLlCJ6/fmUseuG0wVQ=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.6 h1:Yf9fFpf49Zrxb9NlQaluyE92/+X7UVHlhMNJN2sxfOI=
