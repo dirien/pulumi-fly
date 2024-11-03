@@ -6,6 +6,6 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "3.74.0",
-        "@ediri/pulumi-fly": "0.0.23"
+        "@ediri/pulumi-fly": "0.1.13"
     }
 }

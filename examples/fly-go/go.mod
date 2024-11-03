@@ -2,12 +2,9 @@ module fly-go
 
 go 1.20
 
-require (
-	github.com/dirien/pulumi-fly v0.0.0
-	github.com/pulumi/pulumi/sdk/v3 v3.116.1
-)
+require github.com/pulumi/pulumi/sdk/v3 v3.116.1
 
-replace github.com/dirien/pulumi-fly => ../../sdk
+//replace github.com/dirien/pulumi-fly => ../../sdk
 
 require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
@@ -19,6 +16,7 @@ require (
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/cloudflare/circl v1.3.7 // indirect
+	github.com/dirien/pulumi-fly v0.1.13 // indirect
 	github.com/djherbis/times v1.5.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect

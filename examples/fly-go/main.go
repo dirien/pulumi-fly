@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/dirien/pulumi-fly/go/fly"
+	"github.com/dirien/pulumi-fly/sdk/go/fly"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
