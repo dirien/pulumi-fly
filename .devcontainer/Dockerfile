@@ -8,6 +8,7 @@ ENV PATH="//root/pulumictl/:${PATH}"
 
 RUN go install github.com/pulumi/upgrade-provider@main
 
+RUN sudo apt update
 RUN apt install sudo -y
 
 RUN type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
