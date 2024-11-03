@@ -33,6 +33,10 @@ export interface MachineService {
 
 export interface MachineServicePort {
     /**
+     * For a port range, the last port to listen on
+     */
+    endPort?: number;
+    /**
      * Automatically redirect to HTTPS on "http" handler
      */
     forceHttps: boolean;
@@ -41,8 +45,12 @@ export interface MachineServicePort {
      */
     handlers?: string[];
     /**
-     * Mapped external port number
+     * Mapped external port number, either `port` or `startPort` and `endPort` must be set.
      */
-    port: number;
+    port?: number;
+    /**
+     * For a port range, the first port to listen on.
+     */
+    startPort?: number;
 }
 

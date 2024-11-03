@@ -235,12 +235,16 @@ func (o MachineServiceArrayOutput) Index(i pulumi.IntInput) MachineServiceOutput
 }
 
 type MachineServicePort struct {
+	// For a port range, the last port to listen on
+	EndPort *int `pulumi:"endPort"`
 	// Automatically redirect to HTTPS on "http" handler
 	ForceHttps *bool `pulumi:"forceHttps"`
 	// How the edge should process requests; ex empty, or `tls` to attach app's certificate
 	Handlers []string `pulumi:"handlers"`
-	// Mapped external port number
-	Port int `pulumi:"port"`
+	// Mapped external port number, either `port` or `startPort` and `endPort` must be set.
+	Port *int `pulumi:"port"`
+	// For a port range, the first port to listen on.
+	StartPort *int `pulumi:"startPort"`
 }
 
 // MachineServicePortInput is an input type that accepts MachineServicePortArgs and MachineServicePortOutput values.
@@ -255,12 +259,16 @@ type MachineServicePortInput interface {
 }
 
 type MachineServicePortArgs struct {
+	// For a port range, the last port to listen on
+	EndPort pulumi.IntPtrInput `pulumi:"endPort"`
 	// Automatically redirect to HTTPS on "http" handler
 	ForceHttps pulumi.BoolPtrInput `pulumi:"forceHttps"`
 	// How the edge should process requests; ex empty, or `tls` to attach app's certificate
 	Handlers pulumi.StringArrayInput `pulumi:"handlers"`
-	// Mapped external port number
-	Port pulumi.IntInput `pulumi:"port"`
+	// Mapped external port number, either `port` or `startPort` and `endPort` must be set.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// For a port range, the first port to listen on.
+	StartPort pulumi.IntPtrInput `pulumi:"startPort"`
 }
 
 func (MachineServicePortArgs) ElementType() reflect.Type {
@@ -314,6 +322,11 @@ func (o MachineServicePortOutput) ToMachineServicePortOutputWithContext(ctx cont
 	return o
 }
 
+// For a port range, the last port to listen on
+func (o MachineServicePortOutput) EndPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MachineServicePort) *int { return v.EndPort }).(pulumi.IntPtrOutput)
+}
+
 // Automatically redirect to HTTPS on "http" handler
 func (o MachineServicePortOutput) ForceHttps() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v MachineServicePort) *bool { return v.ForceHttps }).(pulumi.BoolPtrOutput)
@@ -324,9 +337,14 @@ func (o MachineServicePortOutput) Handlers() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v MachineServicePort) []string { return v.Handlers }).(pulumi.StringArrayOutput)
 }
 
-// Mapped external port number
-func (o MachineServicePortOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v MachineServicePort) int { return v.Port }).(pulumi.IntOutput)
+// Mapped external port number, either `port` or `startPort` and `endPort` must be set.
+func (o MachineServicePortOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MachineServicePort) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// For a port range, the first port to listen on.
+func (o MachineServicePortOutput) StartPort() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MachineServicePort) *int { return v.StartPort }).(pulumi.IntPtrOutput)
 }
 
 type MachineServicePortArrayOutput struct{ *pulumi.OutputState }

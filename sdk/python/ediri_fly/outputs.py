@@ -107,8 +107,12 @@ class MachineServicePort(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "forceHttps":
+        if key == "endPort":
+            suggest = "end_port"
+        elif key == "forceHttps":
             suggest = "force_https"
+        elif key == "startPort":
+            suggest = "start_port"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in MachineServicePort. Access the value via the '{suggest}' property getter instead.")
@@ -122,27 +126,36 @@ class MachineServicePort(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 port: int,
+                 end_port: Optional[int] = None,
                  force_https: Optional[bool] = None,
-                 handlers: Optional[Sequence[str]] = None):
+                 handlers: Optional[Sequence[str]] = None,
+                 port: Optional[int] = None,
+                 start_port: Optional[int] = None):
         """
-        :param int port: Mapped external port number
+        :param int end_port: For a port range, the last port to listen on
         :param bool force_https: Automatically redirect to HTTPS on "http" handler
         :param Sequence[str] handlers: How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        :param int port: Mapped external port number, either `port` or `start_port` and `end_port` must be set.
+        :param int start_port: For a port range, the first port to listen on.
         """
-        pulumi.set(__self__, "port", port)
+        if end_port is not None:
+            pulumi.set(__self__, "end_port", end_port)
         if force_https is not None:
             pulumi.set(__self__, "force_https", force_https)
         if handlers is not None:
             pulumi.set(__self__, "handlers", handlers)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if start_port is not None:
+            pulumi.set(__self__, "start_port", start_port)
 
     @property
-    @pulumi.getter
-    def port(self) -> int:
+    @pulumi.getter(name="endPort")
+    def end_port(self) -> Optional[int]:
         """
-        Mapped external port number
+        For a port range, the last port to listen on
         """
-        return pulumi.get(self, "port")
+        return pulumi.get(self, "end_port")
 
     @property
     @pulumi.getter(name="forceHttps")
@@ -159,5 +172,21 @@ class MachineServicePort(dict):
         How the edge should process requests; ex empty, or `tls` to attach app's certificate
         """
         return pulumi.get(self, "handlers")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        """
+        Mapped external port number, either `port` or `start_port` and `end_port` must be set.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="startPort")
+    def start_port(self) -> Optional[int]:
+        """
+        For a port range, the first port to listen on.
+        """
+        return pulumi.get(self, "start_port")
 
 

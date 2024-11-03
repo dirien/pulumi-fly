@@ -15,6 +15,10 @@ namespace ediri.Fly.Outputs
     public sealed class MachineServicePort
     {
         /// <summary>
+        /// For a port range, the last port to listen on
+        /// </summary>
+        public readonly int? EndPort;
+        /// <summary>
         /// Automatically redirect to HTTPS on "http" handler
         /// </summary>
         public readonly bool? ForceHttps;
@@ -23,21 +27,31 @@ namespace ediri.Fly.Outputs
         /// </summary>
         public readonly ImmutableArray<string> Handlers;
         /// <summary>
-        /// Mapped external port number
+        /// Mapped external port number, either `port` or `start_port` and `end_port` must be set.
         /// </summary>
-        public readonly int Port;
+        public readonly int? Port;
+        /// <summary>
+        /// For a port range, the first port to listen on.
+        /// </summary>
+        public readonly int? StartPort;
 
         [OutputConstructor]
         private MachineServicePort(
+            int? endPort,
+
             bool? forceHttps,
 
             ImmutableArray<string> handlers,
 
-            int port)
+            int? port,
+
+            int? startPort)
         {
+            EndPort = endPort;
             ForceHttps = forceHttps;
             Handlers = handlers;
             Port = port;
+            StartPort = startPort;
         }
     }
 }

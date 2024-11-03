@@ -14,6 +14,12 @@ namespace ediri.Fly.Inputs
     public sealed class MachineServicePortGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// For a port range, the last port to listen on
+        /// </summary>
+        [Input("endPort")]
+        public Input<int>? EndPort { get; set; }
+
+        /// <summary>
         /// Automatically redirect to HTTPS on "http" handler
         /// </summary>
         [Input("forceHttps")]
@@ -32,10 +38,16 @@ namespace ediri.Fly.Inputs
         }
 
         /// <summary>
-        /// Mapped external port number
+        /// Mapped external port number, either `port` or `start_port` and `end_port` must be set.
         /// </summary>
-        [Input("port", required: true)]
-        public Input<int> Port { get; set; } = null!;
+        [Input("port")]
+        public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// For a port range, the first port to listen on.
+        /// </summary>
+        [Input("startPort")]
+        public Input<int>? StartPort { get; set; }
 
         public MachineServicePortGetArgs()
         {
