@@ -4,16 +4,39 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'MachineMountArgs',
+    'MachineMountArgsDict',
     'MachineServiceArgs',
+    'MachineServiceArgsDict',
     'MachineServicePortArgs',
+    'MachineServicePortArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class MachineMountArgsDict(TypedDict):
+        path: pulumi.Input[str]
+        """
+        Path for volume to be mounted on vm, ex: `/data`
+        """
+        volume: pulumi.Input[str]
+        """
+        ID of volume
+        """
+elif False:
+    MachineMountArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class MachineMountArgs:
@@ -51,6 +74,23 @@ class MachineMountArgs:
     def volume(self, value: pulumi.Input[str]):
         pulumi.set(self, "volume", value)
 
+
+if not MYPY:
+    class MachineServiceArgsDict(TypedDict):
+        internal_port: pulumi.Input[int]
+        """
+        Port the machine listens on
+        """
+        ports: pulumi.Input[Sequence[pulumi.Input['MachineServicePortArgsDict']]]
+        """
+        How the port is exposed
+        """
+        protocol: pulumi.Input[str]
+        """
+        `udp` or `tcp`
+        """
+elif False:
+    MachineServiceArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class MachineServiceArgs:
@@ -103,6 +143,31 @@ class MachineServiceArgs:
     def protocol(self, value: pulumi.Input[str]):
         pulumi.set(self, "protocol", value)
 
+
+if not MYPY:
+    class MachineServicePortArgsDict(TypedDict):
+        end_port: NotRequired[pulumi.Input[int]]
+        """
+        For a port range, the last port to listen on
+        """
+        force_https: NotRequired[pulumi.Input[bool]]
+        """
+        Automatically redirect to HTTPS on "http" handler
+        """
+        handlers: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        """
+        port: NotRequired[pulumi.Input[int]]
+        """
+        Mapped external port number, either `port` or `start_port` and `end_port` must be set.
+        """
+        start_port: NotRequired[pulumi.Input[int]]
+        """
+        For a port range, the first port to listen on.
+        """
+elif False:
+    MachineServicePortArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class MachineServicePortArgs:

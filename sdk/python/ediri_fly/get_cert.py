@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
@@ -123,9 +128,6 @@ def get_cert(app: Optional[str] = None,
         dns_validation_target=pulumi.get(__ret__, 'dns_validation_target'),
         hostname=pulumi.get(__ret__, 'hostname'),
         id=pulumi.get(__ret__, 'id'))
-
-
-@_utilities.lift_output_func(get_cert)
 def get_cert_output(app: Optional[pulumi.Input[str]] = None,
                     hostname: Optional[pulumi.Input[str]] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertResult]:
@@ -134,4 +136,16 @@ def get_cert_output(app: Optional[pulumi.Input[str]] = None,
 
     :param str app: The App this resource will be created in
     """
-    ...
+    __args__ = dict()
+    __args__['app'] = app
+    __args__['hostname'] = hostname
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('fly:index/getCert:getCert', __args__, opts=opts, typ=GetCertResult)
+    return __ret__.apply(lambda __response__: GetCertResult(
+        app=pulumi.get(__response__, 'app'),
+        check=pulumi.get(__response__, 'check'),
+        dns_validation_hostname=pulumi.get(__response__, 'dns_validation_hostname'),
+        dns_validation_instructions=pulumi.get(__response__, 'dns_validation_instructions'),
+        dns_validation_target=pulumi.get(__response__, 'dns_validation_target'),
+        hostname=pulumi.get(__response__, 'hostname'),
+        id=pulumi.get(__response__, 'id')))

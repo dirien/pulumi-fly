@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
@@ -154,9 +159,6 @@ def get_app(name: Optional[str] = None,
         name=pulumi.get(__ret__, 'name'),
         sharedipaddress=pulumi.get(__ret__, 'sharedipaddress'),
         status=pulumi.get(__ret__, 'status'))
-
-
-@_utilities.lift_output_func(get_app)
 def get_app_output(name: Optional[pulumi.Input[str]] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetAppResult]:
     """
@@ -164,4 +166,18 @@ def get_app_output(name: Optional[pulumi.Input[str]] = None,
 
     :param str name: Name of app
     """
-    ...
+    __args__ = dict()
+    __args__['name'] = name
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('fly:index/getApp:getApp', __args__, opts=opts, typ=GetAppResult)
+    return __ret__.apply(lambda __response__: GetAppResult(
+        appurl=pulumi.get(__response__, 'appurl'),
+        currentrelease=pulumi.get(__response__, 'currentrelease'),
+        deployed=pulumi.get(__response__, 'deployed'),
+        healthchecks=pulumi.get(__response__, 'healthchecks'),
+        hostname=pulumi.get(__response__, 'hostname'),
+        id=pulumi.get(__response__, 'id'),
+        ipaddresses=pulumi.get(__response__, 'ipaddresses'),
+        name=pulumi.get(__response__, 'name'),
+        sharedipaddress=pulumi.get(__response__, 'sharedipaddress'),
+        status=pulumi.get(__response__, 'status')))
