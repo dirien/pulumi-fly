@@ -51,7 +51,7 @@ export interface GetIpResult {
      */
     readonly type: string;
 }
-export function getIpOutput(args: GetIpOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIpResult> {
+export function getIpOutput(args: GetIpOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIpResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("fly:index/getIp:getIp", {
         "app": args.app,

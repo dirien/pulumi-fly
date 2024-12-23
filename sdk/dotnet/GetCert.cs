@@ -17,6 +17,9 @@ namespace ediri.Fly
 
         public static Output<GetCertResult> Invoke(GetCertInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCertResult>("fly:index/getCert:getCert", args ?? new GetCertInvokeArgs(), options.WithDefaults());
+
+        public static Output<GetCertResult> Invoke(GetCertInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetCertResult>("fly:index/getCert:getCert", args ?? new GetCertInvokeArgs(), options.WithDefaults());
     }
 
 

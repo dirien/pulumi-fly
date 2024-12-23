@@ -120,7 +120,7 @@ def get_ip(app: Optional[str] = None,
         type=pulumi.get(__ret__, 'type'))
 def get_ip_output(app: Optional[pulumi.Input[str]] = None,
                   id: Optional[pulumi.Input[str]] = None,
-                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetIpResult]:
+                  opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetIpResult]:
     """
     Use this data source to access information about an existing resource.
 
@@ -130,7 +130,7 @@ def get_ip_output(app: Optional[pulumi.Input[str]] = None,
     __args__ = dict()
     __args__['app'] = app
     __args__['id'] = id
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('fly:index/getIp:getIp', __args__, opts=opts, typ=GetIpResult)
     return __ret__.apply(lambda __response__: GetIpResult(
         address=pulumi.get(__response__, 'address'),

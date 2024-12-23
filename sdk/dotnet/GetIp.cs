@@ -17,6 +17,9 @@ namespace ediri.Fly
 
         public static Output<GetIpResult> Invoke(GetIpInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetIpResult>("fly:index/getIp:getIp", args ?? new GetIpInvokeArgs(), options.WithDefaults());
+
+        public static Output<GetIpResult> Invoke(GetIpInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetIpResult>("fly:index/getIp:getIp", args ?? new GetIpInvokeArgs(), options.WithDefaults());
     }
 
 
