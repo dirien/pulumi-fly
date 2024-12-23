@@ -41,7 +41,7 @@ export interface GetCertResult {
      */
     readonly id: string;
 }
-export function getCertOutput(args: GetCertOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertResult> {
+export function getCertOutput(args: GetCertOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCertResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("fly:index/getCert:getCert", {
         "app": args.app,

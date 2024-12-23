@@ -44,21 +44,11 @@ type LookupIpResult struct {
 }
 
 func LookupIpOutput(ctx *pulumi.Context, args LookupIpOutputArgs, opts ...pulumi.InvokeOption) LookupIpResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (LookupIpResultOutput, error) {
 			args := v.(LookupIpArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv LookupIpResult
-			secret, err := ctx.InvokePackageRaw("fly:index/getIp:getIp", args, &rv, "", opts...)
-			if err != nil {
-				return LookupIpResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(LookupIpResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(LookupIpResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("fly:index/getIp:getIp", args, LookupIpResultOutput{}, options).(LookupIpResultOutput), nil
 		}).(LookupIpResultOutput)
 }
 

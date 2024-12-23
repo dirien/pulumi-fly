@@ -130,7 +130,7 @@ def get_cert(app: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'))
 def get_cert_output(app: Optional[pulumi.Input[str]] = None,
                     hostname: Optional[pulumi.Input[str]] = None,
-                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertResult]:
+                    opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetCertResult]:
     """
     Use this data source to access information about an existing resource.
 
@@ -139,7 +139,7 @@ def get_cert_output(app: Optional[pulumi.Input[str]] = None,
     __args__ = dict()
     __args__['app'] = app
     __args__['hostname'] = hostname
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('fly:index/getCert:getCert', __args__, opts=opts, typ=GetCertResult)
     return __ret__.apply(lambda __response__: GetCertResult(
         app=pulumi.get(__response__, 'app'),
