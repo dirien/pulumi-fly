@@ -13,7 +13,7 @@ require (
 	github.com/andrewbaxter/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.102.0
-	github.com/pulumi/pulumi/sdk/v3 v3.149.0
+	github.com/pulumi/pulumi/sdk/v3 v3.153.1
 )
 
 require (
