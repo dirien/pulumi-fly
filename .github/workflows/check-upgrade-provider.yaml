@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Call upgrade provider action
-      uses: pulumi/pulumi-upgrade-provider-action@a1d9f03fbfd923f787427c1d9e99c2356711d483 # v0.0.13
+      uses: pulumi/pulumi-upgrade-provider-action@ff5cb5907aecba099e61146c4d4d074c7fd6ca99 # v0.0.15
       with:
         kind: check-upstream-version
         email: botdirien.de
