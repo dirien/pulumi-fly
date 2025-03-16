@@ -2,7 +2,7 @@ module github.com/dirien/pulumi-fly/provider
 
 go 1.22.3
 
-toolchain go1.22.5
+toolchain go1.24.1
 
 replace (
 	github.com/andrewbaxter/terraform-provider-fly/shim => ./shim
@@ -13,7 +13,7 @@ require (
 	github.com/andrewbaxter/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.104.0
-	github.com/pulumi/pulumi/sdk/v3 v3.153.1
+	github.com/pulumi/pulumi/sdk/v3 v3.156.0
 )
 
 require (
