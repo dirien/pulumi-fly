@@ -7,6 +7,7 @@ RUN tar -xvf /root/pulumictl/pulumictl-v0.0.42-linux-amd64.tar.gz -C /root/pulum
 ENV PATH="//root/pulumictl/:${PATH}"
 
 RUN go install github.com/pulumi/upgrade-provider@main
+RUN pip install setuptools
 
 RUN rm -f /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list

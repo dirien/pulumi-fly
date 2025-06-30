@@ -164,6 +164,9 @@
                 "type": "string",
                 "description": "Where the provider should look to find the fly http endpoint\n"
             }
+        },
+        "methods": {
+            "terraformConfig": "pulumi:providers:fly/terraformConfig"
         }
     },
     "resources": {
@@ -938,6 +941,35 @@
                     "region",
                     "size"
                 ]
+            }
+        },
+        "pulumi:providers:fly/terraformConfig": {
+            "description": "This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.",
+            "inputs": {
+                "properties": {
+                    "__self__": {
+                        "type": "ref",
+                        "$ref": "#/resources/pulumi:providers:fly"
+                    }
+                },
+                "type": "pulumi:providers:fly/terraformConfig",
+                "required": [
+                    "__self__"
+                ]
+            },
+            "outputs": {
+                "properties": {
+                    "result": {
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "type": "object"
             }
         }
     }
