@@ -1,6 +1,6 @@
 module github.com/dirien/pulumi-fly/provider
 
-go 1.23.0
+go 1.23.11
 
 toolchain go1.24.2
 
@@ -13,7 +13,7 @@ require (
 	github.com/andrewbaxter/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.110.0
-	github.com/pulumi/pulumi/sdk/v3 v3.181.0
+	github.com/pulumi/pulumi/sdk/v3 v3.186.0
 )
 
 require (
