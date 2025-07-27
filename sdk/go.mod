@@ -1,12 +1,12 @@
 module github.com/dirien/pulumi-fly/sdk
 
-go 1.23.0
+go 1.23.11
 
 toolchain go1.24.4
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/pulumi/pulumi/sdk/v3 v3.181.0
+	github.com/pulumi/pulumi/sdk/v3 v3.186.0
 )
 
 require (
