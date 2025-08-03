@@ -4,7 +4,7 @@ go 1.23.0
 
 require (
 	github.com/andrewbaxter/terraform-provider-fly v0.1.18
-	github.com/hashicorp/terraform-plugin-framework v1.15.0
+	github.com/hashicorp/terraform-plugin-framework v1.15.1
 )
 
 require (
