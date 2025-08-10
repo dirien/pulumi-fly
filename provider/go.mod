@@ -13,7 +13,7 @@ require (
 	github.com/andrewbaxter/terraform-provider-fly/shim v0.0.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.111.0
-	github.com/pulumi/pulumi/sdk/v3 v3.186.0
+	github.com/pulumi/pulumi/sdk/v3 v3.188.0
 )
 
 require (
@@ -143,7 +143,7 @@ require (
 	github.com/pkg/term v1.1.0 // indirect
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
-	github.com/pulumi/esc v0.14.3 // indirect
+	github.com/pulumi/esc v0.17.0 // indirect
 	github.com/pulumi/inflector v0.1.1 // indirect
 	github.com/pulumi/pulumi-java/pkg v1.12.0 // indirect
 	github.com/pulumi/pulumi-yaml v1.19.1 // indirect
