@@ -83,6 +83,7 @@ func main() {
 				Memory: pulumi.Int(256),
 			}, pulumi.DependsOn([]pulumi.Resource{exampleApp, exampleIpV4, exampleIpV6}),
 				pulumi.Provider(flyProvider))
+
 			if err != nil {
 				return err
 			}
