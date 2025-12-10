@@ -57,8 +57,8 @@ func main() {
 						InternalPort: pulumi.Int(8080),
 					},
 				},
-				Cpus:     pulumi.Int(1),
-				Memorymb: pulumi.Int(256),
+				Cpus:   pulumi.Int(1),
+				Memory: pulumi.Int(256),
 			}, pulumi.DependsOn([]pulumi.Resource{exampleApp}))
 			if err != nil {
 				return err
