@@ -56,7 +56,8 @@
         "variables": {
             "flyApiToken": {
                 "type": "string",
-                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n",
+                "secret": true
             },
             "flyHttpEndpoint": {
                 "type": "string",
@@ -148,7 +149,8 @@
         "properties": {
             "flyApiToken": {
                 "type": "string",
-                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n",
+                "secret": true
             },
             "flyHttpEndpoint": {
                 "type": "string",
@@ -158,7 +160,8 @@
         "inputProperties": {
             "flyApiToken": {
                 "type": "string",
-                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n",
+                "secret": true
             },
             "flyHttpEndpoint": {
                 "type": "string",
