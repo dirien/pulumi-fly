@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # tag=v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # tag=v5.0.0
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
@@ -43,14 +43,14 @@ jobs:
       - name: Set PreRelease Version
         run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
       - uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
-      - uses: anchore/sbom-action/download-syft@7b36ad622f042cab6f59a75c2ac24ccb256e9b45 # v0.20.4
+      - uses: anchore/sbom-action/download-syft@8e94d75ddd33f69f691467e42275782e4bfefe84 # v0.20.9
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@9c156ee8a17a598857849441385a2041ef570552 # tag=v6.3.0
+        uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # tag=v6.4.0
         with:
           args: -p 3 release --clean
           version: '~> v2'
       - name: Create tag
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # tag=v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # tag=v8.0.0
         with:
           script: |
             github.rest.git.createRef({
@@ -70,7 +70,7 @@ jobs:
     needs: publish_binary
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # tag=v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # tag=v5.0.0
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
@@ -84,7 +84,7 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11 # tag=v2.0.0
       - name: Setup Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # tag=v4.4.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # tag=v6.0.0
         with:
           node-version: ${{matrix.nodeversion}}
           registry-url: ${{env.NPM_REGISTRY_URL}}
