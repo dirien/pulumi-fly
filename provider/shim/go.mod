@@ -1,6 +1,6 @@
 module github.com/fly-apps/terraform-provider-fly/shim
 
-go 1.24.0
+go 1.25.9
 
 require (
 	github.com/andrewbaxter/terraform-provider-fly v0.1.18
