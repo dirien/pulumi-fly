@@ -21,7 +21,7 @@ import (
 	_ "embed"
 
 	fly "github.com/dirien/pulumi-fly/provider"
-	tfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	tfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 )
 
 //go:embed schema-embed.json
