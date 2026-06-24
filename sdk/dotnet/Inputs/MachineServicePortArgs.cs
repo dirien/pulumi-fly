@@ -29,7 +29,7 @@ namespace ediri.Fly.Inputs
         private InputList<string>? _handlers;
 
         /// <summary>
-        /// How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        /// How the edge should process requests; ex empty, or `Tls` to attach app's certificate
         /// </summary>
         public InputList<string> Handlers
         {
@@ -38,7 +38,7 @@ namespace ediri.Fly.Inputs
         }
 
         /// <summary>
-        /// Mapped external port number, either `port` or `start_port` and `end_port` must be set.
+        /// Mapped external port number, either `Port` or `StartPort` and `EndPort` must be set.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }

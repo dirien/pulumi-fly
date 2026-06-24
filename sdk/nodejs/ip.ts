@@ -35,19 +35,19 @@ export class Ip extends pulumi.CustomResource {
     /**
      * Empty if using `sharedV4`
      */
-    public /*out*/ readonly address!: pulumi.Output<string>;
+    declare public /*out*/ readonly address: pulumi.Output<string>;
     /**
      * The App this resource will be created in
      */
-    public readonly app!: pulumi.Output<string>;
+    declare public readonly app: pulumi.Output<string>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    public readonly region!: pulumi.Output<string>;
+    declare public readonly region: pulumi.Output<string>;
     /**
      * One of the following values (by regex): `^(v4|v6|private_v6)$`
      */
-    public readonly type!: pulumi.Output<string>;
+    declare public readonly type: pulumi.Output<string>;
 
     /**
      * Create a Ip resource with the given unique name, arguments, and options.
@@ -62,21 +62,21 @@ export class Ip extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IpState | undefined;
-            resourceInputs["address"] = state ? state.address : undefined;
-            resourceInputs["app"] = state ? state.app : undefined;
-            resourceInputs["region"] = state ? state.region : undefined;
-            resourceInputs["type"] = state ? state.type : undefined;
+            resourceInputs["address"] = state?.address;
+            resourceInputs["app"] = state?.app;
+            resourceInputs["region"] = state?.region;
+            resourceInputs["type"] = state?.type;
         } else {
             const args = argsOrState as IpArgs | undefined;
-            if ((!args || args.app === undefined) && !opts.urn) {
+            if (args?.app === undefined && !opts.urn) {
                 throw new Error("Missing required property 'app'");
             }
-            if ((!args || args.type === undefined) && !opts.urn) {
+            if (args?.type === undefined && !opts.urn) {
                 throw new Error("Missing required property 'type'");
             }
-            resourceInputs["app"] = args ? args.app : undefined;
-            resourceInputs["region"] = args ? args.region : undefined;
-            resourceInputs["type"] = args ? args.type : undefined;
+            resourceInputs["app"] = args?.app;
+            resourceInputs["region"] = args?.region;
+            resourceInputs["type"] = args?.type;
             resourceInputs["address"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -91,19 +91,19 @@ export interface IpState {
     /**
      * Empty if using `sharedV4`
      */
-    address?: pulumi.Input<string>;
+    address?: pulumi.Input<string | undefined>;
     /**
      * The App this resource will be created in
      */
-    app?: pulumi.Input<string>;
+    app?: pulumi.Input<string | undefined>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * One of the following values (by regex): `^(v4|v6|private_v6)$`
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -117,7 +117,7 @@ export interface IpArgs {
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * One of the following values (by regex): `^(v4|v6|private_v6)$`
      */

@@ -29,7 +29,7 @@ namespace ediri.Fly
         public Output<ImmutableArray<string>> Cmds { get; private set; } = null!;
 
         /// <summary>
-        /// Which machine flavor, ex: `shared`
+        /// Which machine flavor, ex: `Shared`
         /// </summary>
         [Output("cpuType")]
         public Output<string> CpuType { get; private set; } = null!;
@@ -74,7 +74,7 @@ namespace ediri.Fly
         public Output<string> PrivateIp { get; private set; } = null!;
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
@@ -150,7 +150,7 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// Which machine flavor, ex: `shared`
+        /// Which machine flavor, ex: `Shared`
         /// </summary>
         [Input("cpuType")]
         public Input<string>? CpuType { get; set; }
@@ -213,7 +213,7 @@ namespace ediri.Fly
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
@@ -255,7 +255,7 @@ namespace ediri.Fly
         }
 
         /// <summary>
-        /// Which machine flavor, ex: `shared`
+        /// Which machine flavor, ex: `Shared`
         /// </summary>
         [Input("cpuType")]
         public Input<string>? CpuType { get; set; }
@@ -321,7 +321,7 @@ namespace ediri.Fly
         public Input<string>? PrivateIp { get; set; }
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }

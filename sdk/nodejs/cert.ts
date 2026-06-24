@@ -38,12 +38,12 @@ export class Cert extends pulumi.CustomResource {
     /**
      * The App this resource will be created in
      */
-    public readonly app!: pulumi.Output<string>;
-    public /*out*/ readonly check!: pulumi.Output<boolean>;
-    public /*out*/ readonly dnsValidationHostname!: pulumi.Output<string>;
-    public /*out*/ readonly dnsValidationInstructions!: pulumi.Output<string>;
-    public /*out*/ readonly dnsValidationTarget!: pulumi.Output<string>;
-    public readonly hostname!: pulumi.Output<string>;
+    declare public readonly app: pulumi.Output<string>;
+    declare public /*out*/ readonly check: pulumi.Output<boolean>;
+    declare public /*out*/ readonly dnsValidationHostname: pulumi.Output<string>;
+    declare public /*out*/ readonly dnsValidationInstructions: pulumi.Output<string>;
+    declare public /*out*/ readonly dnsValidationTarget: pulumi.Output<string>;
+    declare public readonly hostname: pulumi.Output<string>;
 
     /**
      * Create a Cert resource with the given unique name, arguments, and options.
@@ -58,22 +58,22 @@ export class Cert extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CertState | undefined;
-            resourceInputs["app"] = state ? state.app : undefined;
-            resourceInputs["check"] = state ? state.check : undefined;
-            resourceInputs["dnsValidationHostname"] = state ? state.dnsValidationHostname : undefined;
-            resourceInputs["dnsValidationInstructions"] = state ? state.dnsValidationInstructions : undefined;
-            resourceInputs["dnsValidationTarget"] = state ? state.dnsValidationTarget : undefined;
-            resourceInputs["hostname"] = state ? state.hostname : undefined;
+            resourceInputs["app"] = state?.app;
+            resourceInputs["check"] = state?.check;
+            resourceInputs["dnsValidationHostname"] = state?.dnsValidationHostname;
+            resourceInputs["dnsValidationInstructions"] = state?.dnsValidationInstructions;
+            resourceInputs["dnsValidationTarget"] = state?.dnsValidationTarget;
+            resourceInputs["hostname"] = state?.hostname;
         } else {
             const args = argsOrState as CertArgs | undefined;
-            if ((!args || args.app === undefined) && !opts.urn) {
+            if (args?.app === undefined && !opts.urn) {
                 throw new Error("Missing required property 'app'");
             }
-            if ((!args || args.hostname === undefined) && !opts.urn) {
+            if (args?.hostname === undefined && !opts.urn) {
                 throw new Error("Missing required property 'hostname'");
             }
-            resourceInputs["app"] = args ? args.app : undefined;
-            resourceInputs["hostname"] = args ? args.hostname : undefined;
+            resourceInputs["app"] = args?.app;
+            resourceInputs["hostname"] = args?.hostname;
             resourceInputs["check"] = undefined /*out*/;
             resourceInputs["dnsValidationHostname"] = undefined /*out*/;
             resourceInputs["dnsValidationInstructions"] = undefined /*out*/;
@@ -91,12 +91,12 @@ export interface CertState {
     /**
      * The App this resource will be created in
      */
-    app?: pulumi.Input<string>;
-    check?: pulumi.Input<boolean>;
-    dnsValidationHostname?: pulumi.Input<string>;
-    dnsValidationInstructions?: pulumi.Input<string>;
-    dnsValidationTarget?: pulumi.Input<string>;
-    hostname?: pulumi.Input<string>;
+    app?: pulumi.Input<string | undefined>;
+    check?: pulumi.Input<boolean | undefined>;
+    dnsValidationHostname?: pulumi.Input<string | undefined>;
+    dnsValidationInstructions?: pulumi.Input<string | undefined>;
+    dnsValidationTarget?: pulumi.Input<string | undefined>;
+    hostname?: pulumi.Input<string | undefined>;
 }
 
 /**

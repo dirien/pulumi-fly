@@ -23,11 +23,11 @@ namespace ediri.Fly.Outputs
         /// </summary>
         public readonly bool? ForceHttps;
         /// <summary>
-        /// How the edge should process requests; ex empty, or `tls` to attach app's certificate
+        /// How the edge should process requests; ex empty, or `Tls` to attach app's certificate
         /// </summary>
         public readonly ImmutableArray<string> Handlers;
         /// <summary>
-        /// Mapped external port number, either `port` or `start_port` and `end_port` must be set.
+        /// Mapped external port number, either `Port` or `StartPort` and `EndPort` must be set.
         /// </summary>
         public readonly int? Port;
         /// <summary>

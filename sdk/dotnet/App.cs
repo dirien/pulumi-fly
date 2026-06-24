@@ -29,7 +29,7 @@ namespace ediri.Fly
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the organization to generate the app in, ex: `personal` (your initial org)
+        /// The name of the organization to generate the app in, ex: `Personal` (your initial org)
         /// </summary>
         [Output("org")]
         public Output<string> Org { get; private set; } = null!;
@@ -103,7 +103,7 @@ namespace ediri.Fly
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The name of the organization to generate the app in, ex: `personal` (your initial org)
+        /// The name of the organization to generate the app in, ex: `Personal` (your initial org)
         /// </summary>
         [Input("org")]
         public Input<string>? Org { get; set; }
@@ -132,7 +132,7 @@ namespace ediri.Fly
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The name of the organization to generate the app in, ex: `personal` (your initial org)
+        /// The name of the organization to generate the app in, ex: `Personal` (your initial org)
         /// </summary>
         [Input("org")]
         public Input<string>? Org { get; set; }

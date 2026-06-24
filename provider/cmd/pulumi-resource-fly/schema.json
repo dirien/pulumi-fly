@@ -56,11 +56,12 @@
         "variables": {
             "flyApiToken": {
                 "type": "string",
-                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN",
+                "secret": true
             },
             "flyHttpEndpoint": {
                 "type": "string",
-                "description": "Where the provider should look to find the fly http endpoint\n"
+                "description": "Where the provider should look to find the fly http endpoint"
             }
         }
     },
@@ -97,7 +98,7 @@
                 },
                 "protocol": {
                     "type": "string",
-                    "description": "`udp` or `tcp`\n"
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`udp`\" pulumi-lang-dotnet=\"`Udp`\" pulumi-lang-go=\"`udp`\" pulumi-lang-python=\"`udp`\" pulumi-lang-yaml=\"`udp`\" pulumi-lang-java=\"`udp`\" pulumi-lang-hcl=\"`udp`\"\u003e`udp`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`tcp`\" pulumi-lang-dotnet=\"`Tcp`\" pulumi-lang-go=\"`tcp`\" pulumi-lang-python=\"`tcp`\" pulumi-lang-yaml=\"`tcp`\" pulumi-lang-java=\"`tcp`\" pulumi-lang-hcl=\"`tcp`\"\u003e`tcp`\u003c/span\u003e\n"
                 }
             },
             "type": "object",
@@ -122,11 +123,11 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "How the edge should process requests; ex empty, or `tls` to attach app's certificate\n"
+                    "description": "How the edge should process requests; ex empty, or \u003cspan pulumi-lang-nodejs=\"`tls`\" pulumi-lang-dotnet=\"`Tls`\" pulumi-lang-go=\"`tls`\" pulumi-lang-python=\"`tls`\" pulumi-lang-yaml=\"`tls`\" pulumi-lang-java=\"`tls`\" pulumi-lang-hcl=\"`tls`\"\u003e`tls`\u003c/span\u003e to attach app's certificate\n"
                 },
                 "port": {
                     "type": "integer",
-                    "description": "Mapped external port number, either `port` or `start_port` and `end_port` must be set.\n"
+                    "description": "Mapped external port number, either \u003cspan pulumi-lang-nodejs=\"`port`\" pulumi-lang-dotnet=\"`Port`\" pulumi-lang-go=\"`port`\" pulumi-lang-python=\"`port`\" pulumi-lang-yaml=\"`port`\" pulumi-lang-java=\"`port`\" pulumi-lang-hcl=\"`port`\"\u003e`port`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`startPort`\" pulumi-lang-dotnet=\"`StartPort`\" pulumi-lang-go=\"`startPort`\" pulumi-lang-python=\"`start_port`\" pulumi-lang-yaml=\"`startPort`\" pulumi-lang-java=\"`startPort`\" pulumi-lang-hcl=\"`start_port`\"\u003e`startPort`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`endPort`\" pulumi-lang-dotnet=\"`EndPort`\" pulumi-lang-go=\"`endPort`\" pulumi-lang-python=\"`end_port`\" pulumi-lang-yaml=\"`endPort`\" pulumi-lang-java=\"`endPort`\" pulumi-lang-hcl=\"`end_port`\"\u003e`endPort`\u003c/span\u003e must be set.\n"
                 },
                 "startPort": {
                     "type": "integer",
@@ -148,21 +149,23 @@
         "properties": {
             "flyApiToken": {
                 "type": "string",
-                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN",
+                "secret": true
             },
             "flyHttpEndpoint": {
                 "type": "string",
-                "description": "Where the provider should look to find the fly http endpoint\n"
+                "description": "Where the provider should look to find the fly http endpoint"
             }
         },
         "inputProperties": {
             "flyApiToken": {
                 "type": "string",
-                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN\n"
+                "description": "fly.io api token. If not set checks env for FLY_API_TOKEN",
+                "secret": true
             },
             "flyHttpEndpoint": {
                 "type": "string",
-                "description": "Where the provider should look to find the fly http endpoint\n"
+                "description": "Where the provider should look to find the fly http endpoint"
             }
         },
         "methods": {
@@ -185,7 +188,7 @@
                 },
                 "org": {
                     "type": "string",
-                    "description": "The name of the organization to generate the app in, ex: `personal` (your initial org)\n"
+                    "description": "The name of the organization to generate the app in, ex: \u003cspan pulumi-lang-nodejs=\"`personal`\" pulumi-lang-dotnet=\"`Personal`\" pulumi-lang-go=\"`personal`\" pulumi-lang-python=\"`personal`\" pulumi-lang-yaml=\"`personal`\" pulumi-lang-java=\"`personal`\" pulumi-lang-hcl=\"`personal`\"\u003e`personal`\u003c/span\u003e (your initial org)\n"
                 },
                 "orgId": {
                     "type": "string"
@@ -214,7 +217,7 @@
                 },
                 "org": {
                     "type": "string",
-                    "description": "The name of the organization to generate the app in, ex: `personal` (your initial org)\n"
+                    "description": "The name of the organization to generate the app in, ex: \u003cspan pulumi-lang-nodejs=\"`personal`\" pulumi-lang-dotnet=\"`Personal`\" pulumi-lang-go=\"`personal`\" pulumi-lang-python=\"`personal`\" pulumi-lang-yaml=\"`personal`\" pulumi-lang-java=\"`personal`\" pulumi-lang-hcl=\"`personal`\"\u003e`personal`\u003c/span\u003e (your initial org)\n"
                 }
             },
             "stateInputs": {
@@ -233,7 +236,7 @@
                     },
                     "org": {
                         "type": "string",
-                        "description": "The name of the organization to generate the app in, ex: `personal` (your initial org)\n"
+                        "description": "The name of the organization to generate the app in, ex: \u003cspan pulumi-lang-nodejs=\"`personal`\" pulumi-lang-dotnet=\"`Personal`\" pulumi-lang-go=\"`personal`\" pulumi-lang-python=\"`personal`\" pulumi-lang-yaml=\"`personal`\" pulumi-lang-java=\"`personal`\" pulumi-lang-hcl=\"`personal`\"\u003e`personal`\u003c/span\u003e (your initial org)\n"
                     },
                     "orgId": {
                         "type": "string"
@@ -320,7 +323,7 @@
             "properties": {
                 "address": {
                     "type": "string",
-                    "description": "Empty if using `shared_v4`\n"
+                    "description": "Empty if using \u003cspan pulumi-lang-nodejs=\"`sharedV4`\" pulumi-lang-dotnet=\"`SharedV4`\" pulumi-lang-go=\"`sharedV4`\" pulumi-lang-python=\"`shared_v4`\" pulumi-lang-yaml=\"`sharedV4`\" pulumi-lang-java=\"`sharedV4`\" pulumi-lang-hcl=\"`shared_v4`\"\u003e`sharedV4`\u003c/span\u003e\n"
                 },
                 "app": {
                     "type": "string",
@@ -328,7 +331,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                    "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                 },
                 "type": {
                     "type": "string",
@@ -348,7 +351,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                    "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                 },
                 "type": {
                     "type": "string",
@@ -364,7 +367,7 @@
                 "properties": {
                     "address": {
                         "type": "string",
-                        "description": "Empty if using `shared_v4`\n"
+                        "description": "Empty if using \u003cspan pulumi-lang-nodejs=\"`sharedV4`\" pulumi-lang-dotnet=\"`SharedV4`\" pulumi-lang-go=\"`sharedV4`\" pulumi-lang-python=\"`shared_v4`\" pulumi-lang-yaml=\"`sharedV4`\" pulumi-lang-java=\"`sharedV4`\" pulumi-lang-hcl=\"`shared_v4`\"\u003e`sharedV4`\u003c/span\u003e\n"
                     },
                     "app": {
                         "type": "string",
@@ -372,7 +375,7 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                        "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                     },
                     "type": {
                         "type": "string",
@@ -400,7 +403,7 @@
                 },
                 "cpuType": {
                     "type": "string",
-                    "description": "Which machine flavor, ex: `shared`\n"
+                    "description": "Which machine flavor, ex: \u003cspan pulumi-lang-nodejs=\"`shared`\" pulumi-lang-dotnet=\"`Shared`\" pulumi-lang-go=\"`shared`\" pulumi-lang-python=\"`shared`\" pulumi-lang-yaml=\"`shared`\" pulumi-lang-java=\"`shared`\" pulumi-lang-hcl=\"`shared`\"\u003e`shared`\u003c/span\u003e\n"
                 },
                 "cpus": {
                     "type": "integer"
@@ -430,7 +433,7 @@
                 },
                 "memory": {
                     "type": "integer",
-                    "description": "Amount of memory in MB. `256`, `512`, `1024`, ...\n"
+                    "description": "Amount of memory in MB. \u003cspan pulumi-lang-nodejs=\"`256`\" pulumi-lang-dotnet=\"`256`\" pulumi-lang-go=\"`256`\" pulumi-lang-python=\"`256`\" pulumi-lang-yaml=\"`256`\" pulumi-lang-java=\"`256`\" pulumi-lang-hcl=\"`256`\"\u003e`256`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`512`\" pulumi-lang-dotnet=\"`512`\" pulumi-lang-go=\"`512`\" pulumi-lang-python=\"`512`\" pulumi-lang-yaml=\"`512`\" pulumi-lang-java=\"`512`\" pulumi-lang-hcl=\"`512`\"\u003e`512`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`1024`\" pulumi-lang-dotnet=\"`1024`\" pulumi-lang-go=\"`1024`\" pulumi-lang-python=\"`1024`\" pulumi-lang-yaml=\"`1024`\" pulumi-lang-java=\"`1024`\" pulumi-lang-hcl=\"`1024`\"\u003e`1024`\u003c/span\u003e, ...\n"
                 },
                 "mounts": {
                     "type": "array",
@@ -447,7 +450,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                    "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                 },
                 "services": {
                     "type": "array",
@@ -485,7 +488,7 @@
                 },
                 "cpuType": {
                     "type": "string",
-                    "description": "Which machine flavor, ex: `shared`\n"
+                    "description": "Which machine flavor, ex: \u003cspan pulumi-lang-nodejs=\"`shared`\" pulumi-lang-dotnet=\"`Shared`\" pulumi-lang-go=\"`shared`\" pulumi-lang-python=\"`shared`\" pulumi-lang-yaml=\"`shared`\" pulumi-lang-java=\"`shared`\" pulumi-lang-hcl=\"`shared`\"\u003e`shared`\u003c/span\u003e\n"
                 },
                 "cpus": {
                     "type": "integer"
@@ -515,7 +518,7 @@
                 },
                 "memory": {
                     "type": "integer",
-                    "description": "Amount of memory in MB. `256`, `512`, `1024`, ...\n"
+                    "description": "Amount of memory in MB. \u003cspan pulumi-lang-nodejs=\"`256`\" pulumi-lang-dotnet=\"`256`\" pulumi-lang-go=\"`256`\" pulumi-lang-python=\"`256`\" pulumi-lang-yaml=\"`256`\" pulumi-lang-java=\"`256`\" pulumi-lang-hcl=\"`256`\"\u003e`256`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`512`\" pulumi-lang-dotnet=\"`512`\" pulumi-lang-go=\"`512`\" pulumi-lang-python=\"`512`\" pulumi-lang-yaml=\"`512`\" pulumi-lang-java=\"`512`\" pulumi-lang-hcl=\"`512`\"\u003e`512`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`1024`\" pulumi-lang-dotnet=\"`1024`\" pulumi-lang-go=\"`1024`\" pulumi-lang-python=\"`1024`\" pulumi-lang-yaml=\"`1024`\" pulumi-lang-java=\"`1024`\" pulumi-lang-hcl=\"`1024`\"\u003e`1024`\u003c/span\u003e, ...\n"
                 },
                 "mounts": {
                     "type": "array",
@@ -529,7 +532,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                    "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                 },
                 "services": {
                     "type": "array",
@@ -562,7 +565,7 @@
                     },
                     "cpuType": {
                         "type": "string",
-                        "description": "Which machine flavor, ex: `shared`\n"
+                        "description": "Which machine flavor, ex: \u003cspan pulumi-lang-nodejs=\"`shared`\" pulumi-lang-dotnet=\"`Shared`\" pulumi-lang-go=\"`shared`\" pulumi-lang-python=\"`shared`\" pulumi-lang-yaml=\"`shared`\" pulumi-lang-java=\"`shared`\" pulumi-lang-hcl=\"`shared`\"\u003e`shared`\u003c/span\u003e\n"
                     },
                     "cpus": {
                         "type": "integer"
@@ -592,7 +595,7 @@
                     },
                     "memory": {
                         "type": "integer",
-                        "description": "Amount of memory in MB. `256`, `512`, `1024`, ...\n"
+                        "description": "Amount of memory in MB. \u003cspan pulumi-lang-nodejs=\"`256`\" pulumi-lang-dotnet=\"`256`\" pulumi-lang-go=\"`256`\" pulumi-lang-python=\"`256`\" pulumi-lang-yaml=\"`256`\" pulumi-lang-java=\"`256`\" pulumi-lang-hcl=\"`256`\"\u003e`256`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`512`\" pulumi-lang-dotnet=\"`512`\" pulumi-lang-go=\"`512`\" pulumi-lang-python=\"`512`\" pulumi-lang-yaml=\"`512`\" pulumi-lang-java=\"`512`\" pulumi-lang-hcl=\"`512`\"\u003e`512`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`1024`\" pulumi-lang-dotnet=\"`1024`\" pulumi-lang-go=\"`1024`\" pulumi-lang-python=\"`1024`\" pulumi-lang-yaml=\"`1024`\" pulumi-lang-java=\"`1024`\" pulumi-lang-hcl=\"`1024`\"\u003e`1024`\u003c/span\u003e, ...\n"
                     },
                     "mounts": {
                         "type": "array",
@@ -609,7 +612,7 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                        "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                     },
                     "services": {
                         "type": "array",
@@ -636,7 +639,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                    "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                 },
                 "size": {
                     "type": "integer",
@@ -664,7 +667,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                    "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                 },
                 "size": {
                     "type": "integer",
@@ -692,7 +695,7 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                        "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                     },
                     "size": {
                         "type": "integer",
@@ -857,7 +860,7 @@
                 "properties": {
                     "address": {
                         "type": "string",
-                        "description": "Empty if using `shared_v4`\n"
+                        "description": "Empty if using \u003cspan pulumi-lang-nodejs=\"`sharedV4`\" pulumi-lang-dotnet=\"`SharedV4`\" pulumi-lang-go=\"`sharedV4`\" pulumi-lang-python=\"`shared_v4`\" pulumi-lang-yaml=\"`sharedV4`\" pulumi-lang-java=\"`sharedV4`\" pulumi-lang-hcl=\"`shared_v4`\"\u003e`sharedV4`\u003c/span\u003e\n"
                     },
                     "app": {
                         "type": "string",
@@ -869,11 +872,11 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                        "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                     },
                     "type": {
                         "type": "string",
-                        "description": "`v4`, `v6`, or `private_v6`\n"
+                        "description": "\u003cspan pulumi-lang-nodejs=\"`v4`\" pulumi-lang-dotnet=\"`V4`\" pulumi-lang-go=\"`v4`\" pulumi-lang-python=\"`v4`\" pulumi-lang-yaml=\"`v4`\" pulumi-lang-java=\"`v4`\" pulumi-lang-hcl=\"`v4`\"\u003e`v4`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`v6`\" pulumi-lang-dotnet=\"`V6`\" pulumi-lang-go=\"`v6`\" pulumi-lang-python=\"`v6`\" pulumi-lang-yaml=\"`v6`\" pulumi-lang-java=\"`v6`\" pulumi-lang-hcl=\"`v6`\"\u003e`v6`\u003c/span\u003e, or \u003cspan pulumi-lang-nodejs=\"`privateV6`\" pulumi-lang-dotnet=\"`PrivateV6`\" pulumi-lang-go=\"`privateV6`\" pulumi-lang-python=\"`private_v6`\" pulumi-lang-yaml=\"`privateV6`\" pulumi-lang-java=\"`privateV6`\" pulumi-lang-hcl=\"`private_v6`\"\u003e`privateV6`\u003c/span\u003e\n"
                     }
                 },
                 "type": "object",
@@ -925,7 +928,7 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "Fly region, ex `ord`, `sin`, `mad`\n"
+                        "description": "Fly region, ex \u003cspan pulumi-lang-nodejs=\"`ord`\" pulumi-lang-dotnet=\"`Ord`\" pulumi-lang-go=\"`ord`\" pulumi-lang-python=\"`ord`\" pulumi-lang-yaml=\"`ord`\" pulumi-lang-java=\"`ord`\" pulumi-lang-hcl=\"`ord`\"\u003e`ord`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`sin`\" pulumi-lang-dotnet=\"`Sin`\" pulumi-lang-go=\"`sin`\" pulumi-lang-python=\"`sin`\" pulumi-lang-yaml=\"`sin`\" pulumi-lang-java=\"`sin`\" pulumi-lang-hcl=\"`sin`\"\u003e`sin`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`mad`\" pulumi-lang-dotnet=\"`Mad`\" pulumi-lang-go=\"`mad`\" pulumi-lang-python=\"`mad`\" pulumi-lang-yaml=\"`mad`\" pulumi-lang-java=\"`mad`\" pulumi-lang-hcl=\"`mad`\"\u003e`mad`\u003c/span\u003e\n"
                     },
                     "size": {
                         "type": "integer",
@@ -949,7 +952,7 @@
                 "properties": {
                     "__self__": {
                         "type": "ref",
-                        "$ref": "#/resources/pulumi:providers:fly"
+                        "$ref": "#/provider"
                     }
                 },
                 "type": "pulumi:providers:fly/terraformConfig",

@@ -16,7 +16,7 @@ package main
 
 import (
 	fly "github.com/dirien/pulumi-fly/provider"
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfgen"
 )
 
 func main() {

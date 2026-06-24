@@ -29,7 +29,7 @@ namespace ediri.Fly
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
@@ -103,7 +103,7 @@ namespace ediri.Fly
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
@@ -138,7 +138,7 @@ namespace ediri.Fly
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
