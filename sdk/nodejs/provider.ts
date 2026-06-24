@@ -28,11 +28,11 @@ export class Provider extends pulumi.ProviderResource {
     /**
      * fly.io api token. If not set checks env for FLY_API_TOKEN
      */
-    public readonly flyApiToken!: pulumi.Output<string | undefined>;
+    declare public readonly flyApiToken: pulumi.Output<string | undefined>;
     /**
      * Where the provider should look to find the fly http endpoint
      */
-    public readonly flyHttpEndpoint!: pulumi.Output<string | undefined>;
+    declare public readonly flyHttpEndpoint: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -45,10 +45,12 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["flyApiToken"] = args ? args.flyApiToken : undefined;
-            resourceInputs["flyHttpEndpoint"] = args ? args.flyHttpEndpoint : undefined;
+            resourceInputs["flyApiToken"] = args?.flyApiToken ? pulumi.secret(args.flyApiToken) : undefined;
+            resourceInputs["flyHttpEndpoint"] = args?.flyHttpEndpoint;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["flyApiToken"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 
@@ -69,11 +71,11 @@ export interface ProviderArgs {
     /**
      * fly.io api token. If not set checks env for FLY_API_TOKEN
      */
-    flyApiToken?: pulumi.Input<string>;
+    flyApiToken?: pulumi.Input<string | undefined>;
     /**
      * Where the provider should look to find the fly http endpoint
      */
-    flyHttpEndpoint?: pulumi.Input<string>;
+    flyHttpEndpoint?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {

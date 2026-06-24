@@ -83,6 +83,9 @@ func Provider() tfbridge.ProviderInfo {
 		PluginDownloadURL: "github://api.github.com/dirien/pulumi-fly",
 		Version:           version.Version,
 		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
+		Config: map[string]*tfbridge.SchemaInfo{
+			"fly_api_token": {Secret: tfbridge.True()},
+		},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"fly_app":     {Tok: flyResource(flyMod, "App")},
 			"fly_cert":    {Tok: flyResource(flyMod, "Cert")},

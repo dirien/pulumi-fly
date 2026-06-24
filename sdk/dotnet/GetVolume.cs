@@ -81,7 +81,7 @@ namespace ediri.Fly
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         public readonly string Region;
         /// <summary>

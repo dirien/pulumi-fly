@@ -32,7 +32,7 @@ namespace ediri.Fly.Inputs
         }
 
         /// <summary>
-        /// `udp` or `tcp`
+        /// `Udp` or `Tcp`
         /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;

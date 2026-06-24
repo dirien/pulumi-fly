@@ -50,6 +50,10 @@ namespace ediri.Fly
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/dirien/pulumi-fly",
+                AdditionalSecretOutputs =
+                {
+                    "flyApiToken",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -66,11 +70,21 @@ namespace ediri.Fly
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
+        [Input("flyApiToken")]
+        private Input<string>? _flyApiToken;
+
         /// <summary>
         /// fly.io api token. If not set checks env for FLY_API_TOKEN
         /// </summary>
-        [Input("flyApiToken")]
-        public Input<string>? FlyApiToken { get; set; }
+        public Input<string>? FlyApiToken
+        {
+            get => _flyApiToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _flyApiToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Where the provider should look to find the fly http endpoint

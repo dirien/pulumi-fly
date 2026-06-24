@@ -23,7 +23,7 @@ namespace ediri.Fly.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.MachineServicePort> Ports;
         /// <summary>
-        /// `udp` or `tcp`
+        /// `Udp` or `Tcp`
         /// </summary>
         public readonly string Protocol;
 

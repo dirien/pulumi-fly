@@ -35,20 +35,20 @@ export class Volume extends pulumi.CustomResource {
     /**
      * The App this resource will be created in
      */
-    public readonly app!: pulumi.Output<string>;
-    public readonly encrypted!: pulumi.Output<boolean>;
+    declare public readonly app: pulumi.Output<string>;
+    declare public readonly encrypted: pulumi.Output<boolean>;
     /**
      * A user-provided identifier
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    public readonly region!: pulumi.Output<string>;
+    declare public readonly region: pulumi.Output<string>;
     /**
      * Size of volume in GB
      */
-    public readonly size!: pulumi.Output<number>;
+    declare public readonly size: pulumi.Output<number>;
 
     /**
      * Create a Volume resource with the given unique name, arguments, and options.
@@ -63,27 +63,27 @@ export class Volume extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as VolumeState | undefined;
-            resourceInputs["app"] = state ? state.app : undefined;
-            resourceInputs["encrypted"] = state ? state.encrypted : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["region"] = state ? state.region : undefined;
-            resourceInputs["size"] = state ? state.size : undefined;
+            resourceInputs["app"] = state?.app;
+            resourceInputs["encrypted"] = state?.encrypted;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["region"] = state?.region;
+            resourceInputs["size"] = state?.size;
         } else {
             const args = argsOrState as VolumeArgs | undefined;
-            if ((!args || args.app === undefined) && !opts.urn) {
+            if (args?.app === undefined && !opts.urn) {
                 throw new Error("Missing required property 'app'");
             }
-            if ((!args || args.region === undefined) && !opts.urn) {
+            if (args?.region === undefined && !opts.urn) {
                 throw new Error("Missing required property 'region'");
             }
-            if ((!args || args.size === undefined) && !opts.urn) {
+            if (args?.size === undefined && !opts.urn) {
                 throw new Error("Missing required property 'size'");
             }
-            resourceInputs["app"] = args ? args.app : undefined;
-            resourceInputs["encrypted"] = args ? args.encrypted : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["region"] = args ? args.region : undefined;
-            resourceInputs["size"] = args ? args.size : undefined;
+            resourceInputs["app"] = args?.app;
+            resourceInputs["encrypted"] = args?.encrypted;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["region"] = args?.region;
+            resourceInputs["size"] = args?.size;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Volume.__pulumiType, name, resourceInputs, opts);
@@ -97,20 +97,20 @@ export interface VolumeState {
     /**
      * The App this resource will be created in
      */
-    app?: pulumi.Input<string>;
-    encrypted?: pulumi.Input<boolean>;
+    app?: pulumi.Input<string | undefined>;
+    encrypted?: pulumi.Input<boolean | undefined>;
     /**
      * A user-provided identifier
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * Size of volume in GB
      */
-    size?: pulumi.Input<number>;
+    size?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -121,11 +121,11 @@ export interface VolumeArgs {
      * The App this resource will be created in
      */
     app: pulumi.Input<string>;
-    encrypted?: pulumi.Input<boolean>;
+    encrypted?: pulumi.Input<boolean | undefined>;
     /**
      * A user-provided identifier
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */

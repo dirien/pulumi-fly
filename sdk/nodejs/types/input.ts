@@ -35,21 +35,21 @@ export interface MachineServicePort {
     /**
      * For a port range, the last port to listen on
      */
-    endPort?: pulumi.Input<number>;
+    endPort?: pulumi.Input<number | undefined>;
     /**
      * Automatically redirect to HTTPS on "http" handler
      */
-    forceHttps?: pulumi.Input<boolean>;
+    forceHttps?: pulumi.Input<boolean | undefined>;
     /**
      * How the edge should process requests; ex empty, or `tls` to attach app's certificate
      */
-    handlers?: pulumi.Input<pulumi.Input<string>[]>;
+    handlers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Mapped external port number, either `port` or `startPort` and `endPort` must be set.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * For a port range, the first port to listen on.
      */
-    startPort?: pulumi.Input<number>;
+    startPort?: pulumi.Input<number | undefined>;
 }

@@ -14,7 +14,7 @@ namespace ediri.Fly
     public partial class Ip : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Empty if using `shared_v4`
+        /// Empty if using `SharedV4`
         /// </summary>
         [Output("address")]
         public Output<string> Address { get; private set; } = null!;
@@ -26,7 +26,7 @@ namespace ediri.Fly
         public Output<string> App { get; private set; } = null!;
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
@@ -91,7 +91,7 @@ namespace ediri.Fly
         public Input<string> App { get; set; } = null!;
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
@@ -111,7 +111,7 @@ namespace ediri.Fly
     public sealed class IpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Empty if using `shared_v4`
+        /// Empty if using `SharedV4`
         /// </summary>
         [Input("address")]
         public Input<string>? Address { get; set; }
@@ -123,7 +123,7 @@ namespace ediri.Fly
         public Input<string>? App { get; set; }
 
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }

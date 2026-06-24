@@ -37,42 +37,42 @@ export class Machine extends pulumi.CustomResource {
     /**
      * The App this resource will be created in
      */
-    public readonly app!: pulumi.Output<string>;
+    declare public readonly app: pulumi.Output<string>;
     /**
      * Optional boolean telling the Machine to destroy itself once it's complete
      */
-    public readonly autoDestroy!: pulumi.Output<boolean>;
-    public readonly cmds!: pulumi.Output<string[] | undefined>;
+    declare public readonly autoDestroy: pulumi.Output<boolean>;
+    declare public readonly cmds: pulumi.Output<string[] | undefined>;
     /**
      * Which machine flavor, ex: `shared`
      */
-    public readonly cpuType!: pulumi.Output<string>;
-    public readonly cpus!: pulumi.Output<number>;
-    public readonly entrypoints!: pulumi.Output<string[] | undefined>;
+    declare public readonly cpuType: pulumi.Output<string>;
+    declare public readonly cpus: pulumi.Output<number>;
+    declare public readonly entrypoints: pulumi.Output<string[] | undefined>;
     /**
      * Keys and values must be strings
      */
-    public readonly env!: pulumi.Output<{[key: string]: string}>;
-    public readonly execs!: pulumi.Output<string[] | undefined>;
+    declare public readonly env: pulumi.Output<{[key: string]: string}>;
+    declare public readonly execs: pulumi.Output<string[] | undefined>;
     /**
      * Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
      */
-    public readonly image!: pulumi.Output<string>;
+    declare public readonly image: pulumi.Output<string>;
     /**
      * Amount of memory in MB. `256`, `512`, `1024`, ...
      */
-    public readonly memory!: pulumi.Output<number>;
-    public readonly mounts!: pulumi.Output<outputs.MachineMount[] | undefined>;
+    declare public readonly memory: pulumi.Output<number>;
+    declare public readonly mounts: pulumi.Output<outputs.MachineMount[] | undefined>;
     /**
      * A user-provided identifier
      */
-    public readonly name!: pulumi.Output<string>;
-    public /*out*/ readonly privateIp!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
+    declare public /*out*/ readonly privateIp: pulumi.Output<string>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    public readonly region!: pulumi.Output<string>;
-    public readonly services!: pulumi.Output<outputs.MachineService[] | undefined>;
+    declare public readonly region: pulumi.Output<string>;
+    declare public readonly services: pulumi.Output<outputs.MachineService[] | undefined>;
 
     /**
      * Create a Machine resource with the given unique name, arguments, and options.
@@ -87,46 +87,46 @@ export class Machine extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as MachineState | undefined;
-            resourceInputs["app"] = state ? state.app : undefined;
-            resourceInputs["autoDestroy"] = state ? state.autoDestroy : undefined;
-            resourceInputs["cmds"] = state ? state.cmds : undefined;
-            resourceInputs["cpuType"] = state ? state.cpuType : undefined;
-            resourceInputs["cpus"] = state ? state.cpus : undefined;
-            resourceInputs["entrypoints"] = state ? state.entrypoints : undefined;
-            resourceInputs["env"] = state ? state.env : undefined;
-            resourceInputs["execs"] = state ? state.execs : undefined;
-            resourceInputs["image"] = state ? state.image : undefined;
-            resourceInputs["memory"] = state ? state.memory : undefined;
-            resourceInputs["mounts"] = state ? state.mounts : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["privateIp"] = state ? state.privateIp : undefined;
-            resourceInputs["region"] = state ? state.region : undefined;
-            resourceInputs["services"] = state ? state.services : undefined;
+            resourceInputs["app"] = state?.app;
+            resourceInputs["autoDestroy"] = state?.autoDestroy;
+            resourceInputs["cmds"] = state?.cmds;
+            resourceInputs["cpuType"] = state?.cpuType;
+            resourceInputs["cpus"] = state?.cpus;
+            resourceInputs["entrypoints"] = state?.entrypoints;
+            resourceInputs["env"] = state?.env;
+            resourceInputs["execs"] = state?.execs;
+            resourceInputs["image"] = state?.image;
+            resourceInputs["memory"] = state?.memory;
+            resourceInputs["mounts"] = state?.mounts;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["privateIp"] = state?.privateIp;
+            resourceInputs["region"] = state?.region;
+            resourceInputs["services"] = state?.services;
         } else {
             const args = argsOrState as MachineArgs | undefined;
-            if ((!args || args.app === undefined) && !opts.urn) {
+            if (args?.app === undefined && !opts.urn) {
                 throw new Error("Missing required property 'app'");
             }
-            if ((!args || args.image === undefined) && !opts.urn) {
+            if (args?.image === undefined && !opts.urn) {
                 throw new Error("Missing required property 'image'");
             }
-            if ((!args || args.region === undefined) && !opts.urn) {
+            if (args?.region === undefined && !opts.urn) {
                 throw new Error("Missing required property 'region'");
             }
-            resourceInputs["app"] = args ? args.app : undefined;
-            resourceInputs["autoDestroy"] = args ? args.autoDestroy : undefined;
-            resourceInputs["cmds"] = args ? args.cmds : undefined;
-            resourceInputs["cpuType"] = args ? args.cpuType : undefined;
-            resourceInputs["cpus"] = args ? args.cpus : undefined;
-            resourceInputs["entrypoints"] = args ? args.entrypoints : undefined;
-            resourceInputs["env"] = args ? args.env : undefined;
-            resourceInputs["execs"] = args ? args.execs : undefined;
-            resourceInputs["image"] = args ? args.image : undefined;
-            resourceInputs["memory"] = args ? args.memory : undefined;
-            resourceInputs["mounts"] = args ? args.mounts : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["region"] = args ? args.region : undefined;
-            resourceInputs["services"] = args ? args.services : undefined;
+            resourceInputs["app"] = args?.app;
+            resourceInputs["autoDestroy"] = args?.autoDestroy;
+            resourceInputs["cmds"] = args?.cmds;
+            resourceInputs["cpuType"] = args?.cpuType;
+            resourceInputs["cpus"] = args?.cpus;
+            resourceInputs["entrypoints"] = args?.entrypoints;
+            resourceInputs["env"] = args?.env;
+            resourceInputs["execs"] = args?.execs;
+            resourceInputs["image"] = args?.image;
+            resourceInputs["memory"] = args?.memory;
+            resourceInputs["mounts"] = args?.mounts;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["region"] = args?.region;
+            resourceInputs["services"] = args?.services;
             resourceInputs["privateIp"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -141,42 +141,42 @@ export interface MachineState {
     /**
      * The App this resource will be created in
      */
-    app?: pulumi.Input<string>;
+    app?: pulumi.Input<string | undefined>;
     /**
      * Optional boolean telling the Machine to destroy itself once it's complete
      */
-    autoDestroy?: pulumi.Input<boolean>;
-    cmds?: pulumi.Input<pulumi.Input<string>[]>;
+    autoDestroy?: pulumi.Input<boolean | undefined>;
+    cmds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Which machine flavor, ex: `shared`
      */
-    cpuType?: pulumi.Input<string>;
-    cpus?: pulumi.Input<number>;
-    entrypoints?: pulumi.Input<pulumi.Input<string>[]>;
+    cpuType?: pulumi.Input<string | undefined>;
+    cpus?: pulumi.Input<number | undefined>;
+    entrypoints?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Keys and values must be strings
      */
-    env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    execs?: pulumi.Input<pulumi.Input<string>[]>;
+    env?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    execs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
      */
-    image?: pulumi.Input<string>;
+    image?: pulumi.Input<string | undefined>;
     /**
      * Amount of memory in MB. `256`, `512`, `1024`, ...
      */
-    memory?: pulumi.Input<number>;
-    mounts?: pulumi.Input<pulumi.Input<inputs.MachineMount>[]>;
+    memory?: pulumi.Input<number | undefined>;
+    mounts?: pulumi.Input<pulumi.Input<inputs.MachineMount>[] | undefined>;
     /**
      * A user-provided identifier
      */
-    name?: pulumi.Input<string>;
-    privateIp?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    privateIp?: pulumi.Input<string | undefined>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
-    region?: pulumi.Input<string>;
-    services?: pulumi.Input<pulumi.Input<inputs.MachineService>[]>;
+    region?: pulumi.Input<string | undefined>;
+    services?: pulumi.Input<pulumi.Input<inputs.MachineService>[] | undefined>;
 }
 
 /**
@@ -190,19 +190,19 @@ export interface MachineArgs {
     /**
      * Optional boolean telling the Machine to destroy itself once it's complete
      */
-    autoDestroy?: pulumi.Input<boolean>;
-    cmds?: pulumi.Input<pulumi.Input<string>[]>;
+    autoDestroy?: pulumi.Input<boolean | undefined>;
+    cmds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Which machine flavor, ex: `shared`
      */
-    cpuType?: pulumi.Input<string>;
-    cpus?: pulumi.Input<number>;
-    entrypoints?: pulumi.Input<pulumi.Input<string>[]>;
+    cpuType?: pulumi.Input<string | undefined>;
+    cpus?: pulumi.Input<number | undefined>;
+    entrypoints?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Keys and values must be strings
      */
-    env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    execs?: pulumi.Input<pulumi.Input<string>[]>;
+    env?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    execs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Protocol-less docker image, ex: `registry.fly.io/myapp:mytag`
      */
@@ -210,15 +210,15 @@ export interface MachineArgs {
     /**
      * Amount of memory in MB. `256`, `512`, `1024`, ...
      */
-    memory?: pulumi.Input<number>;
-    mounts?: pulumi.Input<pulumi.Input<inputs.MachineMount>[]>;
+    memory?: pulumi.Input<number | undefined>;
+    mounts?: pulumi.Input<pulumi.Input<inputs.MachineMount>[] | undefined>;
     /**
      * A user-provided identifier
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Fly region, ex `ord`, `sin`, `mad`
      */
     region: pulumi.Input<string>;
-    services?: pulumi.Input<pulumi.Input<inputs.MachineService>[]>;
+    services?: pulumi.Input<pulumi.Input<inputs.MachineService>[] | undefined>;
 }

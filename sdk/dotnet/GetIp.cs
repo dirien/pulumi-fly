@@ -68,7 +68,7 @@ namespace ediri.Fly
     public sealed class GetIpResult
     {
         /// <summary>
-        /// Empty if using `shared_v4`
+        /// Empty if using `SharedV4`
         /// </summary>
         public readonly string Address;
         /// <summary>
@@ -80,11 +80,11 @@ namespace ediri.Fly
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// Fly region, ex `ord`, `sin`, `mad`
+        /// Fly region, ex `Ord`, `Sin`, `Mad`
         /// </summary>
         public readonly string Region;
         /// <summary>
-        /// `v4`, `v6`, or `private_v6`
+        /// `V4`, `V6`, or `PrivateV6`
         /// </summary>
         public readonly string Type;
 
